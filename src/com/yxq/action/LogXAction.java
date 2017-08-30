@@ -1,5 +1,7 @@
 package com.yxq.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -172,6 +174,37 @@ public class LogXAction extends DispatchAction {
 				}				
 			}			
 			return mapping.findForward("result");		
+		}
+	}	
+	
+	public ActionForward personCenter(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+		ActionMessages messages=new ActionMessages();
+		HttpSession session=request.getSession();
+		session.setAttribute("mainPage","../pages/personCenter.jsp");
+		
+		Object obj=session.getAttribute("logoner");
+		if(obj!=null&&(obj instanceof UserForm)){
+			UserForm logoner=(UserForm)obj;
+			String ID=logoner.getId();
+			
+			String sql="";
+    		Object[] params=null;
+    		sql="select * from tb_user where id=?";
+    		params=new Object[1];
+    		params[0]=ID;    			                  
+    		
+    		OpDB myOp=new OpDB();
+    		UserForm user=myOp.OpUserShow(sql, params);
+    		session.setAttribute("backUser",user);
+    		if (session != null)
+    			return mapping.findForward("result");
+    		else
+    			return mapping.findForward("noLogin");	
+		}
+		else{
+			messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.E"));
+			saveErrors(request,messages);
+			return mapping.findForward("noLogin");			
 		}
 	}	
 }

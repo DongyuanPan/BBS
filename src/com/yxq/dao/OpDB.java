@@ -343,6 +343,36 @@ public class OpDB {
 		return userlist;
 	}
 	
+	public UserForm OpUserShow(String sql,Object[] params){
+		DB mydb=new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs=mydb.getRs();
+		UserForm userform=new UserForm();
+		try {
+			if(rs!=null){
+				while(rs.next()){		
+					userform.setId(String.valueOf(rs.getInt(1)));
+					userform.setUserName(rs.getString(2));
+					userform.setOldPassword(rs.getString(3));
+					userform.setUserFace(rs.getString(4));
+					userform.setUserSex(rs.getString(5));
+					userform.setUserPhone(rs.getString(6));
+					userform.setUserOICQ(rs.getString(7));
+					userform.setUserEmail(rs.getString(8));
+					userform.setUserFrom(rs.getString(9));
+					userform.setUserAble(rs.getString(10));
+				}
+				rs.close();					
+			}
+		} catch (SQLException e) {
+			System.out.println("调用OpDB类中的OpUserListShow()方法出错！");
+			e.printStackTrace();
+		}finally{
+			mydb.closed();
+		}
+		return userform;
+	}
+	
 	public UserForm OpUserSingleShow(String sql,Object[] params){
 		DB mydb=new DB();
 		UserForm userform=null;
