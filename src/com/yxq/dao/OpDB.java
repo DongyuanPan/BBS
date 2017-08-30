@@ -8,6 +8,7 @@ import java.util.List;
 import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
+import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.model.CreatePage;
@@ -173,6 +174,7 @@ public class OpDB {
 					bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 					bbsform.setBbsIsGood(rs.getString(13));
 					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));					
+					bbsform.setBbsReason(rs.getString(15));
 					
 					/* 以下代码，查询tb_bbsAnswer数据表，查询出当前帖子的回复数、最后回复者、最后回复时间 */					
 					String bbsId=bbsform.getBbsId();					
@@ -278,7 +280,8 @@ public class OpDB {
 				bbsform.setBbsIsTop(rs.getString(11));
 				bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 				bbsform.setBbsIsGood(rs.getString(13));
-				bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));				
+				bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));
+				bbsform.setBbsReason(rs.getString(15));
     		}
     		
 		} catch (SQLException e) {
@@ -286,6 +289,30 @@ public class OpDB {
 			e.printStackTrace();
 		}
 		return bbsform;		
+	}
+	
+	public List<BroadcastForm> OpBroadcastShow() {
+		List<BroadcastForm> listshow = null;
+		String sql="select * from tb_broadcast";
+		DB mydb=new DB();
+		mydb.doPstm(sql,null);
+		ResultSet rs=mydb.getRs();
+		if(rs!=null){
+			try {
+				listshow=new ArrayList<BroadcastForm>();
+				while(rs.next()){
+					BroadcastForm broadcast=new BroadcastForm();
+					broadcast.setBroadcastId(rs.getInt(1));
+					broadcast.setBroadcastMessege((rs.getString(2)));					
+					broadcast.setBroadcastTime(Change.dateTimeChange(rs.getTimestamp(3)));
+					listshow.add(broadcast);					
+				}
+			} catch (SQLException e) {
+				System.out.println("调用OpDB类中OpBroadcastShow()方法出错！");
+				e.printStackTrace();
+			}
+		}
+		return listshow;
 	}
 	
 	public BbsAnswerForm OpBbsAnswerSingleShow(String sql,Object[] params){
