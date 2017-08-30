@@ -146,7 +146,7 @@ public class BbsForm extends ValidatorForm {
 		bbsToTopTime="";
 		bbsIsGood="";
 		bbsToGoodTime="";
-		bbsReason="";
+		bbsReason ="";
 	}
 	public String getBbsType() {
 		return bbsType;
