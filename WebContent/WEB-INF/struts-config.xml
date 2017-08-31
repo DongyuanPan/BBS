@@ -226,7 +226,7 @@
 			<forward name="error" path="/view/indexTemp.jsp" />
 		</action>
 		<!-- 删除根帖 -->
-		<action path="/needLogin/deleteRoot" type="com.yxq.action.BbsAction"
+		<action path="/needLogin/deleteRootBbs" type="com.yxq.action.BbsAction"
 			parameter="method">
 			<forward name="success" path="/user/listShow.do?method=rootListShow" />
 			<forward name="error" path="/view/indexTemp.jsp" />

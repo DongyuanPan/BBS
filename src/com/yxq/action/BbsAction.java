@@ -340,22 +340,24 @@ public class BbsAction extends MySuperAction {
 		String lognerName=logoner.getUserName();						//获取当前登录用户的用户名
 		String master=(String)session.getAttribute("boardMaster");		//获取当前斑竹
 		
-		if(bbsId==null)
+		if(bbsId == null)
 			bbsId="-1";
-		if(bbsSender==null)
+		if(bbsSender == null)
 			bbsSender="";		
 		
-		ActionMessages messages=new ActionMessages();
+		System.out.print(bbsId+bbsSender);
+		
+		ActionMessages messages = new ActionMessages();
 		
     	//如果当前登录的用户是帖子的发表者、帖子所属版面的斑竹、管理员
 		if(lognerAble.equals("2")||lognerName.equals(master)||lognerName.equals(bbsSender)){
 			if(bbsId!=null&&!bbsId.equals("")){						
-				String sql="delete tb_bbs where bbs_id=?";				
+				String sql="delete from tb_bbs where bbs_id=?";				
 				Object[] params={bbsId};
 				
-				OpDB myOp=new OpDB();
-				int i=myOp.OpUpdate(sql,params);
-				if(i<=0){
+				OpDB myOp = new OpDB();
+				int i = myOp.OpUpdate(sql,params);
+				if(i <= 0){
 					System.out.println("删除出错！");
 					messages.add("userOpR",new ActionMessage("luntan.bbs.deleteRoot.E"));
 					saveErrors(request,messages);					

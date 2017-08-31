@@ -95,7 +95,15 @@
                       ◆<a
 							href="needLogin/admin/doTopGood.do?method=setTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
 							title="管理员操作">置顶帖子</a>&nbsp;
-                  </logic:notEqual> <!-- 如果该帖不是精华帖子 --> <logic:notEqual value="1"
+                  </logic:notEqual>
+                  
+                   <!-- 如果该帖是置顶帖子 -->
+                  <logic:notEqual value="0" name="bbsRootSingle" property="bbsIsTop">
+					  <!-- 显示“取消置顶”超链接 -->
+                      ◆<a href="needLogin/admin/doTopGood.do?method=cancleTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}" title="管理员操作">取消置顶</a>&nbsp;
+                  </logic:notEqual>
+                  
+                   <!-- 如果该帖不是精华帖子 --> <logic:notEqual value="1"
 						name="bbsRootSingle" property="bbsIsGood">
 						<!-- 显示“设为精华帖”超链接 -->
                       ◆<a
