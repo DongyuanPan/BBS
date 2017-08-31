@@ -24,7 +24,8 @@ public class BbsForm extends ValidatorForm {
 	private String bbsToTopTime;
 	private String bbsIsGood;
 	private String bbsToGoodTime;	
-
+	private String bbsReason;
+	
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		String validate=request.getParameter("validate");
 		if(validate==null||validate.equals("")||!validate.equals("yes"))
@@ -145,6 +146,7 @@ public class BbsForm extends ValidatorForm {
 		bbsToTopTime="";
 		bbsIsGood="";
 		bbsToGoodTime="";
+		bbsReason ="";
 	}
 	public String getBbsType() {
 		return bbsType;
@@ -157,6 +159,12 @@ public class BbsForm extends ValidatorForm {
 	}
 	public void setBbsSendIP(String bbsSendIP) {
 		this.bbsSendIP = bbsSendIP;
+	}
+	public String getBbsReason() {
+		return bbsReason;
+	}
+	public void setBbsReason(String bbsReason) {
+		this.bbsReason = bbsReason;
 	}
 	
 	

@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-08-30 14:37:59
+Date: 2017-08-31 09:05:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tb_accessory`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_accessory`;
+CREATE TABLE `tb_accessory` (
+  `accessory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `accessory_file_name` varchar(255) NOT NULL,
+  `accessory_path` varchar(255) NOT NULL,
+  `accessory_upload_time` datetime NOT NULL,
+  `accessory_description` varchar(255) NOT NULL,
+  `accessory_size` varchar(255) NOT NULL,
+  `accessory_download_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`accessory_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+
+-- ----------------------------
+-- Records of tb_accessory
+-- ----------------------------
+INSERT INTO `tb_accessory` VALUES ('1', 'accessory1.cpp', '/accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
@@ -34,19 +54,20 @@ CREATE TABLE `tb_bbs` (
   `bbs_toTopTime` datetime DEFAULT NULL,
   `bbs_isGood` varchar(1) DEFAULT NULL,
   `bbs_toGoodTime` datetime DEFAULT NULL,
+  `bbs_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`bbs_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bbs
 -- ----------------------------
-INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('3', '1', '普通主题', '开发JSP程序通常使用哪些框架？', '请问，开发JSP程序比较常用和流行的开发框架有哪些？？', '许久', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '0000-00-00 00:00:00', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('14', '1', '普通主题', '随时回答你的问题', '如果你有什么问题可随时发布帖了，我会及时的回复您．', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03');
-INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null);
+INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
+INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:44:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
+INSERT INTO `tb_bbs` VALUES ('3', '1', '普通主题', '开发JSP程序通常使用哪些框架？', '请问，开发JSP程序比较常用和流行的开发框架有哪些？？', '许久', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是置顶原因');
+INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
+INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
+INSERT INTO `tb_bbs` VALUES ('14', '1', '普通主题', '随时回答你的问题', '如果你有什么问题可随时发布帖了，我会及时的回复您．', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
+INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for `tb_bbsanswer`
@@ -107,6 +128,22 @@ INSERT INTO `tb_board` VALUES ('19', '5', '问候', '00', '请不要乱写内容
 INSERT INTO `tb_board` VALUES ('20', '5', '44444', '00', '4444');
 
 -- ----------------------------
+-- Table structure for `tb_broadcast`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_broadcast`;
+CREATE TABLE `tb_broadcast` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `broadcast_messege` varchar(255) NOT NULL,
+  `broadcase_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+
+-- ----------------------------
+-- Records of tb_broadcast
+-- ----------------------------
+INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告', '2017-08-30 14:53:19');
+
+-- ----------------------------
 -- Table structure for `tb_class`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_class`;
@@ -127,6 +164,23 @@ INSERT INTO `tb_class` VALUES ('4', '硬件开发', '欢迎进入“硬件开发
 INSERT INTO `tb_class` VALUES ('5', '关爱', '欢迎访问！');
 
 -- ----------------------------
+-- Table structure for `tb_collect`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_collect`;
+CREATE TABLE `tb_collect` (
+  `collect_id` int(11) NOT NULL AUTO_INCREMENT,
+  `collect_collector` varchar(255) NOT NULL,
+  `collect_bbs_id` int(11) NOT NULL,
+  PRIMARY KEY (`collect_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gb2312;
+
+-- ----------------------------
+-- Records of tb_collect
+-- ----------------------------
+INSERT INTO `tb_collect` VALUES ('1', 'tsoft', '2');
+INSERT INTO `tb_collect` VALUES ('2', 'tsoft', '13');
+
+-- ----------------------------
 -- Table structure for `tb_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
@@ -135,7 +189,7 @@ CREATE TABLE `tb_user` (
   `user_name` varchar(20) DEFAULT NULL,
   `user_password` varchar(20) DEFAULT NULL,
   `user_face` varchar(11) DEFAULT NULL,
-  `user_sex` varchar(2) DEFAULT NULL,
+  `user_sex` varchar(10) DEFAULT NULL,
   `user_phone` varchar(12) DEFAULT NULL,
   `user_OICQ` varchar(14) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,

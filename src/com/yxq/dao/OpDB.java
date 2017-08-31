@@ -8,6 +8,7 @@ import java.util.List;
 import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
+import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.model.CreatePage;
@@ -173,6 +174,7 @@ public class OpDB {
 					bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 					bbsform.setBbsIsGood(rs.getString(13));
 					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));					
+					bbsform.setBbsReason(rs.getString(15));
 					
 					/* 以下代码，查询tb_bbsAnswer数据表，查询出当前帖子的回复数、最后回复者、最后回复时间 */					
 					String bbsId=bbsform.getBbsId();					
@@ -247,7 +249,7 @@ public class OpDB {
 					bbsAnswerform.setBbsAnswerSendTime(Change.dateTimeChange(rs.getTimestamp(6)));
 					bbsAnswerform.setBbsFace(rs.getString(7));					
 					listshow.add(bbsAnswerform);
-					i++;
+					++i;
 				}
 			} catch (SQLException e) {
 				System.out.println("调用OpDB类中OpBbsAnswerListShow()方法出错！");
@@ -278,7 +280,8 @@ public class OpDB {
 				bbsform.setBbsIsTop(rs.getString(11));
 				bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 				bbsform.setBbsIsGood(rs.getString(13));
-				bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));				
+				bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));
+				bbsform.setBbsReason(rs.getString(15));
     		}
     		
 		} catch (SQLException e) {
@@ -286,6 +289,76 @@ public class OpDB {
 			e.printStackTrace();
 		}
 		return bbsform;		
+	}
+	
+	//String sql = "select * from tb_bbs where bbs_id in (select collect_bbs_id from tb_collect where collect_collector = ?)";
+	public List<BbsForm> OpCollectShow(String sql,Object[] params) {
+		
+		List<BbsForm> listshow=new ArrayList<BbsForm>();
+		DB mydb=new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs=mydb.getRs();
+		try {
+			if(rs!=null){
+				while(rs.next()){
+					BbsForm bbsform=new BbsForm();
+					bbsform.setBbsId(String.valueOf(rs.getInt(1)));
+					bbsform.setBbsBoardID(String.valueOf(rs.getInt(2)));
+					bbsform.setBbsType(rs.getString(3));
+					bbsform.setBbsTitle(rs.getString(4));
+					bbsform.setBbsContent(rs.getString(5));
+					bbsform.setBbsSender(rs.getString(6));
+					bbsform.setBbsSendTime(Change.dateTimeChange(rs.getTimestamp(7)));
+					bbsform.setBbsSendIP(rs.getString(8));
+					bbsform.setBbsFace(rs.getString(9));
+					bbsform.setBbsOpTime(Change.dateTimeChange(rs.getTimestamp(10)));
+					bbsform.setBbsIsTop(rs.getString(11));
+					bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
+					bbsform.setBbsIsGood(rs.getString(13));
+					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));					
+					bbsform.setBbsReason(rs.getString(15));
+					listshow.add(bbsform);
+				}
+				rs.close();					
+			}
+		} catch (SQLException e) {
+			System.out.println("调用OpDB类中的OpCollectShow()方法出错！");
+			e.printStackTrace();
+		}finally{
+			mydb.closed();
+		}
+		return listshow;
+	}
+	
+	public int OpBroadcastUpdate(String sql,Object[] params) {
+		DB mydb=new DB();
+		mydb.doPstm(sql,params);
+		int i=mydb.getUpdate();
+		return i; 
+	}
+	
+	public List<BroadcastForm> OpBroadcastShow() {
+		List<BroadcastForm> listshow = null;
+		String sql="select * from tb_broadcast";
+		DB mydb=new DB();
+		mydb.doPstm(sql,null);
+		ResultSet rs=mydb.getRs();
+		if(rs!=null){
+			try {
+				listshow=new ArrayList<BroadcastForm>();
+				while(rs.next()){
+					BroadcastForm broadcast=new BroadcastForm();
+					broadcast.setBroadcastId(rs.getInt(1));
+					broadcast.setBroadcastMessege((rs.getString(2)));					
+					broadcast.setBroadcastTime(Change.dateTimeChange(rs.getTimestamp(3)));
+					listshow.add(broadcast);					
+				}
+			} catch (SQLException e) {
+				System.out.println("调用OpDB类中OpBroadcastShow()方法出错！");
+				e.printStackTrace();
+			}
+		}
+		return listshow;
 	}
 	
 	public BbsAnswerForm OpBbsAnswerSingleShow(String sql,Object[] params){
@@ -311,8 +384,8 @@ public class OpDB {
 		return bbsAnswerform;
 	}
 	
-	public List OpUserListShow(String sql,Object[] params){
-		List userlist=new ArrayList();
+	public List<UserForm> OpUserListShow(String sql,Object[] params){
+		List<UserForm> userlist=new ArrayList<UserForm>();
 		DB mydb=new DB();
 		mydb.doPstm(sql, params);
 		ResultSet rs=mydb.getRs();
