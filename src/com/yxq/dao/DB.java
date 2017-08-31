@@ -18,7 +18,7 @@ public class DB {
 		className="com.mysql.jdbc.Driver";
 		url="jdbc:mysql://localhost:3306/db_bbs";
 		username="root";
-		password="";
+		password="a";
 		try{
 			Class.forName(className);
 		}catch(ClassNotFoundException e){
