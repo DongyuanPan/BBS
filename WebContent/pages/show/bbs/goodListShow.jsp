@@ -2,7 +2,7 @@
 <%@ taglib uri="struts-html" prefix="html"%>
 <%@ taglib uri="struts-bean" prefix="bean"%>
 <%@ taglib uri="struts-logic" prefix="logic"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>显示精华帖子</title>
@@ -54,14 +54,14 @@
 										<td width="25%" align="center"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${goodSingle.bbsSender}">
 												<b><bean:write name="goodSingle" property="bbsSender"
-														filter="false" /></b> <br>
-											<bean:write name="goodSingle" property="bbsSendTime" />
+														filter="false" /></b> <br> <bean:write name="goodSingle"
+													property="bbsSendTime" />
 										</a></td>
 										<td width="25%" align="center"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${goodSingle.bbsLastUpdateUser}">
 												<b><bean:write name="goodSingle"
 														property="bbsLastUpdateUser" filter="false" /></b> <br>
-											<bean:write name="goodSingle" property="bbsLastUpdateTime" />
+												<bean:write name="goodSingle" property="bbsLastUpdateTime" />
 										</a></td>
 									</tr>
 								</logic:iterate>

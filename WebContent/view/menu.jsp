@@ -54,7 +54,7 @@
 							<td align="center" width="8%"><a
 								href="user/isUserLogin.do?method=isUserLogin">登 录</a></td>
 							<td align="center" width="8%"><a
-								href="user/isUserTest.do?method=isUserTest">test</a></td>
+								href="user/broadcast.do?method=broadcastListShow&showpage=1">公 告</a></td>
 							<td align="center" width="10%"><a
 								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
 							<td align="center" width="10%"><a

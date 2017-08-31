@@ -39,6 +39,12 @@ public class BroadcastForm extends ValidatorForm {
 		this.broadcastTime = broadcastTime;
 	}
 	
+	public String getSubBroadcastMessage(int len) {
+		if(len<=0||len>this.broadcastMessege.length()) {
+			len=this.broadcastMessege.length();
+		}
+		return this.broadcastMessege.substring(0, len)+"..";
+	}
 	public void clear(){
 		broadcastId=0;
 		broadcastMessege="";

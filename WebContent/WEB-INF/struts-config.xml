@@ -38,13 +38,6 @@
 			<forward name="success" path="/index.jsp" />
 			<forward name="fault" path="/pages/login.jsp" />
 		</action>
-		<!-- test(提交表单触发) -->
-		<action path="/user/isUserTest" type="com.yxq.action.LogXAction"
-			parameter="method" name="userForm" validate="true" input="/pages/login.jsp"
-			scope="request">
-			<forward name="noLogin" path="/pages/login.jsp" />						<!-- 没有登录返回的视图 -->
-			<forward name="FhaveLogin" path="/pages/message.jsp" />         			<!-- 已经登录返回的视图 -->
-		</action>
 		<!-- 注销 -->
 		<action path="/user/logout" type="com.yxq.action.LogXAction"
 			parameter="method">
@@ -73,6 +66,11 @@
 		<action path="/user/openShow" type="com.yxq.action.BbsAction"
 			parameter="method">
 			<forward name="success" path="/view/indexTemp.jsp" />
+		</action>
+		<!-- 公告(超链接触发) -->
+		<action path="/user/broadcast" type="com.yxq.action.BroadcastAction"
+			parameter="method" name="broadcastForm" validate="false" >
+			<forward name="success" path="/view/indexTemp.jsp" />						<!-- 没有登录返回的视图 -->
 		</action>
 		<!-- 列表显示精华帖子 -->
 		<action path="/user/goodListShow" type="com.yxq.action.BbsAction"
