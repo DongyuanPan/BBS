@@ -42,6 +42,7 @@ public class OpDB {
 				e.printStackTrace();
 			}
 		}
+		mydb.closed();
 		return listshow;
 	}	
 	
@@ -62,6 +63,7 @@ public class OpDB {
 			System.out.println("调用OpDB类中OpClassingleShow()方法出错！");
 			e.printStackTrace();
 		}
+		mydb.closed();
 		return classform;		
 	}
 	
@@ -125,6 +127,7 @@ public class OpDB {
 				e.printStackTrace();
 			}
 		}
+		mydb.closed();
 		return listshow;
 	}
 	
@@ -147,6 +150,7 @@ public class OpDB {
 			System.out.println("调用OpDB类中OpBoardSingle()方法出错！");
 			e.printStackTrace();
 		}
+		mydb.closed();
 		return boardForm;		
 	}
 	
@@ -154,6 +158,7 @@ public class OpDB {
 		ResultSet rs=getRs(sql,params);
 		
 		List<BbsForm> listshow=null;
+		DB mydb=new DB();
 		int i=1;
 		if(rs!=null){
 			listshow=new ArrayList<BbsForm>();
@@ -181,7 +186,7 @@ public class OpDB {
 					String answerNum="0";
 					String lastUpdateUser="";
 					String lastUpdateTime="";					
-					DB mydb=new DB();
+
 					
 					//查询tb_bbsAnswer数据表,获取回复帖子数
 					String sql1="select count(bbsAnswer_id) from tb_bbsAnswer where bbsAnswer_rootID=?";					
@@ -228,6 +233,7 @@ public class OpDB {
 				e.printStackTrace();
 			}			
 		}
+		mydb.closed();
 		return listshow;
 }
 	
@@ -288,6 +294,7 @@ public class OpDB {
 			System.out.println("调用OpDB类中OpBbsingleShow()方法出错！");
 			e.printStackTrace();
 		}
+		mydb.closed();
 		return bbsform;		
 	}
 	
@@ -348,9 +355,9 @@ public class OpDB {
 			listshow = new ArrayList<BroadcastForm>();
 			try {
 				while(rs.next()&&(!mark||i<=perR)){					
-					BroadcastForm broadcast=new BroadcastForm();
+					BroadcastForm broadcast = new BroadcastForm();
 					broadcast.setBroadcastId(rs.getInt(1));
-					broadcast.setBroadcastMessege((rs.getString(2)));					
+					broadcast.setBroadcastMessage((rs.getString(2)));					
 					broadcast.setBroadcastTime(Change.dateTimeChange(rs.getTimestamp(3)));
 					listshow.add(broadcast);			
 					++i;
@@ -361,8 +368,28 @@ public class OpDB {
 				e.printStackTrace();
 			}			
 		}
+		
 		return listshow;
 	}
+	
+	public BroadcastForm OpBroadcastShow(String sql,Object[] params) {
+		
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		
+		BroadcastForm broadcast = new BroadcastForm();
+		try {
+			broadcast.setBroadcastId(rs.getInt(1));
+			broadcast.setBroadcastMessage((rs.getString(2)));					
+			broadcast.setBroadcastTime(Change.dateTimeChange(rs.getTimestamp(3)));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return broadcast;
+	} 
 	
 	public BbsAnswerForm OpBbsAnswerSingleShow(String sql,Object[] params){
 		BbsAnswerForm bbsAnswerform=null;
@@ -384,6 +411,7 @@ public class OpDB {
 			System.out.println("调用OpDB类中OpBbsAnswerSingleShow()方法出错！");
 			e.printStackTrace();
 		}
+		mydb.closed();
 		return bbsAnswerform;
 	}
 	
@@ -453,9 +481,9 @@ public class OpDB {
 		DB mydb=new DB();
 		UserForm userform=null;
 		mydb.doPstm(sql, params);
-		ResultSet rs=mydb.getRs();
+		ResultSet rs = mydb.getRs();
 		try {
-			if(rs!=null&&rs.next()){
+			if(rs != null && rs.next()){
 				userform=new UserForm();			
 				userform.setId(String.valueOf(rs.getInt(1)));
 				userform.setUserName(rs.getString(2));
@@ -482,6 +510,7 @@ public class OpDB {
 		DB mydb=new DB();
 		mydb.doPstm(sql,params);
 		int i=mydb.getUpdate();
+		mydb.closed();
 		return i;
 	}
 	
