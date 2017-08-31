@@ -29,7 +29,7 @@ public class AdminAction extends DispatchAction {
     public ActionForward setTopBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session=request.getSession();
 		session.setAttribute("mainPage","/pages/show/bbs/openRootShow.jsp");
-		String forwardPath="error";		
+		String forwardPath="error";	
 		
 		String bbsId=request.getParameter("bbsId");
 		if(bbsId!=null&&!bbsId.equals("")){
@@ -263,7 +263,7 @@ public class AdminAction extends DispatchAction {
     	String classId=request.getParameter("classId");
     	if(classId==null||classId.equals(""))
     		classId="-1";
-    	String sql="delete tb_class where class_id=?";
+    	String sql="delete from tb_class where class_id=?";
     	Object[] params={classId};
     	
     	OpDB myOp=new OpDB();
@@ -296,11 +296,11 @@ public class AdminAction extends DispatchAction {
     	String getType=request.getParameter("type");
     	
     	if(getType==null||getType.equals("")||!getType.equals("show")){
-    		List classList=myOp.OpClassListShow();
+    		List<ClassForm> classList=myOp.OpClassListShow();
     		session.setAttribute("backClassList",classList);    		
     	}    	
     	else{    		
-    		ClassForm classform=(ClassForm)form;
+    		ClassForm classform = (ClassForm)form;
     		String classId=classform.getClassId();
     		
     		if(classId==null||classId.equals("")){
@@ -458,7 +458,7 @@ public class AdminAction extends DispatchAction {
     	String boardId=request.getParameter("boardId");
     	if(boardId==null||boardId.equals(""))
     		boardId="-1";
-    	String sql="delete tb_board where board_id=?";
+    	String sql="delete from tb_board where board_id=?";
     	Object[] params={boardId};
     	
     	OpDB myOp=new OpDB();
@@ -467,7 +467,7 @@ public class AdminAction extends DispatchAction {
     	ActionMessages messages=new ActionMessages();
     	String forwardPath="";
     	
-    	if(i<=0){
+    	if(i <= 0){
     		System.out.println("删除版面失败！");
     		forwardPath="error";
     		messages.add("adminOpR",new ActionMessage("luntan.admin.delete.board.E"));
@@ -488,7 +488,7 @@ public class AdminAction extends DispatchAction {
     	
     	String getType=request.getParameter("type");
     	if(getType==null||getType.equals("")||!getType.equals("show")){
-    		List ableList=new ArrayList();
+    		List<LabelValueBean> ableList = new ArrayList<LabelValueBean>();
     		ableList.add(new LabelValueBean("全部","all"));
     		ableList.add(new LabelValueBean("管理员","2"));
     		ableList.add(new LabelValueBean("版主","1"));
@@ -529,7 +529,7 @@ public class AdminAction extends DispatchAction {
     	HttpSession session=request.getSession();
     	session.setAttribute("backMainPage","../user/userModify.jsp");
     	
-    	List backUserAble=new ArrayList();    	
+    	List<LabelValueBean> backUserAble = new ArrayList<LabelValueBean>();    	
     	backUserAble.add(new LabelValueBean("管理员","2"));
     	backUserAble.add(new LabelValueBean("版主","1"));
     	backUserAble.add(new LabelValueBean("普通用户","0"));
@@ -601,7 +601,7 @@ public class AdminAction extends DispatchAction {
     	String userId=request.getParameter("userId");
     	if(userId==null||userId.equals(""))
     		userId="-1";
-    	String sql="delete tb_user where id=?";
+    	String sql="delete from tb_user where id=?";
     	Object[] params={userId};
     	
     	OpDB myOp=new OpDB();
