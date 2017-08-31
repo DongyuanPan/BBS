@@ -1,5 +1,7 @@
 package com.yxq.action;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -131,6 +133,14 @@ public class LogXAction extends DispatchAction {
 					String userOICQ=regForm.getUserOICQ();
 					String userEmail=regForm.getUserEmail();
 					String userFrom=Change.HTMLChange(regForm.getUserFrom());
+//					System.out.println(userFrom);
+//					try {
+//						userFrom = new String(userFrom.getBytes("ISO-8859-1"), "gb2312");
+//					} catch (UnsupportedEncodingException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					System.out.println(userFrom);
 					String userAble="0";
 					
 					sql="insert into tb_user values(null,?,?,?,?,?,?,?,?,?)";

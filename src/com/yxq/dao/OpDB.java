@@ -338,25 +338,28 @@ public class OpDB {
 	}
 	
 	public List<BroadcastForm> OpBroadcastShow() {
-		List<BroadcastForm> listshow = null;
+		
 		String sql="select * from tb_broadcast";
-		DB mydb = new DB();
-		mydb.doPstm(sql,null);
-		ResultSet rs = mydb.getRs();
+		ResultSet rs = getRs(sql, null);
+		
+		List<BroadcastForm> listshow = null;
+		int i=1;
 		if(rs!=null){
+			listshow = new ArrayList<BroadcastForm>();
 			try {
-				listshow=new ArrayList<BroadcastForm>();
-				while(rs.next()){
+				while(rs.next()&&(!mark||i<=perR)){					
 					BroadcastForm broadcast=new BroadcastForm();
 					broadcast.setBroadcastId(rs.getInt(1));
 					broadcast.setBroadcastMessege((rs.getString(2)));					
 					broadcast.setBroadcastTime(Change.dateTimeChange(rs.getTimestamp(3)));
-					listshow.add(broadcast);					
+					listshow.add(broadcast);			
+					++i;
 				}
-			} catch (SQLException e) {
-				System.out.println("调用OpDB类中OpBroadcastShow()方法出错！");
+			} catch (SQLException e) {				
+				System.out.println("OpBroadcastShow()方法出错！");
+				System.out.println("标记："+mark);
 				e.printStackTrace();
-			}
+			}			
 		}
 		return listshow;
 	}
