@@ -330,6 +330,13 @@ public class OpDB {
 		return listshow;
 	}
 	
+	public int OpBroadcastUpdate(String sql,Object[] params) {
+		DB mydb=new DB();
+		mydb.doPstm(sql,params);
+		int i=mydb.getUpdate();
+		return i; 
+	}
+	
 	public List<BroadcastForm> OpBroadcastShow() {
 		List<BroadcastForm> listshow = null;
 		String sql="select * from tb_broadcast";

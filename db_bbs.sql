@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-08-30 16:09:54
+Date: 2017-08-31 09:05:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tb_accessory`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_accessory`;
+CREATE TABLE `tb_accessory` (
+  `accessory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `accessory_file_name` varchar(255) NOT NULL,
+  `accessory_path` varchar(255) NOT NULL,
+  `accessory_upload_time` datetime NOT NULL,
+  `accessory_description` varchar(255) NOT NULL,
+  `accessory_size` varchar(255) NOT NULL,
+  `accessory_download_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`accessory_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+
+-- ----------------------------
+-- Records of tb_accessory
+-- ----------------------------
+INSERT INTO `tb_accessory` VALUES ('1', 'accessory1.cpp', '/accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
@@ -42,9 +62,9 @@ CREATE TABLE `tb_bbs` (
 -- Records of tb_bbs
 -- ----------------------------
 INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
-INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
+INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:44:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
 INSERT INTO `tb_bbs` VALUES ('3', '1', '普通主题', '开发JSP程序通常使用哪些框架？', '请问，开发JSP程序比较常用和流行的开发框架有哪些？？', '许久', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是置顶原因');
-INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '0000-00-00 00:00:00', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
+INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('14', '1', '普通主题', '随时回答你的问题', '如果你有什么问题可随时发布帖了，我会及时的回复您．', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null, null);
