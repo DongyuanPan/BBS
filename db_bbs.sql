@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-08-31 09:05:46
+Date: 2017-08-31 10:28:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -193,10 +193,10 @@ CREATE TABLE `tb_user` (
   `user_phone` varchar(12) DEFAULT NULL,
   `user_OICQ` varchar(14) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
-  `user_from` varchar(200) DEFAULT NULL,
+  `user_from` varchar(200) CHARACTER SET gb2312 DEFAULT NULL,
   `user_able` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
@@ -208,3 +208,4 @@ INSERT INTO `tb_user` VALUES ('8', '雨飞', '333', 'user18.gif', '女', '134***
 INSERT INTO `tb_user` VALUES ('9', '许久', '444', 'user5.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '吉林省长春市', '1');
 INSERT INTO `tb_user` VALUES ('14', '00', '000000', 'user6.gif', '女', '135*****117', '5454', '11@11.com', '长春', '1');
 INSERT INTO `tb_user` VALUES ('15', 'java1234', '123', 'user15.gif', '女', '12345678900', '12321', '231@qq.com', '江苏', '0');
+INSERT INTO `tb_user` VALUES ('16', 'me', '000000', 'user9.gif', '?', '11111111111', '120', '110@seu.edu.cn', '江苏', '0');

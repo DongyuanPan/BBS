@@ -28,7 +28,7 @@ public class DB {
 	}
 	public void getCon(){
 		try {
-			con=DriverManager.getConnection(url,username,password);
+			con = DriverManager.getConnection(url,username,password);
 		} catch (SQLException e) {
 			System.out.println("获取数据库连接失败！");
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class DB {
 				if(params==null){
 					params=new Object[0];
 				}
-				for(int i=0;i<params.length;i++){
+				for(int i = 0;i < params.length; ++i){
 					pstm.setObject(i+1,params[i]);
 				}
 				pstm.execute();

@@ -24,7 +24,7 @@ public class OpDB {
 	public List<ClassForm> OpClassListShow(){
 		List<ClassForm> listshow=null;
 		String sql="select * from tb_class";
-		DB mydb=new DB();
+		DB mydb = new DB();
 		mydb.doPstm(sql,null);
 		ResultSet rs=mydb.getRs();
 		if(rs!=null){
@@ -46,7 +46,7 @@ public class OpDB {
 	}	
 	
 	public ClassForm OpClassSingleShow(String sql,Object[] params){
-		ClassForm classform=null;
+		ClassForm classform = null;
 		DB mydb=new DB();
 		mydb.doPstm(sql,params);
 		ResultSet rs=mydb.getRs();
@@ -65,7 +65,7 @@ public class OpDB {
 		return classform;		
 	}
 	
-	public List OpBoardListShow(String sql,Object[] params){
+	public List<BoardForm> OpBoardListShow(String sql,Object[] params){
 		List<BoardForm> listshow=null;
 		DB mydb=new DB();
 		mydb.doPstm(sql,params);
@@ -231,13 +231,13 @@ public class OpDB {
 		return listshow;
 }
 	
-	public List OpBbsAnswerListShow(String sql,Object[] params){
+	public List<BbsAnswerForm> OpBbsAnswerListShow(String sql,Object[] params){
 		ResultSet rs=getRs(sql,params);
 		
-		List listshow=null;
+		List<BbsAnswerForm> listshow=null;
 		if(rs!=null){
 			try {				
-				listshow=new ArrayList<BbsForm>();
+				listshow = new ArrayList<BbsAnswerForm>();
 				int i=1;
 				while(rs.next()&&(!mark||i<=perR)){					
 					BbsAnswerForm bbsAnswerform=new BbsAnswerForm();
@@ -331,18 +331,18 @@ public class OpDB {
 	}
 	
 	public int OpBroadcastUpdate(String sql,Object[] params) {
-		DB mydb=new DB();
+		DB mydb = new DB();
 		mydb.doPstm(sql,params);
-		int i=mydb.getUpdate();
+		int i = mydb.getUpdate();
 		return i; 
 	}
 	
 	public List<BroadcastForm> OpBroadcastShow() {
 		List<BroadcastForm> listshow = null;
 		String sql="select * from tb_broadcast";
-		DB mydb=new DB();
+		DB mydb = new DB();
 		mydb.doPstm(sql,null);
-		ResultSet rs=mydb.getRs();
+		ResultSet rs = mydb.getRs();
 		if(rs!=null){
 			try {
 				listshow=new ArrayList<BroadcastForm>();

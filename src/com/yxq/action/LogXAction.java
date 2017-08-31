@@ -1,7 +1,5 @@
 package com.yxq.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,21 +16,6 @@ import com.yxq.dao.OpDB;
 import com.yxq.tools.Change;
 
 public class LogXAction extends DispatchAction {
-	
-	/** test */
-	public ActionForward isUserTest(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
-		HttpSession session=request.getSession();
-		Object loginer=session.getAttribute("logoner");
-		if(loginer!=null&&(loginer instanceof UserForm)){			
-			ActionMessages messages=new ActionMessages();
-			messages.add("loginR",new ActionMessage("luntan.bbs.have.login"));
-			saveErrors(request,messages);
-			return mapping.findForward("FhaveLogin");
-		}
-		else{
-			return mapping.findForward("noLogin");			
-		}
-	}
 	
 	/** Ç°Ì¨µÇÂ¼ÅÐ¶Ï */
 	public ActionForward isUserLogin(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
@@ -71,7 +54,8 @@ public class LogXAction extends DispatchAction {
 			saveErrors(request,messages);
 			return mapping.findForward("noLogin");			
 		}
-	}	
+	}
+	
 	/** µÇÂ¼ */
 	public ActionForward login(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session=request.getSession();
@@ -95,6 +79,7 @@ public class LogXAction extends DispatchAction {
 			return mapping.findForward("fault");
 		}		
 	}
+	
 	/** ×¢Ïú */
 	public ActionForward logout(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session=request.getSession();
@@ -160,8 +145,8 @@ public class LogXAction extends DispatchAction {
 					params[7]=userFrom;
 					params[8]=userAble;
 					
-					int i=myOp.OpUpdate(sql, params);			
-					if(i<=0){
+					int i = myOp.OpUpdate(sql, params);			
+					if(i <= 0){
 						System.out.println("ÓÃ»§×¢²áÊ§°Ü£¡");
 						messages.add("userOpR",new ActionMessage("luntan.user.reg.E"));
 					}
@@ -193,13 +178,13 @@ public class LogXAction extends DispatchAction {
     		params=new Object[1];
     		params[0]=ID;    			                  
     		
-    		OpDB myOp=new OpDB();
+    		OpDB myOp = new OpDB();
     		UserForm user=myOp.OpUserShow(sql, params);
     		session.setAttribute("backUser",user);
     		if (session != null)
     			return mapping.findForward("result");
     		else
-    			return mapping.findForward("noLogin");	
+    			return mapping.findForward("noLogin");
 		}
 		else{
 			messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.E"));
