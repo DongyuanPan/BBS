@@ -54,7 +54,7 @@
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/addBoard.do?method=addBoard">我的帖子</a></td>
+								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
 						</tr>
 
 					</table>

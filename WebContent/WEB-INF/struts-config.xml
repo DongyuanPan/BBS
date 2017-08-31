@@ -110,7 +110,7 @@
 		<!-- 列表显示我的帖子 -->
 		<action path="/needLogin/my/listShow" type="com.yxq.action.OwnAction"
 			parameter="method" validate="false">
-			<forward name="success" path="/view/indexTemp.jsp" />
+			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
 
 		<!-- *************以下配置管理员的操作************* -->
