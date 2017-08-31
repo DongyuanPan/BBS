@@ -59,6 +59,38 @@ public class AdminAction extends DispatchAction {
 		return mapping.findForward(forwardPath);
 	}
     
+    /** 取消置顶帖*/
+    public ActionForward cancleTopBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+		HttpSession session=request.getSession();
+		session.setAttribute("mainPage","/pages/show/bbs/openRootShow.jsp");
+		String forwardPath="error";		
+		
+		String bbsId=request.getParameter("bbsId");
+		if(bbsId!=null&&!bbsId.equals("")){
+			Date date=new Date();
+			String today=Change.dateTimeChange(date);
+			String sql="update tb_bbs set bbs_isTop='0', bbs_toTopTime=? where bbs_id=?";
+			Object[] params={today,bbsId};
+			
+			ActionMessages messages=new ActionMessages();
+			
+			OpDB myOp=new OpDB();
+			int i=myOp.OpUpdate(sql, params);
+			if(i<=0){
+				System.out.println("取消置顶出错！");
+				forwardPath="error";
+				messages.add("userOpR",new ActionMessage("luntan.bbs.cancleTop.E"));
+			}
+			else{
+				System.out.println("取消置顶成功！");
+				forwardPath="success";
+				messages.add("userOpR",new ActionMessage("luntan.bbs.cancleTop.S"));
+			}			
+			saveErrors(request,messages);
+		}
+		return mapping.findForward(forwardPath);
+	}
+    
     /** 设为精华帖子 */
     public ActionForward setGoodBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		String forwardPath="error";		
