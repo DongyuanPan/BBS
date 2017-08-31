@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50617
+Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : db_bbs
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2017-08-31 09:05:46
+Date: 2017-08-31 14:17:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,11 +63,11 @@ CREATE TABLE `tb_bbs` (
 -- ----------------------------
 INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
 INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:44:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
-INSERT INTO `tb_bbs` VALUES ('3', '1', '普通主题', '开发JSP程序通常使用哪些框架？', '请问，开发JSP程序比较常用和流行的开发框架有哪些？？', '许久', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是置顶原因');
+INSERT INTO `tb_bbs` VALUES ('3', '1', '普通主题', '开发JSP程序通常使用哪些框架？', '请问，开发JSP程序比较常用和流行的开发框架有哪些？？', '许久', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2017-08-31 14:14:08', '1', '2013-08-05 10:43:03', '这里是置顶原因');
 INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('14', '1', '普通主题', '随时回答你的问题', '如果你有什么问题可随时发布帖了，我会及时的回复您．', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
-INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', '2017-08-31 14:15:20', '0', null, null);
 
 -- ----------------------------
 -- Table structure for `tb_bbsanswer`
@@ -193,10 +193,10 @@ CREATE TABLE `tb_user` (
   `user_phone` varchar(12) DEFAULT NULL,
   `user_OICQ` varchar(14) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
-  `user_from` varchar(200) DEFAULT NULL,
+  `user_from` varchar(200) CHARACTER SET gb2312 DEFAULT NULL,
   `user_able` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
@@ -208,3 +208,4 @@ INSERT INTO `tb_user` VALUES ('8', '雨飞', '333', 'user18.gif', '女', '134***
 INSERT INTO `tb_user` VALUES ('9', '许久', '444', 'user5.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '吉林省长春市', '1');
 INSERT INTO `tb_user` VALUES ('14', '00', '000000', 'user6.gif', '女', '135*****117', '5454', '11@11.com', '长春', '1');
 INSERT INTO `tb_user` VALUES ('15', 'java1234', '123', 'user15.gif', '女', '12345678900', '12321', '231@qq.com', '江苏', '0');
+INSERT INTO `tb_user` VALUES ('16', 'me', '000000', 'user9.gif', '?', '11111111111', '120', '110@seu.edu.cn', '江苏', '0');
