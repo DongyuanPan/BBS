@@ -9,7 +9,7 @@ import org.apache.struts.validator.ValidatorForm;
 public class BroadcastForm extends ValidatorForm {
 
 	private int broadcastId;
-	private String broadcastMessege;
+	private String broadcastMessage;
 	private String broadcastTime;
 	
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
@@ -26,11 +26,11 @@ public class BroadcastForm extends ValidatorForm {
 	public void setBroadcastId(int broadcastId) {
 		this.broadcastId = broadcastId;
 	}
-	public String getBroadcastMessege() {
-		return broadcastMessege;
+	public String getBroadcastMessage() {
+		return broadcastMessage;
 	}
-	public void setBroadcastMessege(String broadcastMessege) {
-		this.broadcastMessege = broadcastMessege;
+	public void setBroadcastMessage(String broadcastMessage) {
+		this.broadcastMessage = broadcastMessage;
 	}
 	public String getBroadcastTime() {
 		return broadcastTime;
@@ -41,7 +41,7 @@ public class BroadcastForm extends ValidatorForm {
 	
 	public void clear(){
 		broadcastId=0;
-		broadcastMessege="";
+		broadcastMessage="";
 		broadcastTime="";
 	}
 	

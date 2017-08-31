@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-08-31 13:52:58
+Date: 2017-08-31 18:49:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,7 +131,7 @@ INSERT INTO `tb_board` VALUES ('20', '5', '44444', '00', '4444');
 DROP TABLE IF EXISTS `tb_broadcast`;
 CREATE TABLE `tb_broadcast` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `broadcast_messege` varchar(255) NOT NULL,
+  `broadcast_message` varchar(255) NOT NULL,
   `broadcase_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
@@ -184,7 +184,7 @@ INSERT INTO `tb_collect` VALUES ('2', 'tsoft', '13');
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(20) DEFAULT NULL,
+  `user_name` varchar(20) CHARACTER SET gb2312 DEFAULT NULL,
   `user_password` varchar(20) DEFAULT NULL,
   `user_face` varchar(11) DEFAULT NULL,
   `user_sex` varchar(10) DEFAULT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `tb_user` (
   `user_from` varchar(200) CHARACTER SET gb2312 DEFAULT NULL,
   `user_able` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
@@ -209,4 +209,8 @@ INSERT INTO `tb_user` VALUES ('15', 'java1234', '123', 'user15.gif', '女', '123
 INSERT INTO `tb_user` VALUES ('16', 'me', '000000', 'user9.gif', '?', '11111111111', '120', '110@seu.edu.cn', '福建', '0');
 INSERT INTO `tb_user` VALUES ('18', 'you', '111111', 'user0.gif', '?', '11111111111', '111', '111@qq.com', '??', '0');
 INSERT INTO `tb_user` VALUES ('19', 'op', '11111', 'user0.gif', '?', '11111111111', '111', '111@11.com', '??', '0');
-INSERT INTO `tb_user` VALUES ('20', '??', '11111', 'user0.gif', '?', '11111111111', '111', '111@qq.com', '??', '0');
+INSERT INTO `tb_user` VALUES ('20', 'll', '11111', 'user0.gif', '?', '11111111111', '111', '111@qq.com', '??', '0');
+INSERT INTO `tb_user` VALUES ('21', '我', '111', 'user0.gif', '男', '111', '111', '11.qq.com', '广州', '0');
+INSERT INTO `tb_user` VALUES ('22', '王', '111', 'user0.gif', '男', '112', '111', '11', '新酱', '0');
+INSERT INTO `tb_user` VALUES ('23', '1', '1111', 'user0.gif', '?', '11111111111', '11', '11@qq.com', '??', '0');
+INSERT INTO `tb_user` VALUES ('26', '??', '111', 'user0.gif', '?', '11111111111', '111', '112@qq.com', '???', '0');

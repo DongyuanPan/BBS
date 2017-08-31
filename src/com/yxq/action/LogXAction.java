@@ -114,7 +114,13 @@ public class LogXAction extends DispatchAction {
 			}
 			else{
 				String userName=Change.HTMLChange(regForm.getUserName());
-				
+				try {
+					userName = new String(userName.getBytes("gb2312"),"gb2312");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(userName);
 				Object[] params=null;
 				String sql="";
 				
@@ -122,8 +128,8 @@ public class LogXAction extends DispatchAction {
 				params=new Object[1];
 				params[0]=userName;
 				
-				OpDB myOp=new OpDB();
-				UserForm user=myOp.OpUserSingleShow(sql, params);
+				OpDB myOp = new OpDB();
+				UserForm user = myOp.OpUserSingleShow(sql, params);
 				
 				if(user!=null){
 					System.out.println(userName+" 用户已经存在！");
@@ -137,14 +143,6 @@ public class LogXAction extends DispatchAction {
 					String userOICQ=regForm.getUserOICQ();
 					String userEmail=regForm.getUserEmail();
 					String userFrom=Change.HTMLChange(regForm.getUserFrom());
-//					System.out.println(userFrom);
-//					try {
-//						userFrom = new String(userFrom.getBytes("ISO-8859-1"), "gb2312");
-//					} catch (UnsupportedEncodingException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					System.out.println(userFrom);
 					String userAble="0";
 					
 					sql="insert into tb_user values(null,?,?,?,?,?,?,?,?,?)";
@@ -170,7 +168,8 @@ public class LogXAction extends DispatchAction {
 						messages.add("userOpR",new ActionMessage("luntan.user.reg.S"));
 					}				
 					saveErrors(request,messages);		
-				}				
+				}
+				
 			}			
 			return mapping.findForward("result");		
 		}
