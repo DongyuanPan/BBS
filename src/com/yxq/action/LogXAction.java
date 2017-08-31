@@ -1,5 +1,6 @@
 package com.yxq.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.util.LabelValueBean;
 
 import com.yxq.actionform.UserForm;
 import com.yxq.dao.OpDB;
@@ -177,10 +179,10 @@ public class LogXAction extends DispatchAction {
 		}
 	}	
 	
-	public ActionForward personCenter(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+	public ActionForward myPersonInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		ActionMessages messages=new ActionMessages();
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","../pages/personCenter.jsp");
+		session.setAttribute("mainPage","../UserCenter/personCenter.jsp");
 		
 		Object obj=session.getAttribute("logoner");
 		if(obj!=null&&(obj instanceof UserForm)){
@@ -207,4 +209,105 @@ public class LogXAction extends DispatchAction {
 			return mapping.findForward("noLogin");			
 		}
 	}	
+	
+	public ActionForward personCenter(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+		ActionMessages messages=new ActionMessages();
+		HttpSession session=request.getSession();
+		Object obj=session.getAttribute("logoner");
+		if(obj!=null&&(obj instanceof UserForm)){
+			UserForm logoner=(UserForm)obj;
+			String able=logoner.getUserAble();
+
+			if(!able.equals("2")){				
+				messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.N"));
+				saveErrors(request,messages);
+				return mapping.findForward("noAble");				
+			}
+			else{
+				return mapping.findForward("BhaveLogin");
+			}
+		}
+		else{
+			messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.E"));
+			saveErrors(request,messages);
+			return mapping.findForward("noLogin");			
+		}
+	}	
+	
+	public ActionForward modifyUser1(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+    	HttpSession session=request.getSession();
+    	session.setAttribute("mainPage","../UserCenter/userModify.jsp");
+    	Object obj=session.getAttribute("logoner");
+    	String ID=null;
+		if(obj!=null&&(obj instanceof UserForm)){
+			UserForm logoner=(UserForm)obj;
+			ID=logoner.getId();
+		}
+		
+    	List backUserAble=new ArrayList();    	
+    	backUserAble.add(new LabelValueBean("管理员","2"));
+    	backUserAble.add(new LabelValueBean("版主","1"));
+    	backUserAble.add(new LabelValueBean("普通用户","0"));
+    	session.setAttribute("backUserAble",backUserAble);    		
+
+		String forwardPath="";		
+		String userId=ID;
+		if(userId==null)
+			userId="";
+    	
+		UserForm userForm=(UserForm)form;
+    	String validate=request.getParameter("validate");
+    	if(validate==null||validate.equals("")||!validate.equals("yes")){        	
+    		forwardPath="showModifyJSP";    		
+    		String sql="select * from tb_user where id=?";
+        	Object[] params={userId};
+        	
+        	OpDB myOp=new OpDB();
+        	UserForm select=myOp.OpUserSingleShow(sql, params);
+        	
+        	userForm.setId(select.getId());
+        	userForm.setUserName(select.getUserName());
+        	userForm.setOldPassword(select.getOldPassword()); 
+        	userForm.setUserFace(select.getUserFace());
+        	userForm.setUserSex(select.getUserSex());
+        	userForm.setUserPhone(select.getUserPhone());
+        	userForm.setUserOICQ(select.getUserOICQ());
+        	userForm.setUserEmail(select.getUserEmail());
+        	userForm.setUserFrom(select.getUserFrom());
+        	userForm.setUserAble(select.getUserAble());        	
+    	}
+    	else{    		
+    		ActionMessages messages=new ActionMessages();
+    		
+    		userId = userForm.getId();
+    		String userName=Change.HTMLChange(userForm.getUserName());
+    		String userPassword=Change.HTMLChange(userForm.getUserPassword());    	
+    		String userFace=userForm.getUserFace();
+    		String userSex=userForm.getUserSex();
+    		String userPhone=userForm.getUserPhone();
+    		String userOICQ=userForm.getUserOICQ();
+    		String userEmail=userForm.getUserEmail();
+    		String userFrom=Change.HTMLChange(userForm.getUserFrom());
+    		String userAble=userForm.getUserAble();
+    		
+    		String sql="update tb_user set user_name=?,user_password=?,user_face=?,user_sex=?,user_phone=?,user_OICQ=?,user_email=?,user_from=?,user_able=? where id=?";
+    		Object[] params={userName,userPassword,userFace,userSex,userPhone,userOICQ,userEmail,userFrom,userAble,userId};
+    		
+    		OpDB myOp=new OpDB();
+    		int i=myOp.OpUpdate(sql, params);    		
+
+    		if(i<=0){
+    			System.out.println("更新用户失败！");
+    			forwardPath="error";
+    			messages.add("adminOpR",new ActionMessage("luntan.admin.modify.user.E"));
+    		}
+    		else{
+    			System.out.println("更新用户成功！");
+    			forwardPath="success";
+    			messages.add("adminOpR",new ActionMessage("luntan.admin.modify.user.S"));
+    		}
+    		saveErrors(request,messages);
+    	}
+    	return mapping.findForward(forwardPath);
+    }
 }

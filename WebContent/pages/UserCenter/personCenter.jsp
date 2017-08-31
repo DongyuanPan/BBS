@@ -75,12 +75,7 @@
 					<td></td>
 					<td colspan="4"><html:errors property="userFrom" /></td>
 				</tr>				
-				
-				<tr height="80">
-					<td>&nbsp;</td>
-					<td colspan="4"><html:submit value="修改信息" /> <html:submit
-							value="重新填写" /></td>
-				</tr>
+
 			</html:form>
 		</table>
 		<br>
