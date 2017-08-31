@@ -38,6 +38,12 @@
 			<forward name="success" path="/index.jsp" />
 			<forward name="fault" path="/pages/login.jsp" />
 		</action>
+		<!-- 个人中心(提交表单触发) -->
+		<action path="/user/personCen" type="com.yxq.action.LogXAction"
+			parameter="method" name="userForm" validate="true" input="/view/indexTemp.jsp">
+			<forward name="result" path="/view/indexTemp.jsp" />	
+			<forward name="noLogin" path="/pages/login.jsp" /> 					<!-- 没有登录返回的视图 -->        			<!-- 已经登录返回的视图 -->
+		</action>
 		<!-- 注销 -->
 		<action path="/user/logout" type="com.yxq.action.LogXAction"
 			parameter="method">
@@ -71,6 +77,11 @@
 		<action path="/user/broadcast" type="com.yxq.action.BroadcastAction"
 			parameter="method" name="broadcastForm" validate="false" >
 			<forward name="success" path="/view/indexTemp.jsp" />						<!-- 没有登录返回的视图 -->
+		</action>
+		<!-- 查看一个公告 -->
+		<action path="/user/openBroadcast" type="com.yxq.action.BroadcastAction"
+			parameter="method" name="broadcastForm" validate="false" >
+			<forward name="success" path="/view/indexTemp.jsp" />
 		</action>
 		<!-- 列表显示精华帖子 -->
 		<action path="/user/goodListShow" type="com.yxq.action.BbsAction"
@@ -158,11 +169,41 @@
 				path="/needLogin/admin/getBoardList.do?method=getBoardList&amp;type=show" />
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		
+		<!-- 后台-管理员列表显示公告 -->
+		<action path="/needLogin/admin/getBroadcastList" type="com.yxq.action.BroadcastAction"
+			name="classForm" scope="request" parameter="method" validate="false">
+			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员修改某个公告 -->
+		<action path="/needLogin/admin/modifyBroadcast" type="com.yxq.action.BroadcastAction"
+			parameter="method" name="broadcastForm" scope="request" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="showModifyJSP" path="/pages/admin/view/adminTemp.jsp" />
+			<forward name="success"
+				path="/needLogin/admin/getBroadcastList.do?method=getBroadcastList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员添加公告 -->
+		<action path="/needLogin/admin/addBroadcast" type="com.yxq.action.BroadcastAction"
+			name="broadcastForm" scope="request" parameter="method" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="result" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员删除公告 -->
+		<action path="/needLogin/admin/deleteBroadcast" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getBroadcastList.do?method=getBroadcastList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-列表查看用户列表 -->
 		<action path="/needLogin/admin/getUserList" type="com.yxq.action.AdminAction"
 			parameter="method" name="ableForm" scope="request" validate="false">
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		
 		<!-- 后台-管理员修改用户 -->
 		<action path="/needLogin/admin/modifyUser" type="com.yxq.action.AdminAction"
 			parameter="method" name="userForm" scope="request" validate="true"
@@ -203,7 +244,7 @@
 			<forward name="error" path="/view/indexTemp.jsp" />
 		</action>
 		<!-- 删除根帖 -->
-		<action path="/needLogin/deleteRoot" type="com.yxq.action.BbsAction"
+		<action path="/needLogin/deleteRootBbs" type="com.yxq.action.BbsAction"
 			parameter="method">
 			<forward name="success" path="/user/listShow.do?method=rootListShow" />
 			<forward name="error" path="/view/indexTemp.jsp" />

@@ -23,20 +23,23 @@
 <head>
 <title>页眉</title>
 <script type="text/javascript">
-        function showTime(showWhere){
-            var now=new Date();
-	        var hour=now.getHours();
-	        var minu=now.getMinutes();
-	        var sec=now.getSeconds();
-         
-            if(hour<10) hour="0"+hour;
-         	if(minu<10) minu="0"+minu;
-         	if(sec<10) sec="0"+sec;
-         	
-         	showWhere.value=hour+":"+minu+":"+sec;
-            setTimeout("showTime(time)",1000)
-        }
-      </script>
+	function showTime(showWhere) {
+		var now = new Date();
+		var hour = now.getHours();
+		var minu = now.getMinutes();
+		var sec = now.getSeconds();
+
+		if (hour < 10)
+			hour = "0" + hour;
+		if (minu < 10)
+			minu = "0" + minu;
+		if (sec < 10)
+			sec = "0" + sec;
+
+		showWhere.value = hour + ":" + minu + ":" + sec;
+		setTimeout("showTime(time)", 1000)
+	}
+</script>
 </head>
 <body onload="showTime(time)" bgcolor="#F0F0F0">
 	<center>
@@ -54,7 +57,10 @@
 							<td align="center" width="8%"><a
 								href="user/isUserLogin.do?method=isUserLogin">登 录</a></td>
 							<td align="center" width="8%"><a
-								href="user/broadcast.do?method=broadcastListShow&showpage=1">公 告</a></td>
+								href="user/broadcast.do?method=broadcastListShow&showpage=1">公
+									告</a></td>
+							<td align="center" width="8%"><a
+								href="user/personCen.do?method=personCenter">个人中心</a></td>
 							<td align="center" width="10%"><a
 								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
 							<td align="center" width="10%"><a

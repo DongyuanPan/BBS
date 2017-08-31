@@ -37,15 +37,12 @@
 						<td colspan="5">
 							<table border="1" width="100%" cellspacing="0" cellpadding="0"
 								bordercolor="#F0F0F0" bordercolorlight="#F0F0F0"
-								bordercolordark="white" rules="all">
+								bordercolordark="white" rules="all" style="word-break:break-all">
 								<logic:iterate id="broadcastSingle" name="broadcast">
-									<tr height="35" bgcolor="#F9F9F9">
+									<tr height="100" bgcolor="#F9F9F9">
 										<td width="25%" align="center"><bean:write
 												name="broadcastSingle" property="broadcastTime" /></td>
-										<td width="75%" style="style-indent: 10"><a
-											href="user/singleBroadcastShow.do?method=singleBroadcastShow&broadcastId=${broadcastSingle.broadcastId}"><bean:write
-													name="broadcastSingle" property="subBroadcastMessage[40]"
-													filter="false" /></a>
+										<td width="75%" style="style-indent: 10"><bean:write name="broadcastSingle" property="broadcastMessage"/>
 								</logic:iterate>
 							</table>
 						</td>

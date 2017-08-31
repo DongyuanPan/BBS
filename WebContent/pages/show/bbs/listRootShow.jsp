@@ -180,9 +180,10 @@
 										</a></td>
 										<!-- “删除”超链接 -->
 										<td align="center" width="6%"><a
-											href="needLogin/deleteRoot.do?method=deleteRootBbs&bbsId=${otherBbsSingle.bbsId}&bbsSender=${otherBbsSingle.bbsSender}"
+											href="needLogin/deleteRootBbs.do?method=deleteRootBbs&bbsId=${otherBbsSingle.bbsId}&bbsSender=${URLEncode.encode(otherBbsSingle.bbsSender,"ISO-8859-1")}"
 											title="楼主/管理员操作"
-											onclick="javaScript:return confirm('确认要删除该信息?')">×删除</a></td>
+											onclick="javaScript:return confirm('确认要删除该信息?')">×删除
+										</a></td>
 									</tr>
 								</logic:iterate>
 							</table>

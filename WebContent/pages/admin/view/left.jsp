@@ -58,6 +58,21 @@
 						<tr bgcolor="#F0F0F0" height="33">
 							<td style="text-indent: 5" colspan="2"
 								background="images/admin/menu.jpg"><b><font
+									color="white">■ 公告管理</font></b></td>
+						</tr>
+						<tr height="34">
+							<td style="text-indent: 40" colspan="2"
+								background="images/admin/subMenu.jpg"><a
+								href="needLogin/admin/addBroadcast.do?method=addBroadcast">发布公告</a></td>
+						</tr>
+						<tr height="34">
+							<td style="text-indent: 40" colspan="2"
+								background="images/admin/subMenu.jpg"><a
+								href="needLogin/admin/deleteBroadcast.do?method=deleteBroadcast">修改公告</a></td>
+						</tr>
+						<tr bgcolor="#F0F0F0" height="33">
+							<td style="text-indent: 5" colspan="2"
+								background="images/admin/menu.jpg"><b><font
 									color="white">■ 用户管理</font></b></td>
 						</tr>
 						<tr height="34">
