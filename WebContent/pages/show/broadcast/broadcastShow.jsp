@@ -42,7 +42,7 @@
 									<tr height="100" bgcolor="#F9F9F9">
 										<td width="25%" align="center"><bean:write
 												name="broadcastSingle" property="broadcastTime" /></td>
-										<td width="75%" style="style-indent: 10"><bean:write name="broadcastSingle" property="broadcastMessage"/>
+										<td width="75%" style="style-indent: 10"><bean:write name="broadcastSingle" property="broadcastMessage" filter="false"/>
 								</logic:iterate>
 							</table>
 						</td>

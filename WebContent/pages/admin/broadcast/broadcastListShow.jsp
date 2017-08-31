@@ -35,23 +35,23 @@
 						<td align="center" colspan="4"><li>没有类别可显示！</li></td>
 					</tr>
 				</logic:empty>
-				<logic:notEmpty name="backClassList">
+				<logic:notEmpty name="backBroadcastList">
 					<tr>
 						<td colspan="4">
 							<table border="1" width="100%" cellspacing="0" cellpadding="0"
 								bordercolor="#F0F0F0" bordercolorlight="#F0F0F0"
 								bordercolordark="white" rules="rows">
-								<logic:iterate id="backClassSingle" name="backClassList">
+								<logic:iterate id="backBroadcastSingle" name="backBroadcastList">
 									<tr height="30" bgcolor="#FBFBFB">
-										<td width="20%" align="center"><bean:write
-												name="backClassSingle" property="classId" /></td>
-										<td width="60%" style="text-indent: 15"><a
-											href="needLogin/admin/modifyClass.do?method=modifyClass&classId=${backClassSingle.classId}"><bean:write
-													name="backClassSingle" property="className" filter="false" /></a></td>
+										<td width="25%" align="center"><bean:write
+												name="backBroadcastSingle" property="broadcastTime" /></td>
+										<td width="55%" style="text-indent: 15"><bean:write
+												name="backBroadcastSingle" property="subBroadcastMessage[18]"
+												filter="false" /></a></td>
 										<td align="center"><a
-											href="needLogin/admin/modifyClass.do?method=modifyClass&classId=${backClassSingle.classId}">√修改</a></td>
+											href="needLogin/admin/modifyBroadcast.do?method=modifyBroadcast&broadcastId=${backBroadcastSingle.broadcastId}">√修改</a></td>
 										<td align="center"><a
-											href="needLogin/admin/deleteClass.do?method=deleteClass&classId=${backClassSingle.classId}"
+											href="needLogin/admin/deleteBroadcast.do?method=deleteBroadcast&broadcastId=${backBroadcastSingle.broadcastId}"
 											onclick="javaScript:return confirm('确认要删除该信息?')">×删除</a></td>
 									</tr>
 								</logic:iterate>

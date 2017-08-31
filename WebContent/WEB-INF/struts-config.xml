@@ -6,7 +6,7 @@
 		<form-bean name="searchForm" type="com.yxq.actionform.SearchForm" />
 		<form-bean name="jumpForm" type="com.yxq.actionform.JumpForm" />
 		<form-bean name="ableForm" type="com.yxq.actionform.AbleForm" />
-
+		<form-bean name="broadcastForm" type="com.yxq.actionform.BroadcastForm"></form-bean>
 		<form-bean name="classForm" type="com.yxq.actionform.ClassForm" />
 		<form-bean name="boardForm" type="com.yxq.actionform.BoardForm" />
 		<form-bean name="bbsForm" type="com.yxq.actionform.BbsForm" />
@@ -26,11 +26,20 @@
 		</action>
 		<!-- 进入后台(超链接触发，判断用户是否已经登录，若登录，则判断登录的用户是否是管理员) -->
 		<action path="/user/isAdminLogin" type="com.yxq.action.LogXAction"
-			parameter="method">
+			parameter="method" >
 			<forward name="noLogin" path="/pages/login.jsp" />                       <!-- 没有登录返回的视图 -->
 			<forward name="BhaveLogin" path="/pages/admin/view/adminTemp.jsp" />		<!-- 已经登录返回的视图 -->
 			<forward name="noAble" path="/pages/message.jsp" />             			<!-- 无权限进入后台返回的视图 -->
 		</action>
+		
+		<!-- 进入个人中心(超链接触发，判断用户是否已经登录，若登录，则判断登录的用户是否是管理员) -->
+		<action path="/user/personCen" type="com.yxq.action.LogXAction"
+			parameter="method" name="userForm">
+			<forward name="noLogin" path="/pages/login.jsp" />                       <!-- 没有登录返回的视图 -->
+			<forward name="BhaveLogin" path="/pages/UserCenter/adminTemp.jsp" />		<!-- 已经登录返回的视图 -->
+			<forward name="noAble" path="/pages/message.jsp" />             			<!-- 无权限进入后台返回的视图 -->
+		</action>
+		
 		<!-- 登录(提交表单触发) -->
 		<action path="/user/login" type="com.yxq.action.LogXAction"
 			parameter="method" name="userForm" validate="true" input="/pages/login.jsp"
@@ -38,12 +47,24 @@
 			<forward name="success" path="/index.jsp" />
 			<forward name="fault" path="/pages/login.jsp" />
 		</action>
-		<!-- 个人中心(提交表单触发) -->
-		<action path="/user/personCen" type="com.yxq.action.LogXAction"
-			parameter="method" name="userForm" validate="true" input="/view/indexTemp.jsp">
-			<forward name="result" path="/view/indexTemp.jsp" />	
+		<!-- 我的信息(提交表单触发) -->
+		<action path="/needLogin/user/myPersonInfo" type="com.yxq.action.LogXAction"
+			parameter="method" name="userForm" scope="request" validate="true" 
+			input="/pages/UserCenter/adminTemp.jsp">
+			<forward name="result" path="/pages/UserCenter/adminTemp.jsp" />	
 			<forward name="noLogin" path="/pages/login.jsp" /> 					<!-- 没有登录返回的视图 -->        			<!-- 已经登录返回的视图 -->
 		</action>
+		
+		<!-- 修改我的信息 -->
+		<action path="/needLogin/user/modifyMyInfo" type="com.yxq.action.LogXAction"
+			parameter="method" name="userForm" scope="request" validate="true"
+			input="/pages/UserCenter/adminTemp.jsp">
+			<forward name="showModifyJSP" path="/pages/UserCenter/adminTemp.jsp" />
+			<forward name="success"
+				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo;type=show" />
+			<forward name="error" path="/pages/UserCenter/adminTemp.jsp" />
+		</action>
+		
 		<!-- 注销 -->
 		<action path="/user/logout" type="com.yxq.action.LogXAction"
 			parameter="method">
@@ -99,7 +120,7 @@
 		<!-- 列表显示我的帖子 -->
 		<action path="/needLogin/my/listShow" type="com.yxq.action.OwnAction"
 			parameter="method" validate="false">
-			<forward name="success" path="/view/indexTemp.jsp" />
+			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
 
 		<!-- *************以下配置管理员的操作************* -->
@@ -171,12 +192,12 @@
 		</action>
 		
 		<!-- 后台-管理员列表显示公告 -->
-		<action path="/needLogin/admin/getBroadcastList" type="com.yxq.action.BroadcastAction"
-			name="classForm" scope="request" parameter="method" validate="false">
+		<action path="/needLogin/admin/getBroadcastList" type="com.yxq.action.AdminAction"
+			name="broadcastForm" scope="request" parameter="method" validate="false">
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		<!-- 后台-管理员修改某个公告 -->
-		<action path="/needLogin/admin/modifyBroadcast" type="com.yxq.action.BroadcastAction"
+		<action path="/needLogin/admin/modifyBroadcast" type="com.yxq.action.AdminAction"
 			parameter="method" name="broadcastForm" scope="request" validate="true"
 			input="/pages/admin/view/adminTemp.jsp">
 			<forward name="showModifyJSP" path="/pages/admin/view/adminTemp.jsp" />
@@ -185,7 +206,7 @@
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		<!-- 后台-管理员添加公告 -->
-		<action path="/needLogin/admin/addBroadcast" type="com.yxq.action.BroadcastAction"
+		<action path="/needLogin/admin/addBroadcast" type="com.yxq.action.AdminAction"
 			name="broadcastForm" scope="request" parameter="method" validate="true"
 			input="/pages/admin/view/adminTemp.jsp">
 			<forward name="result" path="/pages/admin/view/adminTemp.jsp" />

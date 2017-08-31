@@ -282,7 +282,7 @@ public class BbsAction extends MySuperAction {
 		
 		String bbsId=request.getParameter("bbsId");						//获取被提前帖子的ID
 		String bbsSender=request.getParameter("bbsSender");				//获取被提前帖子的发布者
-		bbsSender=new String(bbsSender.getBytes("ISO-8859-1"));	
+		//bbsSender=new String(bbsSender.getBytes("ISO-8859-1"),"gbk");	
 		String time=Change.dateTimeChange(new Date());					//获取操作时间
 		String lognerAble=logoner.getUserAble();						//获取当前登录用户的权限
 		String lognerName=logoner.getUserName();						//获取当前登录用户的用户名

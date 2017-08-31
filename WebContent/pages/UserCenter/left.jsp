@@ -18,7 +18,7 @@
 						src="images/admin/adminE.jpg" style="border: 0"></a></td>
 			</tr>
 			<tr height="33">
-				<td colspan="2"><img src="images/admin/menuT.jpg"></td>
+				<td colspan="2"><img src="images/admin/menuT.png"></td>
 			</tr>
 			<tr>
 				<td align="center" valign="top" colspan="2">
@@ -28,58 +28,35 @@
 						<tr bgcolor="#F0F0F0" height="33">
 							<td style="text-indent: 5" colspan="2"
 								background="images/admin/menu.jpg"><b><font
-									color="white">■ 类别管理</font></b></td>
+									color="white">■ 个人信息管理</font></b></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/getClassList.do?method=getClassList">查看论坛类别</a></td>
+								href="needLogin/user/myPersonInfo.do?method=myPersonInfo">我的信息</a></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/addClass.do?method=addClass">添加论坛类别</a></td>
+								href="needLogin/user/modifyMyInfo.do?method=modifyUser1">修改个人信息</a></td>
 						</tr>
+						
 						<tr bgcolor="#F0F0F0" height="33">
 							<td style="text-indent: 5" colspan="2"
 								background="images/admin/menu.jpg"><b><font
-									color="white">■ 版面管理</font></b></td>
+									color="white">■ 帖子管理</font></b></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/getBoardList.do?method=getBoardList">查看版面</a></td>
+								href="needLogin/admin/getBoardList.do?method=getBoardList">收藏</a></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/addBoard.do?method=addBoard">添加版面</a></td>
+								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
 						</tr>
-						<tr bgcolor="#F0F0F0" height="33">
-							<td style="text-indent: 5" colspan="2"
-								background="images/admin/menu.jpg"><b><font
-									color="white">■ 公告管理</font></b></td>
-						</tr>
-						<tr height="34">
-							<td style="text-indent: 40" colspan="2"
-								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/addBroadcast.do?method=addBroadcast">发布公告</a></td>
-						</tr>
-						<tr height="34">
-							<td style="text-indent: 40" colspan="2"
-								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/getBroadcastList.do?method=getBroadcastList">修改公告</a></td>
-						</tr>
-						<tr bgcolor="#F0F0F0" height="33">
-							<td style="text-indent: 5" colspan="2"
-								background="images/admin/menu.jpg"><b><font
-									color="white">■ 用户管理</font></b></td>
-						</tr>
-						<tr height="34">
-							<td style="text-indent: 40" colspan="2"
-								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/getUserList.do?method=getUserList">查看/修改/删除用户</a></td>
-						</tr>
+
 					</table>
 				</td>
 			</tr>
