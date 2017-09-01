@@ -529,7 +529,7 @@ public class OpDB {
 				rs.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("调用OpDB类中的OpUserListShow()方法出错！");
+			System.out.println("调用OpDB类中的OpUserShow()方法出错！");
 			e.printStackTrace();
 		} finally {
 			mydb.closed();
@@ -565,6 +565,30 @@ public class OpDB {
 			mydb.closed();
 		}
 		return userform;
+	}
+	
+	// String sql = "select * from tb_friend where my_name = ?";
+	public List<String> OpFriendShow(String sql, Object[] params) {
+		List<String> list = new ArrayList<String>();
+		
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					list.add(rs.getString(3));
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("调用OpDB类中的OpFriendShow()方法出错！");
+			e.printStackTrace();
+		} finally {
+			mydb.closed();
+		}
+		
+		return list;
 	}
 
 	public int OpUpdate(String sql, Object[] params) {
