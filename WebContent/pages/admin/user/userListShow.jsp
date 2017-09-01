@@ -36,9 +36,8 @@
 			<tr height="30" bgcolor="#F0F0F0">
 				<td width="15%" align="center">用户ID</td>
 				<td width="30%" align="center">用户名</td>
-				<td width="20%" align="center">用户密码</td>
 				<td width="15%" align="center">用户权限</td>
-				<td width="20%" align="center" colspan="2">操作</td>
+				<td width="35%" align="center" colspan="3">操作</td>
 			</tr>
 			<logic:notPresent name="backUserList">
 				<tr height="80" align="center">
@@ -64,7 +63,6 @@
 										<td width="30%" style="text-indent: 5"><a
 											href="needLogin/admin/modifyUser.do?method=modifyUser&userId=${backUserSingle.id}"><bean:write
 													name="backUserSingle" property="userName" filter="false" /></td>
-										<td width="20%" align="center">${backUserSingle.oldPassword}</td>
 										<td width="15%" align="center"><logic:equal
 												name="backUserSingle" property="userAble" value="0">
                                     普通用户
@@ -75,6 +73,17 @@
 												property="userAble" value="2">
                                     管理员
                                 </logic:equal></td>
+										<td align="center"><logic:equal name="backUserSingle"
+												property="userForbidden" value="0">
+												<a
+													href="needLogin/admin/forbidUser.do?method=forbidUser&userId=${backUserSingle.id}"
+													onclick="javaScript:return confirm('确认要禁言该用户?')">设置禁言</a>
+											</logic:equal> <logic:equal name="backUserSingle" property="userForbidden"
+												value="1">
+												<a
+													href="needLogin/admin/unforbidUser.do?method=unforbidUser&userId=${backUserSingle.id}"
+													onclick="javaScript:return confirm('确认要解除该用户禁言?')">解除禁言</a>
+											</logic:equal></td>
 										<td align="center"><a
 											href="needLogin/admin/modifyUser.do?method=modifyUser&userId=${backUserSingle.id}">√修改</a></td>
 										<td align="center"><a

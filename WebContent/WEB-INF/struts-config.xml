@@ -241,6 +241,20 @@
 				path="/needLogin/admin/getUserList.do?method=getUserList&amp;type=show" />
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		<!-- 后台-设置用户禁言 -->
+		<action path="/needLogin/admin/forbidUser" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getUserList.do?method=getUserList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-解除用户禁言 -->
+		<action path="/needLogin/admin/unforbidUser" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getUserList.do?method=getUserList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
 
 		<!-- *************以下配置登录后,用户/管理员都可进行的操作************* -->
 		<!-- 发表帖子 -->

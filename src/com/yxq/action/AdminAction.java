@@ -792,6 +792,62 @@ public class AdminAction extends DispatchAction {
 		return mapping.findForward(forwardPath);
 	}
 
+	/** 后台-设置用户禁言*/
+	public ActionForward forbidUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String userId = request.getParameter("userId");
+		if (userId == null || userId.equals(""))
+			userId = "-1";
+		String sql = "update tb_user set user_forbidden='1' where id=?";
+		Object[] params = { userId };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("设置用户禁言失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.forbid.user.E"));
+		} else {
+			System.out.println("设置用户禁言成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.forbid.user.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 后台-解除用户禁言*/
+	public ActionForward unforbidUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String userId = request.getParameter("userId");
+		if (userId == null || userId.equals(""))
+			userId = "-1";
+		String sql = "update tb_user set user_forbidden='0' where id=?";
+		Object[] params = { userId };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("解除用户禁言失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.unforbid.user.E"));
+		} else {
+			System.out.println("解除用户禁言成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.unforbid.user.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
 	/** 后台-删除用户 */
 	public ActionForward deleteUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
