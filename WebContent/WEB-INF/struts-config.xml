@@ -126,12 +126,24 @@
 			parameter="method" validate="false">
 			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
-		
+		<!-- 我的回复 -->		
 		<action path="/needLogin/my/myAnswer" type="com.yxq.action.OwnAction"
 			parameter="method" validate="false">
 			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
+		<!-- 我的好友-->		
+		<action path="/needLogin/my/myFriend" type="com.yxq.action.OwnAction"
+			parameter="method" validate="false">
+			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
+		</action>
+		<!-- 删除好友 -->
+		<action path="/bbs/user/deleteFriend" type="com.yxq.action.OwnAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/my/myFriend.do?method=lookMyFriend&amp;type=show" />
 
+			<forward name="errr" path="/pages/message.jsp" />
+		</action>
 		<!-- *************以下配置管理员的操作************* -->
 		<!-- 前台-管理员置顶帖子、设为精华帖 、取消置顶-->
 		<action path="/needLogin/admin/doTopGood" type="com.yxq.action.AdminAction"

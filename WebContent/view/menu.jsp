@@ -77,8 +77,8 @@
 				<td width="529" align="center" background="images/index/indexP.png">
 					<marquee onmouseover=this.stop() onmouseout=this.start()
 						scrollamount="1" scrolldelay="10" direction="left" width="470">
-						<img src="images/index/pcard.gif"> Tsoft服务热线：(0431)8491***
-						E-mail：tsoft***@tsoft.com
+						<img src="images/index/pcard.gif"> BBS服务热线：(520) 110
+						E-mail：东南大学计算机科学与工程学院@seu.edu.com
 					</marquee>
 				</td>
 				<td align="center" width="271"

@@ -61,7 +61,11 @@
 								background="images/admin/subMenu.png"><a
 								href="needLogin/my/myAnswer.do?method=lookMyAnswer&showpage=1">我的回复</a></td>
 						</tr>
-
+						<tr height="34">
+							<td style="text-indent: 40" colspan="2"
+								background="images/admin/subMenu.png"><a
+								href="needLogin/my/myFriend.do?method=lookMyFriend&showpage=1">我的好友</a></td>
+						</tr>
 					</table>
 				</td>
 			</tr>

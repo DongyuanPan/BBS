@@ -1,9 +1,8 @@
 package com.yxq.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.UnsupportedEncodingException;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +19,7 @@ import org.apache.struts.util.LabelValueBean;
 import com.yxq.actionform.UserForm;
 import com.yxq.dao.OpDB;
 import com.yxq.tools.Change;
+import com.yxq.tools.Encryption;
 
 public class LogXAction extends DispatchAction {
 	
@@ -68,13 +68,16 @@ public class LogXAction extends DispatchAction {
 		UserForm logoner=(UserForm)form;
 		String userName=Change.HTMLChange(logoner.getUserName());
 		String userPassword=Change.HTMLChange(logoner.getUserPassword());
+		new Encryption();
+		userPassword = Encryption.getHash(userPassword, "MD5");
+		System.out.println(userPassword);
 		
 		String sql="select * from tb_user where user_name=? and user_password=?";
 		Object[] params={userName,userPassword};
 		
 		ActionMessages messages=new ActionMessages();
-		OpDB myOp=new OpDB();
-		logoner=myOp.OpUserSingleShow(sql, params);
+		OpDB myOp = new OpDB();
+		logoner = myOp.OpUserSingleShow(sql, params);
 		if(logoner!=null){			
 			session.setAttribute("logoner",logoner);
 			return (mapping.findForward("success"));
@@ -104,9 +107,11 @@ public class LogXAction extends DispatchAction {
 		}
 		else{			
 			UserForm regForm=(UserForm)form;
-			
 			String pass1=regForm.getUserPassword();
+		    new Encryption();
+			pass1 = Encryption.getHash(pass1, "MD5");
 			String pass2=regForm.getAginPassword();
+			pass2 = Encryption.getHash(pass2, "MD5");
 			if(!pass1.equals(pass2)){
 				System.out.println("两次输入的密码不一致！");
 				messages.add("userPassword",new ActionMessage("luntan.user.reg.pass.noEquals"));
@@ -114,13 +119,6 @@ public class LogXAction extends DispatchAction {
 			}
 			else{
 				String userName=Change.HTMLChange(regForm.getUserName());
-				try {
-					userName = new String(userName.getBytes("gb2312"),"gb2312");
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(userName);
 				Object[] params=null;
 				String sql="";
 				
@@ -136,7 +134,7 @@ public class LogXAction extends DispatchAction {
 					messages.add("userOpR",new ActionMessage("luntan.user.reg.exist",userName));
 				}
 				else{
-					String userPassword=Change.HTMLChange(regForm.getUserPassword());
+					//String userPassword=Change.HTMLChange(regForm.getUserPassword());
 					String userFace=regForm.getUserFace();
 					String userSex=regForm.getUserSex();
 					String userPhone=regForm.getUserPhone();
@@ -144,11 +142,12 @@ public class LogXAction extends DispatchAction {
 					String userEmail=regForm.getUserEmail();
 					String userFrom=Change.HTMLChange(regForm.getUserFrom());
 					String userAble="0";
+					String userForbidden="0";
 					
-					sql="insert into tb_user values(null,?,?,?,?,?,?,?,?,?)";
-					params=new Object[9];
+					sql="insert into tb_user values(null,?,?,?,?,?,?,?,?,?,?)";
+					params=new Object[10];
 					params[0]=userName;
-					params[1]=userPassword;
+					params[1]=pass1;
 					params[2]=userFace;
 					params[3]=userSex;
 					params[4]=userPhone;
@@ -156,6 +155,7 @@ public class LogXAction extends DispatchAction {
 					params[6]=userEmail;
 					params[7]=userFrom;
 					params[8]=userAble;
+					params[9]=userForbidden;
 					
 					int i = myOp.OpUpdate(sql, params);			
 					if(i <= 0){
