@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50617
+Source Server Version : 50528
 Source Host           : localhost:3306
 Source Database       : db_bbs
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2017-08-31 18:49:32
+Date: 2017-09-01 09:07:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,14 +132,14 @@ DROP TABLE IF EXISTS `tb_broadcast`;
 CREATE TABLE `tb_broadcast` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `broadcast_message` varchar(255) NOT NULL,
-  `broadcase_time` datetime NOT NULL,
+  `broadcast_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_broadcast
 -- ----------------------------
-INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告', '2017-08-30 14:53:19');
+INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告，修改了。', '2017-09-01 09:04:18');
 
 -- ----------------------------
 -- Table structure for `tb_class`
