@@ -137,10 +137,10 @@ public class OwnAction extends MySuperAction {
 			myOp.setMark(true);								//进行分页显示
 			myOp.setPageInfo(perR, currentP, gowhich);		//设置进行分页显示需要的信息	
 			
-			List myanswerlist=myOp.OpBbsAnswerShow(sql, params);
+			List myFriendlist=myOp.OpFriendShow(sql, params);
 			CreatePage page=myOp.getPage();
 			
-			session.setAttribute("myanswerlist",myanswerlist);
+			session.setAttribute("myFriendlist",myFriendlist);
 			session.setAttribute("page",page);
 		}		
 		return (mapping.findForward("success"));
