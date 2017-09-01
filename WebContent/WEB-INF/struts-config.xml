@@ -93,7 +93,7 @@
 		</action>
 
 		<!-- *************以下配置管理员的操作************* -->
-		<!-- 前台-管理员置顶帖子、设为精华帖 -->
+		<!-- 前台-管理员置顶帖子、设为精华帖 、取消置顶-->
 		<action path="/needLogin/admin/doTopGood" type="com.yxq.action.AdminAction"
 			parameter="method">
 			<forward name="success" path="/user/openShow.do?method=openShow" />

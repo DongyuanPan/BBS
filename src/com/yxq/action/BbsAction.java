@@ -189,7 +189,7 @@ public class BbsAction extends MySuperAction {
 	public ActionForward addBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session=request.getSession();		
 		session.setAttribute("mainPage","/pages/add/bbsAdd.jsp");
-		
+		 
 		String validate=request.getParameter("validate");
 		if(validate==null||validate.equals("")||!validate.equals("yes")){
 			return mapping.findForward("showAddJSP");
@@ -199,18 +199,20 @@ public class BbsAction extends MySuperAction {
 			
 			String	boardId=(String)session.getAttribute("boardId");
 			String 	bbsTitle=Change.HTMLChange(bbsForm.getBbsTitle());
+			String  bbsType=Change.HTMLChange(bbsForm.getBbsType());
 			String 	bbsContent=Change.HTMLChange(bbsForm.getBbsContent());
 			String 	bbsSender=((UserForm)session.getAttribute("logoner")).getUserName();
-			String 	bbsSendTime=Change.dateTimeChange(new Date());
+			String  bbsSendIP=request.getRemoteAddr();
+			//String 	bbsSendTime=Change.dateTimeChange(new Date());
 			String 	bbsFace=bbsForm.getBbsFace();
-			String 	bbsOpTime=bbsSendTime;
+			//String 	bbsOpTime=bbsSendTime;
 			String 	bbsIsTop="0";
 			String 	bbsToTopTime="";
 			String 	bbsIsGood="0";
 			String 	bbsToGoodTime="";
 			
-			String sql="insert into tb_bbs values(null,?,?,?,?,now(),?,?,?,null,?,null)";
-			Object[] params={boardId,bbsTitle,bbsContent,bbsSender,bbsFace,bbsOpTime,bbsIsTop,bbsIsGood};
+			String sql="insert into tb_bbs values(null,?,?,?,?,?,now(),?,?,now(),?,null,?,null,null)";
+			Object[] params={boardId,bbsType,bbsTitle,bbsContent,bbsSender,bbsSendIP,bbsFace,bbsIsTop,bbsIsGood};
 			
 			ActionMessages messages=new ActionMessages();			
 			OpDB myOp=new OpDB();
