@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-09-01 11:03:01
+Date: 2017-09-01 14:10:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,7 +63,7 @@ CREATE TABLE `tb_bbs` (
 -- ----------------------------
 -- Records of tb_bbs
 -- ----------------------------
-INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
+INSERT INTO `tb_bbs` VALUES ('1', '1', '普通主题', 'JSP程序开发中有那些设计模式？', '请问各位，在JSP开发中有哪些开发模式？', 'tsoft', '2013-08-05 10:43:03', '127.0.0.1', 'face3.gif', '2013-08-05 10:43:03', '1', '2017-09-01 13:28:21', '1', '2013-08-05 10:43:03', '这里是精华原因');
 INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:44:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
 INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
@@ -172,12 +172,30 @@ CREATE TABLE `tb_collect` (
   `collect_collector` varchar(255) NOT NULL,
   `collect_bbs_id` int(11) NOT NULL,
   PRIMARY KEY (`collect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_collect
 -- ----------------------------
 INSERT INTO `tb_collect` VALUES ('3', 'tsoft', '2');
+INSERT INTO `tb_collect` VALUES ('4', 'tsoft', '1');
+
+-- ----------------------------
+-- Table structure for `tb_friend`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_friend`;
+CREATE TABLE `tb_friend` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `my_name` varchar(255) DEFAULT NULL,
+  `friend_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gb2312;
+
+-- ----------------------------
+-- Records of tb_friend
+-- ----------------------------
+INSERT INTO `tb_friend` VALUES ('1', 'tsoft', 'java1234');
+INSERT INTO `tb_friend` VALUES ('2', 'tsoft', 'me');
 
 -- ----------------------------
 -- Table structure for `tb_user`
