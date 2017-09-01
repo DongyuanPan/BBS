@@ -36,8 +36,8 @@
 													rules="cols">
 													<tr height="35">
 														<td align="center" width="60" rowspan="2"><img
-															src="images/index/boardPic.jpg"></td>
-														<td><img src="images/index/btitle.jpg"> <a
+															src="images/index/boardPic.png"></td>
+														<td><img src="images/index/btitle.png"> <a
 															href="user/listShow.do?method=rootListShow&showpage=1&classId=${classSingle.classId}&boardId=${boardSingle.boardId}"
 															style="" alt="进入版面！"><bean:write name="boardSingle"
 																	property="boardName" filter="false" /></a></td>
@@ -59,9 +59,9 @@
 															</table>
 														</td>
 													</tr>
-													<tr height="25" background="images/index/masterB.jpg">
+													<tr height="25" background="images/index/masterB.png">
 														<td style="text-indent: 60"><img
-															src="images/index/master.jpg"> <a
+															src="images/index/master.png"> <a
 															href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${boardSingle.boardMaster}">
 																斑竹：<bean:write name="boardSingle" property="boardMaster" /></td>
 														</a>
@@ -75,8 +75,7 @@
 									</logic:present></td>
 							</tr>
 							<tr height="25">
-								<td style="text-indent: 10" background="images/index/boardE.jpg"><font
-									color="#F9F9F9)">论坛介绍：<bean:write name="classSingle"
+								<td style="text-indent: 10" background="images/index/boardE.png">论坛介绍：<bean:write name="classSingle"
 											property="classIntro" filter="false" /></font></td>
 							</tr>
 						</table>

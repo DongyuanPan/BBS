@@ -18,7 +18,7 @@
 				<input type="hidden" name="validate" value="yes">
 				<tr bgcolor="#F0F0F0" height="30">
 					<td colspan="2" style="text-indent: 5"
-						background="images/index/classT.jpg"><b><font
+						background="images/index/classT.png"><b><font
 							color="white">Ёі ЗЂБэЬћзг</font></b></td>
 				</tr>
 				<tr>

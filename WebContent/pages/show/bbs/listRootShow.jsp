@@ -23,16 +23,15 @@
 			</tr>
 
 			<!-- 版面跳转 -->
-			<tr height="30" bgcolor="#F9F9F9">
+			<tr height="24" >
 				<html:form action="user/jumpBoard.do">
-					<td colspan="6" align="right" background="images/index/boardE.jpg">
-						<input type="hidden" name="method" value="rootListShow">
-						跳转版面: <html:select property="boardId">
+					<td colspan="6" align="right" background="images/index/boardE.png"><input
+						type="hidden" name="method" value="rootListShow"> 跳转版面: <html:select
+							property="boardId">
 							<html:option value="">-版面跳转--</html:option>
 							<html:options collection="jumpBoard" property="value"
 								labelProperty="label" />
-						</html:select> <html:submit value="跳转" /> &nbsp;
-					</td>
+						</html:select> <html:submit value="跳转" /> &nbsp;</td>
 				</html:form>
 			</tr>
 
@@ -86,14 +85,14 @@
 										<td width="22%" align="center"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${topBbsSingle.bbsSender}">
 												<b><bean:write name="topBbsSingle" property="bbsSender"
-														filter="false" /></b> <br>
-											<bean:write name="topBbsSingle" property="bbsSendTime" />
+														filter="false" /></b> <br> <bean:write
+													name="topBbsSingle" property="bbsSendTime" />
 										</a></td>
 										<td width="28%" align="center" colspan="2"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${topBbsSingle.bbsLastUpdateUser}">
 												<b><bean:write name="topBbsSingle"
 														property="bbsLastUpdateUser" filter="false" /></b> <br>
-											<bean:write name="topBbsSingle" property="bbsLastUpdateTime" />
+												<bean:write name="topBbsSingle" property="bbsLastUpdateTime" />
 										</a></td>
 									</tr>
 								</logic:iterate>
@@ -102,8 +101,8 @@
 					</tr>
 				</logic:notEmpty>
 			</logic:present>
-			<tr height="30">
-				<td colspan="6" align="right" background="images/index/boardE.jpg"></td>
+			<tr height="24">
+				<td colspan="6" align="right" background="images/index/boardE.png"></td>
 			</tr>
 
 			<!-- ****************显示普通帖子**************** -->
@@ -167,23 +166,23 @@
 										<td align="center" width="22%"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${otherBbsSingle.bbsSender}">
 												<b><bean:write name="otherBbsSingle"
-														property="bbsSender" filter="false" /></b> <br>
-											<bean:write name="otherBbsSingle" property="bbsSendTime" />
+														property="bbsSender" filter="false" /></b> <br> <bean:write
+													name="otherBbsSingle" property="bbsSendTime" />
 										</a></td>
 										<!-- 输出最后回复者 -->
 										<td align="center" width="22%"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${otherBbsSingle.bbsLastUpdateUser}">
 												<b><bean:write name="otherBbsSingle"
 														property="bbsLastUpdateUser" filter="false" /></b> <br>
-											<bean:write name="otherBbsSingle"
+												<bean:write name="otherBbsSingle"
 													property="bbsLastUpdateTime" />
 										</a></td>
 										<!-- “删除”超链接 -->
 										<td align="center" width="6%"><a
-											href="needLogin/deleteRootBbs.do?method=deleteRootBbs&bbsId=${otherBbsSingle.bbsId}&bbsSender=${URLEncode.encode(otherBbsSingle.bbsSender,"ISO-8859-1")}"
+											href="needLogin/deleteRootBbs.do?method=deleteRootBbs&bbsId=${otherBbsSingle.bbsId}&bbsSender=${URLEncode.encode(otherBbsSingle.bbsSender,"
+											ISO-8859-1")}"
 											title="楼主/管理员操作"
-											onclick="javaScript:return confirm('确认要删除该信息?')">×删除
-										</a></td>
+											onclick="javaScript:return confirm('确认要删除该信息?')">×删除 </a></td>
 									</tr>
 								</logic:iterate>
 							</table>
@@ -196,13 +195,12 @@
 				<td colspan="6" align="right"></td>
 			</tr>
 			<!-- ****************分页导航栏**************** -->
-			<tr height="30">
-				<td colspan="6" align="right" background="images/index/boardE.jpg">
-					<jsp:include flush="true" page="/pages/page.jsp">
+			<tr height="30" >
+				<td colspan="6" align="right" background="images/index/boardE30.png"><jsp:include
+						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich"
 							value="user/listShow.do?method=rootListShow" />
-					</jsp:include>
-				</td>
+					</jsp:include></td>
 			</tr>
 			<tr height="10" bgcolor="#F4F4F4">
 				<td colspan="6" align="right"></td>

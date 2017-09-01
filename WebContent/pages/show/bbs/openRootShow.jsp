@@ -133,7 +133,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white">
 			<tr height="30">
-				<td align="right" background="images/index/boardE.jpg"><jsp:include
+				<td align="right" background="images/index/boardE30.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich" value="user/openShow.do?method=openShow" />
 					</jsp:include></td>
@@ -145,7 +145,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white" style="margin-top: 2; word-break: break-all">
 			<tr height="30">
-				<td background="images/index/classT.jpg" style="text-indent: 5"><b><font
+				<td background="images/index/classT.png" style="text-indent: 5"><b><font
 						color="white">■ 显示回复帖子</font></b></td>
 			</tr>
 		</table>
@@ -251,8 +251,8 @@
 					<table border="1" width="99%" cellspacing="0" cellpadding="0"
 						bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 						bordercolordark="white">
-						<tr height="15">
-							<td background="images/index/boardE.jpg"></td>
+						<tr height="24">
+							<td background="images/index/boardE.png"></td>
 						</tr>
 					</table>
 				</logic:iterate>
@@ -264,7 +264,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white">
 			<tr height="30">
-				<td align="right" background="images/index/boardE.jpg"><jsp:include
+				<td align="right" background="images/index/boardE30.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich" value="user/openShow.do?method=openShow" />
 					</jsp:include></td>
@@ -280,7 +280,7 @@
 				<input type="hidden" name="method" value="answerBbs">
 				<tr bgcolor="#F0F0F0" height="30">
 					<td colspan="2" style="text-indent: 5"
-						background="images/index/classT.jpg"><b><font
+						background="images/index/classT.png"><b><font
 							color="white">■ 回复【<bean:write name="bbsRootSingle"
 									property="bbsTitle" filter="false" />】帖子
 						</font></b></td>

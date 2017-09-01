@@ -6,11 +6,11 @@
 <title>分页导航栏</title>
 </head>
 <body>
-	<table border="0" width="100%" cellspacing="0">
-		<tr>
-			<td width="37%" align="center"><bean:write name="page"
+	<table border="0" width="100%" cellspacing="0" style="font-size: small">
+		<tr >
+			<td width="45%" align="center" ><bean:write name="page"
 					property="pageInfo" filter="false" /></td>
-			<td align="center" width="37%"><bean:write name="page"
+			<td align="center" width="30%"><bean:write name="page"
 					property="pageLink" filter="false" /></td>
 			<form action="${param['gowhich']}" method="post">
 				<td width="26%">转到： <input type="text" name="showpage" size="7">

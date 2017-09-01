@@ -11,8 +11,8 @@
 </head>
 <body>
 	<center>
-		<table border="1" width="80%" bgcolor="#F9F9F9" cellspacing="0"
-			cellpadding="0" bordercolor="lightgrey" bordercolorlight="lightgrey"
+		<table border="1" width="80%" bgcolor="#cecece" cellspacing="0"
+			cellpadding="0" bordercolor="#cecece" bordercolorlight="#cecece"
 			bordercolordark="white" rules="none" style="margin-top: 5">
 			<html:form action="user/personCen.do">
 				<input type="hidden" name="method" value="personCenter">

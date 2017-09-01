@@ -53,7 +53,7 @@
 				<td colspan="5"></td>
 			</tr>
 			<tr height="30">
-				<td colspan="6" background="images/index/boardE.jpg"><jsp:include
+				<td colspan="6" background="images/index/boardE30.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich"
 							value="user/broadcastShow.do?method=broadcastListShow" />

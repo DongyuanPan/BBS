@@ -17,13 +17,13 @@
 					style="text-indent: 5"><b><font color="white">■
 							我的收藏</font></b></td>
 			</tr>
-			<tr height="30" align="center" bgcolor="#F0F0F0">
+			<tr height="30" align="center" bgcolor="#F0F0F0" style="font-size-adjust: inherit">
 				<td width="6%">状态</td>
-				<td width="32%">帖子标题</td>
-				<td width="7%">回复数</td>
+				<td width="28%">帖子标题</td>
+				<td width="12%">回复数</td>
 				<td width="25%">发表者</td>
-				<td width="25%">最后回复</td>
-				<td width="5%">操作</td>
+				<td width="22%">最后回复</td>
+				<td width="7%">操作</td>
 			</tr>
 			<logic:notPresent name="mybbslist" scope="session">
 				<tr height="180">
@@ -57,12 +57,12 @@
       		                	      普通
                     		      </logic:equal>
 											</logic:equal></td>
-										<td width="32%" style="text-indent: 10"><img
+										<td width="28%" style="text-indent: 10"><img
 											src="images/face/bbs/${myBbsSingle.bbsFace}"> <a
 											href="user/openShow.do?method=openShow&bbsId=${myBbsSingle.bbsId}"><bean:write
 													name="myBbsSingle" property="subBbsTitle[18]"
 													filter="false" /></a></td>
-										<td width="7%" align="center"><bean:write
+										<td width="12%" align="center"><bean:write
 												name="myBbsSingle" property="bbsAnswerNum" /></td>
 										<td width="25%" align="center"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myBbsSingle.bbsSender}">
@@ -70,13 +70,13 @@
 														filter="false" /></b> <br>
 											<bean:write name="myBbsSingle" property="bbsSendTime" />
 										</a></td>
-										<td width="25%" align="center"><a
+										<td width="22%" align="center"><a
 											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myBbsSingle.bbsLastUpdateUser}">
 												<b><bean:write name="myBbsSingle"
 														property="bbsLastUpdateUser" filter="false" /></b> <br>
 											<bean:write name="myBbsSingle" property="bbsLastUpdateTime" />
 										</a></td>
-										<td width="5%" align="center"><a
+										<td width="7%" align="center"><a
 											href="needLogin/deleteRoot.do?method=deleteRootBbs&bbsId=${myBbsSingle.bbsId}&bbsSender=${myBbsSingle.bbsSender}"
 											title="楼主/管理员操作"
 											onclick="javaScript:return confirm('确认要删除该信息?')">删除</a></td>
@@ -92,7 +92,7 @@
 				<td colspan="6"></td>
 			</tr>
 			<tr height="30">
-				<td colspan="6" background="images/index/boardE.jpg"><jsp:include
+				<td colspan="6" background="images/index/boardE30.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich"
 							value="needLogin/my/listShow.do?method=lookMyBbs" />

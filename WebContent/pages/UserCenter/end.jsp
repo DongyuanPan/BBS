@@ -7,7 +7,7 @@
 	<center>
 		<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
-				<td align="center"><img src="images/admin/adminEnd.jpg"></td>
+				<td align="center"><img src="images/admin/adminEnd.png"></td>
 			</tr>
 		</table>
 	</center>

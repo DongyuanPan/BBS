@@ -3,9 +3,16 @@
 <%@ taglib uri="struts-bean" prefix="bean"%>
 <%@ taglib uri="struts-logic" prefix="logic"%>
 
+<%response.setHeader("Pragma","No-cache");
+
+response.setHeader("Cache-Control","no-cache");
+response.setDateHeader("Expires", 0);
+response.flushBuffer();%>
+
 <%
-  String path = request.getContextPath();
-  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <html>
@@ -14,13 +21,15 @@
 <base href="<%=basePath%>">
 <link style="text/css" rel="stylesheet" href="css/style.css">
 </head>
-<body bgcolor="#AA8D60">
+<body bgcolor="#242424">
 	<center>
 		<html:form action="user/login.do" focus="userName">
 			<input type="hidden" name="method" value="login">
-			<table background="images/login/loginB.jpg" width="500" height="300"
+			<table background="images/login/loginB.png" width="500" height="340"
 				border="0" cellspacing="0" cellpadding="0" style="margin-top: 90">
-				<tr height="175">
+				<tr height="180">
+				</tr>
+				<tr height="30">
 					<td colspan="2" style="text-indent: 145"><html:errors /> <logic:present
 							name="message">
 							<bean:write name="message" filter="false" />
@@ -39,12 +48,12 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td>&nbsp; <html:image src="images/login/bsup.gif"
+					<td>&nbsp; <html:image src="images/login/bsup1.gif"
 							onmousedown="this.src='images/login/bsdown.gif'"
-							onmouseup="this.src='images/login/bsup.gif'" /> <html:image
-							src="images/login/brup.gif"
+							onmouseup="this.src='images/login/bsup1.gif'" /> <html:image
+							src="images/login/brup1.gif"
 							onmousedown="this.src='images/login/brdown.gif'"
-							onmouseup="this.src='images/login/brup.gif'" />
+							onmouseup="this.src='images/login/brup1.gif'" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 					</td>
@@ -53,7 +62,7 @@
 			<table width="500" border="0" width="350" cellspacing="0"
 				cellpadding="0">
 				<tr>
-					<td colspan="2"><img src="images/login/loginE.jpg"></td>
+					<td colspan="2"><img src="images/login/loginE.png"></td>
 				</tr>
 			</table>
 		</html:form>

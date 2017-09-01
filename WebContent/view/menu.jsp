@@ -91,10 +91,10 @@
 					<td colspan="2" background="images/index/indexS.jpg" align="center">
 						<table border="0" width="98%">
 							<tr>
-								<td width="25%">欢迎登录： <logic:notPresent name="logoner">
+								<td width="25%"><logic:notPresent name="logoner">
                         		游客，您还没有登录！
                         	</logic:notPresent> <logic:present name="logoner">
-	                        	${sessionScope.logoner.userName}
+	                        	${sessionScope.logoner.userName}，欢迎登录！
                         	</logic:present>
 								</td>
 								<td align="right">条件： <html:select property="subsql">
@@ -104,7 +104,7 @@
 										property="searchType" value="like">模糊</html:radio> <html:radio
 										property="searchType" value="all">精确</html:radio> <html:submit
 										value=" "
-										style="background-image:url('images/index/bs.jpg');width:49;height:21;border:0" />
+										style="background-image:url('images/index/bs.png');width:49;height:21;border:0" />
 								</td>
 							</tr>
 						</table>

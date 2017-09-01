@@ -56,7 +56,7 @@
 		<!-- 收藏中心(提交表单触发) -->
 		<action path="/user/collectBbs" type="com.yxq.action.OwnAction"
 			parameter="method" name="userForm" validate="true" input="/view/indexTemp.jsp">
-			<forward name="success" path="/view/indexTemp.jsp" />				<!-- 已经登录返回的视图 -->
+			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />				<!-- 已经登录返回的视图 -->
 			<forward name="noLogin" path="/pages/login.jsp" /> 					<!-- 没有登录返回的视图 -->        			
 		</action>		
 		<!-- 修改我的信息 -->

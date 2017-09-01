@@ -20,18 +20,18 @@
 		<table border="0" width="800" cellspacing="0" cellpadding="0">
 			<tr>
 				<td rowspan="3" width="172" align="center" valign="top"
-					background="images/admin/back.jpg"><jsp:include
+					background="images/admin/back.png"><jsp:include
 						page="left.jsp" /></td>
 				<td align="center"><jsp:include page="top.jsp" /></td>
 			</tr>
 			<tr height="33">
 				<td width="center" align="center"
-					background="images/admin/message.jpg"><html:errors
+					background="images/admin/message.png"><html:errors
 						property="adminOpR" /></td>
 			</tr>
 			<tr height="430">
 				<td align="center" valign="top"
-					background="images/admin/content.jpg"><jsp:include
+					background="images/admin/content.png"><jsp:include
 						page="<%=backMainPage %>" /></td>
 			</tr>
 			<tr>

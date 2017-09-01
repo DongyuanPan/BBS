@@ -29,7 +29,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white" rules="rows">
 			<tr height="29">
-				<td background="images/admin/backLT.jpg" colspan="6"
+				<td background="images/admin/backLT.png" colspan="6"
 					style="text-indent: 5"><b><font color="white">■
 							查看用户</font></b></td>
 			</tr>
@@ -97,7 +97,7 @@
 				</logic:notEmpty>
 			</logic:present>
 			<tr height="19"
-				style="background-image: url('images/admin/backLE.jpg')">
+				style="background-image: url('images/admin/backLE.png')">
 				<td colspan="6"></td>
 			</tr>
 		</table>

@@ -60,8 +60,8 @@
 			<tr height="10">
 				<td colspan="6"></td>
 			</tr>
-			<tr height="30">
-				<td colspan="6" background="images/index/boardE.jpg"><jsp:include
+			<tr height="24">
+				<td colspan="6" background="images/index/boardE.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich"
 							value="needLogin/my/listShow.do?method=lookMyBbs" />
