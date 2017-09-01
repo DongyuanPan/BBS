@@ -409,6 +409,36 @@ public class OpDB {
 		mydb.closed();
 		return bbsAnswerform;
 	}
+	
+	//String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
+	public List<BbsAnswerForm> OpBbsAnswerShow(String sql, Object[] params) {
+		ResultSet rs = getRs(sql, params);
+
+		List<BbsAnswerForm> listshow = null;
+		int i = 1;
+		if (rs != null) {
+			listshow = new ArrayList<BbsAnswerForm>();
+			try {
+				while (rs.next() && (!mark || i <= perR)) {
+					BbsAnswerForm bbsAnswerform = new BbsAnswerForm();
+					bbsAnswerform.setBbsAnswerId(String.valueOf(rs.getInt(1)));
+					bbsAnswerform.setBbsAnswerRootID(String.valueOf(rs.getInt(2)));
+					bbsAnswerform.setBbsAnswerTitle(rs.getString(3));
+					bbsAnswerform.setBbsAnswerContent(rs.getString(4));
+					bbsAnswerform.setBbsAnswerSender(rs.getString(5));
+					bbsAnswerform.setBbsAnswerSendTime(Change.dateTimeChange(rs.getTimestamp(6)));
+					bbsAnswerform.setBbsFace(rs.getString(7));
+					++i;
+				}
+			} catch (SQLException e) {
+				System.out.println("OpBbsAnswerShow()方法出错！");
+				System.out.println("标记：" + mark);
+				e.printStackTrace();
+			}
+		}
+
+		return listshow;
+	}
 
 	public List<UserForm> OpUserListShow(String sql, Object[] params) {
 		List<UserForm> userlist = new ArrayList<UserForm>();
