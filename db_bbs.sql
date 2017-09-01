@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-09-01 09:42:36
+Date: 2017-09-01 10:12:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `tb_accessory`;
 CREATE TABLE `tb_accessory` (
   `accessory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `accessory_bbs_id` int(11) NOT NULL,
   `accessory_file_name` varchar(255) NOT NULL,
   `accessory_path` varchar(255) NOT NULL,
   `accessory_upload_time` datetime NOT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE `tb_accessory` (
 -- ----------------------------
 -- Records of tb_accessory
 -- ----------------------------
-INSERT INTO `tb_accessory` VALUES ('1', 'accessory1.cpp', '/accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
+INSERT INTO `tb_accessory` VALUES ('1', '1', 'accessory1.cpp', 'accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
