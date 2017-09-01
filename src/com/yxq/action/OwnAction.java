@@ -118,7 +118,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward lookMyFriend(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/bbs/myFriendShow.jsp");
+		session.setAttribute("mainPage","/pages/show/user/myFriendShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
