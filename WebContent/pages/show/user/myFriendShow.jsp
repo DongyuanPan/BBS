@@ -12,42 +12,45 @@
 		<table border="1" width="100%" cellspacing="0" cellpadding="0"
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white" rules="rows" style="margin-top: 8">
+			
 			<tr height="30">
 				<td colspan="6" background="images/index/classT.jpg"
 					style="text-indent: 5"><b><font color="white">■
 							好友列表</font></b></td>
 			</tr>
+			
 			<tr height="30" align="center" bgcolor="#F0F0F0">
 
 				<td width="33%">好友名字</td>
 			</tr>
-			<logic:notPresent name="myanswerlist" scope="session">
+			
+			<logic:notPresent name="myFriendlist" scope="session">
 				<tr height="180">
 					<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，你没有好友</li></td>
 				</tr>
 			</logic:notPresent>
-			<logic:present name="myanswerlist" scope="session">
-				<logic:empty name="myanswerlist" scope="session">
+			
+			<logic:present name="myFriendlist" scope="session">
+			
+				<logic:empty name="myFriendlist" scope="session">
 					<tr height="180">
-						<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，你还没有回复！</li></td>
+						<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，你没有好友</li></td>
 					</tr>
 				</logic:empty>
-				<logic:notEmpty name="myanswerlist" scope="session">
+				
+				<logic:notEmpty name="myFriendlist" scope="session">
 					<tr>
 						<td colspan="6">
 							<table border="1" width="100%" cellspacing="0" cellpadding="0"
 								bordercolor="#F0F0F0" bordercolorlight="#F0F0F0"
 								bordercolordark="white" rules="all">
-								<logic:iterate id="myanswerSingle" name="myanswerlist">
-										<td width="32%" style="text-indent: 10"> <a
-											href="user/openShow.do?method=openShow&bbsId=${myanswerSingle.bbsAnswerRootID}"><bean:write
-													name="myanswerSingle" property="bbsAnswerTitle"
-													filter="false" /></a></td>
-										<td width="33%" align="center"><bean:write
-												name="myanswerSingle" property="bbsAnswerContent" /></td>
-										<td width="33%" align="center"><bean:write
-												name="myanswerSingle" property="bbsAnswerSendTime" /></td>
-							</tr>
+								<logic:iterate id="myFrienfSingle" name="myFriendlist">
+								<td width="25%" align="center"><a
+									href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myFrienfSingle.friendname}">
+									<b><bean:write name="myFrienfSingle" property="friendname" filter="false" /></b> <br>
+								</a></td>		
+													
+								</tr>
 								</logic:iterate>
 							</table>
 						</td>

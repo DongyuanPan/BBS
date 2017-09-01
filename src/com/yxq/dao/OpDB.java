@@ -11,6 +11,7 @@ import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
+import com.yxq.actionform.FriendForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.model.CreatePage;
 import com.yxq.tools.Change;
@@ -568,27 +569,28 @@ public class OpDB {
 	}
 	
 	// String sql = "select * from tb_friend where my_name = ?";
-	public List<String> OpFriendShow(String sql, Object[] params) {
-		List<String> list = new ArrayList<String>();
-		
-		DB mydb = new DB();
-		mydb.doPstm(sql, params);
-		ResultSet rs = mydb.getRs();
-		try {
-			if (rs != null) {
-				while (rs.next()) {
-					list.add(rs.getString(3));
+	public List<FriendForm> OpFriendShow(String sql, Object[] params) {
+		List<FriendForm> list = new ArrayList<FriendForm>();
+		ResultSet rs = getRs(sql, params);
+		int i = 1;
+		if (rs != null) {
+			
+			try {
+				while (rs.next() && (!mark || i <= perR)) {
+					FriendForm form = new FriendForm();
+					form.setFriendname(rs.getString(3));
+					list.add(form);
+					++i;
 				}
-				rs.close();
+			} catch (SQLException e) {
+				System.out.println("OpBbsAnswerShow()方法出错！");
+				System.out.println("标记：" + mark);
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			System.out.println("调用OpDB类中的OpFriendShow()方法出错！");
-			e.printStackTrace();
-		} finally {
-			mydb.closed();
 		}
-		
+
 		return list;
+		
 	}
 
 	public int OpUpdate(String sql, Object[] params) {
