@@ -20,7 +20,11 @@
 				<tr height="80">
 					<td colspan="5" style="text-indent: 20">■ 个人信息</td>
 				</tr>
-				
+				<tr height="50">
+					<td align="right">用户头像：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><img src="images/face/user/${sessionScope.backUser.userFace}"
+						style="border: 1 solid; border-color: #E0E0E0"></td>
+				</tr>
 				<tr height="45">
 					<td align="right" width="35%">用 户 
 						名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -39,7 +43,14 @@
 					<td></td>
 					<td colspan="4"><html:errors property="userSex" /></td>
 				</tr>
-				
+				<tr height="50">
+				<td align="right">用户权限：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><logic:equal value="0" name="backUser"
+						property="userAble">普通用户</logic:equal> <logic:equal value="1"
+						name="backUser" property="userAble">版主</logic:equal> <logic:equal
+						value="2" name="backUser" property="userAble">管理员</logic:equal>
+				</td>
+			</tr>
 				<tr height="45">
 					<td align="right">联系电话：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td align="left" width="35%"> ${sessionScope.backUser.userPhone}</td>
