@@ -339,7 +339,7 @@ public class OpDB {
 
 	public List<BroadcastForm> OpBroadcastShow() {
 
-		String sql = "select * from tb_broadcast";
+		String sql = "select * from tb_broadcast order by broadcast_time desc";
 		ResultSet rs = getRs(sql, null);
 
 		List<BroadcastForm> listshow = null;
