@@ -122,7 +122,7 @@ public class OwnAction extends MySuperAction {
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
-			String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
+			String sql = "select * from tb_friend where my_name = ?";
 			Object[] params={bbsown};
 			OpDB myOp=new OpDB();
 			
