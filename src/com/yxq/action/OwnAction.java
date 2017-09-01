@@ -48,6 +48,7 @@ public class OwnAction extends MySuperAction {
 		return (mapping.findForward("success"));
 	}
 	
+
 	public ActionForward lookMyAnswer(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
@@ -78,4 +79,5 @@ public class OwnAction extends MySuperAction {
 		}		
 		return (mapping.findForward("success"));
 	}
+
 }

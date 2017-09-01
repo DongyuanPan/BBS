@@ -80,7 +80,19 @@
 			<!-- 实现对根帖进行操作的超链接 -->
 			<tr height="30" bgcolor="#F9F9F9">
 				<td align="right" colspan="2">◆<html:link
-						href="view/indexTemp.jsp" anchor="answer">回复该帖&nbsp;</html:link> <!-- 如果该贴不是精华帖子，并且不是置顶帖子(实际上就是普通帖子) -->
+						href="view/indexTemp.jsp" anchor="answer">回复该帖&nbsp;</html:link>
+
+			<!-- 显示“收藏该帖”超链接 -->			
+		 ◆<a
+								href="needLogin/collectBbs.do?method=collectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+								>收藏该帖</a>&nbsp;
+
+			<!-- 显示“取消收藏”超链接 -->			
+		 ◆<a
+								href="needLogin/cancelcollectBbs.do?method=cancelcollectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+								>取消收藏</a>&nbsp;
+								
+						<!-- 如果该贴不是精华帖子，并且不是置顶帖子(实际上就是普通帖子) -->
 					<logic:notEqual value="1" name="bbsRootSingle" property="bbsIsGood"
 						scope="session">
 						<logic:notEqual value="1" name="bbsRootSingle" property="bbsIsTop">
