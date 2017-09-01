@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yxq.actionform.AccessoryForm;
 import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
@@ -438,6 +439,40 @@ public class OpDB {
 		}
 
 		return listshow;
+	}
+	
+	
+	// String sql = "select * from tb_accessory where accessory_bbs_id = ?";
+	public List<AccessoryForm> OpAccessoryShow(String sql, Object[] params) {
+		List<AccessoryForm> accessorylist = new ArrayList<AccessoryForm>();
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		int i = 0;
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					AccessoryForm accessoryform = new AccessoryForm();
+					accessoryform.setAccessoryId(String.valueOf(rs.getInt(1)));
+					accessoryform.setAccessoryBbsId(String.valueOf(rs.getInt(2)));
+					accessoryform.setAccessoryFileName(rs.getString(3));
+					accessoryform.setAccessoryPath(rs.getString(4));
+					accessoryform.setAccessoryUploadTime(Change.dateTimeChange(rs.getTimestamp(5)));
+					accessoryform.setAccessoryDescription(rs.getString(6));
+					accessoryform.setAccessorySize(rs.getString(7));
+					accessoryform.setAccessoryDownloadCount(String.valueOf(rs.getInt(8)));
+					accessorylist.add(accessoryform);
+					++i;
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("调用OpDB类中的OpAccessoryShow()方法出错！");
+			e.printStackTrace();
+		} finally {
+			mydb.closed();
+		}
+		return accessorylist;
 	}
 
 	public List<UserForm> OpUserListShow(String sql, Object[] params) {
