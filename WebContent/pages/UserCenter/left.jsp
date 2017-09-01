@@ -56,6 +56,11 @@
 								background="images/admin/subMenu.jpg"><a
 								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
 						</tr>
+						<tr height="34">
+							<td style="text-indent: 40" colspan="2"
+								background="images/admin/subMenu.jpg"><a
+								href="needLogin/my/myAnswer.do?method=lookMyAnswer&showpage=1">我的回复</a></td>
+						</tr>
 
 					</table>
 				</td>

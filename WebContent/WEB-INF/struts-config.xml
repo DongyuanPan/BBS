@@ -112,6 +112,11 @@
 			parameter="method" validate="false">
 			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
+		
+		<action path="/needLogin/my/myAnswer" type="com.yxq.action.OwnAction"
+			parameter="method" validate="false">
+			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
+		</action>
 
 		<!-- *************以下配置管理员的操作************* -->
 		<!-- 前台-管理员置顶帖子、设为精华帖 -->
