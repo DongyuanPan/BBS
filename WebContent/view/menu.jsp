@@ -62,8 +62,6 @@
 							<td align="center" width="8%"><a
 								href="user/personCen.do?method=personCenter">个人中心</a></td>
 							<td align="center" width="10%"><a
-								href="needLogin/my/listShow.do?method=lookMyBbs&showpage=1">我的帖子</a></td>
-							<td align="center" width="10%"><a
 								href="user/goodListShow.do?method=goodListShow&showpage=1">精华帖子</a></td>
 							<td align="center" width="10%"><a
 								href="user/isAdminLogin.do?method=isAdminLogin">进入后台</a></td>

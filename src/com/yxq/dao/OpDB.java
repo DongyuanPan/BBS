@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yxq.actionform.AccessoryForm;
 import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
@@ -299,16 +300,14 @@ public class OpDB {
 
 	// String sql = "select * from tb_bbs where bbs_id in (select collect_bbs_id
 	// from tb_collect where collect_collector = ?)";
-	public List<BbsForm> OpCollectShow(String sql, Object[] params) {
+	public List<BbsForm> OpCollectShow(String sql,Object[] params) {
 
-		List<BbsForm> listshow = new ArrayList<BbsForm>();
-		DB mydb = new DB();
-		mydb.doPstm(sql, params);
-		ResultSet rs = mydb.getRs();
+		List<BbsForm> listshow=new ArrayList<BbsForm>();
+		ResultSet rs= getRs(sql, params);
+		int i = 1;
 		try {
-			if (rs != null) {
-				while (rs.next()) {
-					BbsForm bbsform = new BbsForm();
+			while(rs.next()&&(!mark||i<=perR)){	
+					BbsForm bbsform=new BbsForm();
 					bbsform.setBbsId(String.valueOf(rs.getInt(1)));
 					bbsform.setBbsBoardID(String.valueOf(rs.getInt(2)));
 					bbsform.setBbsType(rs.getString(3));
@@ -322,17 +321,15 @@ public class OpDB {
 					bbsform.setBbsIsTop(rs.getString(11));
 					bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 					bbsform.setBbsIsGood(rs.getString(13));
-					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));
+					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));					
 					bbsform.setBbsReason(rs.getString(15));
 					listshow.add(bbsform);
-				}
-				rs.close();
+					++i;
 			}
+			rs.close();			
 		} catch (SQLException e) {
 			System.out.println("调用OpDB类中的OpCollectShow()方法出错！");
 			e.printStackTrace();
-		} finally {
-			mydb.closed();
 		}
 		return listshow;
 	}
@@ -408,6 +405,70 @@ public class OpDB {
 		}
 		mydb.closed();
 		return bbsAnswerform;
+	}
+	
+	//String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
+	public List<BbsAnswerForm> OpBbsAnswerShow(String sql, Object[] params) {
+		ResultSet rs = getRs(sql, params);
+
+		List<BbsAnswerForm> listshow = null;
+		int i = 1;
+		if (rs != null) {
+			listshow = new ArrayList<BbsAnswerForm>();
+			try {
+				while (rs.next() && (!mark || i <= perR)) {
+					BbsAnswerForm bbsAnswerform = new BbsAnswerForm();
+					bbsAnswerform.setBbsAnswerId(String.valueOf(rs.getInt(1)));
+					bbsAnswerform.setBbsAnswerRootID(String.valueOf(rs.getInt(2)));
+					bbsAnswerform.setBbsAnswerTitle(rs.getString(3));
+					bbsAnswerform.setBbsAnswerContent(rs.getString(4));
+					bbsAnswerform.setBbsAnswerSender(rs.getString(5));
+					bbsAnswerform.setBbsAnswerSendTime(Change.dateTimeChange(rs.getTimestamp(6)));
+					bbsAnswerform.setBbsFace(rs.getString(7));
+					++i;
+				}
+			} catch (SQLException e) {
+				System.out.println("OpBbsAnswerShow()方法出错！");
+				System.out.println("标记：" + mark);
+				e.printStackTrace();
+			}
+		}
+
+		return listshow;
+	}
+	
+	
+	// String sql = "select * from tb_accessory where accessory_bbs_id = ?";
+	public List<AccessoryForm> OpAccessoryShow(String sql, Object[] params) {
+		List<AccessoryForm> accessorylist = new ArrayList<AccessoryForm>();
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		int i = 0;
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					AccessoryForm accessoryform = new AccessoryForm();
+					accessoryform.setAccessoryId(String.valueOf(rs.getInt(1)));
+					accessoryform.setAccessoryBbsId(String.valueOf(rs.getInt(2)));
+					accessoryform.setAccessoryFileName(rs.getString(3));
+					accessoryform.setAccessoryPath(rs.getString(4));
+					accessoryform.setAccessoryUploadTime(Change.dateTimeChange(rs.getTimestamp(5)));
+					accessoryform.setAccessoryDescription(rs.getString(6));
+					accessoryform.setAccessorySize(rs.getString(7));
+					accessoryform.setAccessoryDownloadCount(String.valueOf(rs.getInt(8)));
+					accessorylist.add(accessoryform);
+					++i;
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("调用OpDB类中的OpAccessoryShow()方法出错！");
+			e.printStackTrace();
+		} finally {
+			mydb.closed();
+		}
+		return accessorylist;
 	}
 
 	public List<UserForm> OpUserListShow(String sql, Object[] params) {

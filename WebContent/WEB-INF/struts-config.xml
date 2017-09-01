@@ -54,7 +54,12 @@
 			<forward name="result" path="/pages/UserCenter/adminTemp.jsp" />	
 			<forward name="noLogin" path="/pages/login.jsp" /> 					<!-- 没有登录返回的视图 -->        			<!-- 已经登录返回的视图 -->
 		</action>
-		
+		<!-- 收藏中心(提交表单触发) -->
+		<action path="/user/collectBbs" type="com.yxq.action.OwnAction"
+			parameter="method" name="userForm" validate="true" input="/view/indexTemp.jsp">
+			<forward name="success" path="/view/indexTemp.jsp" />	
+			<forward name="noLogin" path="/pages/login.jsp" /> 					<!-- 没有登录返回的视图 -->        			<!-- 已经登录返回的视图 -->
+		</action>		
 		<!-- 修改我的信息 -->
 		<action path="/needLogin/user/modifyMyInfo" type="com.yxq.action.LogXAction"
 			parameter="method" name="userForm" scope="request" validate="true"
@@ -272,6 +277,20 @@
 			<forward name="success" path="/user/openShow.do?method=openShow" />
 			<forward name="error" path="/view/indexTemp.jsp" />
 		</action>
+		<!-- 收藏帖子 -->
+		<action path="/needLogin/collectBbs" type="com.yxq.action.BbsAction"
+			parameter="method" name="bbsAnswerForm" scope="request" validate="true"
+			input="/view/indexTemp.jsp">
+			<forward name="success" path="/user/openShow.do?method=openShow" />
+			<forward name="error" path="/view/indexTemp.jsp" />
+		</action>		
+		<!-- 取消收藏 -->
+		<action path="/needLogin/cancelcollectBbs" type="com.yxq.action.BbsAction"
+			parameter="method" name="bbsAnswerForm" scope="request" validate="true"
+			input="/view/indexTemp.jsp">
+			<forward name="success" path="/user/openShow.do?method=openShow" />
+			<forward name="error" path="/view/indexTemp.jsp" />
+		</action>	
 		<!-- 将帖子提前 -->
 		<action path="/needLogin/firstBbs" type="com.yxq.action.BbsAction"
 			parameter="method">

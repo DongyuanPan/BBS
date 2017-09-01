@@ -295,40 +295,110 @@ public class BbsAction extends MySuperAction {
 		}
 	}
 
-	/**
-	 * 将帖子提前
-	 * 
-	 * @throws UnsupportedEncodingException
-	 */
-	public ActionForward toFirstBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
-		HttpSession session = request.getSession();
-		UserForm logoner = (UserForm) session.getAttribute("logoner");
 
-		String bbsId = request.getParameter("bbsId"); // 获取被提前帖子的ID
-		String bbsSender = request.getParameter("bbsSender"); // 获取被提前帖子的发布者
-		// bbsSender=new String(bbsSender.getBytes("ISO-8859-1"),"gbk");
-		String time = Change.dateTimeChange(new Date()); // 获取操作时间
-		String lognerAble = logoner.getUserAble(); // 获取当前登录用户的权限
-		String lognerName = logoner.getUserName(); // 获取当前登录用户的用户名
-		String master = (String) session.getAttribute("boardMaster"); // 获取当前版面的斑竹
+    /** 收藏帖子 */
+    public ActionForward collectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+		String forwardPath="";		
+		
+		HttpSession session=request.getSession();			
+		UserForm logoner=(UserForm)session.getAttribute("logoner");		
+		if(logoner!=null&&(logoner instanceof UserForm)){	
+			
+			String bbsId = request.getParameter("bbsId");					//获取被提前帖子的ID
+			String collector = logoner.getUserName();						//获取当前登录用户的用户名		
+			
+			if(bbsId!=null&&!bbsId.equals("")){
+				String sql="insert into tb_collect value(null,?,?)";
+				Object[] params={collector,bbsId};
+				
+				ActionMessages messages=new ActionMessages();
+				
+				OpDB myOp=new OpDB();
+				int i=myOp.OpUpdate(sql, params);
+				if(i<=0){
+					System.out.println("收藏失败！");
+					forwardPath="error";
+					messages.add("userOpR",new ActionMessage("luntan.user.add.collect.E"));
+				}
+				else{
+					System.out.println("收藏成功！");
+					forwardPath="success";
+					messages.add("userOpR",new ActionMessage("luntan.user.add.collect.S"));
+				}			
+				saveErrors(request,messages);
+			}
+			return mapping.findForward(forwardPath);
+		}
+		else {
+			return mapping.findForward("error");	
+		}
+	}	
+	
+    /** 取消收藏帖子 */
+    public ActionForward cancelcollectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
+		String forwardPath="";		
+		
+		HttpSession session=request.getSession();			
+		UserForm logoner=(UserForm)session.getAttribute("logoner");		
+		
+		String bbsId = request.getParameter("bbsId");					//获取被提前帖子的ID
+		String collector = logoner.getUserName();						//获取当前登录用户的用户名		
 
-		if (bbsId == null)
-			bbsId = "-1";
-		if (bbsSender == null)
-			bbsSender = "";
+		
+		
+		if(bbsId!=null&&!bbsId.equals("")){
+			String sql="delete from tb_collect where collect_collector = ? and collect_bbs_id = ?";
+			Object[] params={collector,bbsId};
+			
+			ActionMessages messages=new ActionMessages();
 
-		String forwardPath = "";
-		ActionMessages messages = new ActionMessages();
-
-		/* 如果当前登录的用户是帖子的发表者、帖子所属版面的斑竹、管理员 */
-		if (lognerAble.equals("2") || lognerName.equals(master) || lognerName.equals(bbsSender)) {
-			if (bbsId != null && !bbsId.equals("")) {
-				Object[] params = { time, bbsId };
-				String sql = "update tb_bbs set bbs_opTime=? where bbs_id=?";
-				OpDB myOp = new OpDB();
-				int i = myOp.OpUpdate(sql, params);
-				if (i <= 0) {
+			OpDB myOp=new OpDB();
+			int i=myOp.OpUpdate(sql, params);
+			if(i<=0){
+				System.out.println("取消收藏失败，您没有收藏该帖！");
+				forwardPath="error";
+				messages.add("userOpR",new ActionMessage("luntan.user.delete.collect.E"));
+			}
+			else{
+				System.out.println("取消收藏成功！");
+				forwardPath="success";
+				messages.add("userOpR",new ActionMessage("luntan.user.delete.collect.S"));
+			}			
+			saveErrors(request,messages);
+		}
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 将帖子提前
+	 *  @throws UnsupportedEncodingException */
+	public ActionForward toFirstBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		HttpSession session=request.getSession();			
+		UserForm logoner=(UserForm)session.getAttribute("logoner");		
+		
+		String bbsId=request.getParameter("bbsId");						//获取被提前帖子的ID
+		String bbsSender=request.getParameter("bbsSender");				//获取被提前帖子的发布者
+		//bbsSender=new String(bbsSender.getBytes("ISO-8859-1"),"gbk");	
+		String time=Change.dateTimeChange(new Date());					//获取操作时间
+		String lognerAble=logoner.getUserAble();						//获取当前登录用户的权限
+		String lognerName=logoner.getUserName();						//获取当前登录用户的用户名
+		String master=(String)session.getAttribute("boardMaster");		//获取当前版面的斑竹		
+		
+		if(bbsId==null)
+			bbsId="-1";
+		if(bbsSender==null)
+			bbsSender="";	
+		
+		String forwardPath="";
+		ActionMessages messages=new ActionMessages();
+		
+		/* 如果当前登录的用户是帖子的发表者、帖子所属版面的斑竹、管理员 */		
+		if(lognerAble.equals("2")||lognerName.equals(master)||lognerName.equals(bbsSender)){
+			if(bbsId!=null&&!bbsId.equals("")){
+				Object[] params={time,bbsId};
+				String sql="update tb_bbs set bbs_opTime=? where bbs_id=?";
+				OpDB myOp=new OpDB();
+				int i=myOp.OpUpdate(sql,params);
+				if(i<=0){
 					System.out.println("提前帖子失败");
 					forwardPath = "error";
 					messages.add("userOpR", new ActionMessage("luntan.bbs.first.E"));
