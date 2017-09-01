@@ -6,7 +6,7 @@
 		<form-bean name="searchForm" type="com.yxq.actionform.SearchForm" />
 		<form-bean name="jumpForm" type="com.yxq.actionform.JumpForm" />
 		<form-bean name="ableForm" type="com.yxq.actionform.AbleForm" />
-
+		<form-bean name="broadcastForm" type="com.yxq.actionform.BroadcastForm"></form-bean>
 		<form-bean name="classForm" type="com.yxq.actionform.ClassForm" />
 		<form-bean name="boardForm" type="com.yxq.actionform.BoardForm" />
 		<form-bean name="bbsForm" type="com.yxq.actionform.BbsForm" />
@@ -92,6 +92,16 @@
 		<!-- 查看根帖 -->
 		<action path="/user/openShow" type="com.yxq.action.BbsAction"
 			parameter="method">
+			<forward name="success" path="/view/indexTemp.jsp" />
+		</action>
+		<!-- 公告(超链接触发) -->
+		<action path="/user/broadcast" type="com.yxq.action.BroadcastAction"
+			parameter="method" name="broadcastForm" validate="false" >
+			<forward name="success" path="/view/indexTemp.jsp" />						<!-- 没有登录返回的视图 -->
+		</action>
+		<!-- 查看一个公告 -->
+		<action path="/user/openBroadcast" type="com.yxq.action.BroadcastAction"
+			parameter="method" name="broadcastForm" validate="false" >
 			<forward name="success" path="/view/indexTemp.jsp" />
 		</action>
 		<!-- 列表显示精华帖子 -->
@@ -185,6 +195,35 @@
 				path="/needLogin/admin/getBoardList.do?method=getBoardList&amp;type=show" />
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		
+		<!-- 后台-管理员列表显示公告 -->
+		<action path="/needLogin/admin/getBroadcastList" type="com.yxq.action.AdminAction"
+			name="broadcastForm" scope="request" parameter="method" validate="false">
+			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员修改某个公告 -->
+		<action path="/needLogin/admin/modifyBroadcast" type="com.yxq.action.AdminAction"
+			parameter="method" name="broadcastForm" scope="request" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="showModifyJSP" path="/pages/admin/view/adminTemp.jsp" />
+			<forward name="success"
+				path="/needLogin/admin/getBroadcastList.do?method=getBroadcastList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员添加公告 -->
+		<action path="/needLogin/admin/addBroadcast" type="com.yxq.action.AdminAction"
+			name="broadcastForm" scope="request" parameter="method" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="result" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		<!-- 后台-管理员删除公告 -->
+		<action path="/needLogin/admin/deleteBroadcast" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getBroadcastList.do?method=getBroadcastList&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-列表查看用户列表 -->
 		<action path="/needLogin/admin/getUserList" type="com.yxq.action.AdminAction"
 			parameter="method" name="ableForm" scope="request" validate="false">

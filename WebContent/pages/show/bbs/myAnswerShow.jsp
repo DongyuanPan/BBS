@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>显示我的所有帖子</title>
+<title>我的回复</title>
 </head>
 <body>
 	<center>
@@ -15,72 +15,41 @@
 			<tr height="30">
 				<td colspan="6" background="images/index/classT.jpg"
 					style="text-indent: 5"><b><font color="white">■
-							我的帖子</font></b></td>
+							我的回复</font></b></td>
 			</tr>
 			<tr height="30" align="center" bgcolor="#F0F0F0">
-				<td width="6%">状态</td>
-				<td width="32%">帖子标题</td>
-				<td width="7%">回复数</td>
-				<td width="25%">发表者</td>
-				<td width="25%">最后回复</td>
-				<td width="5%">操作</td>
+
+				<td width="33%">标题</td>
+				<td width="33%">内容</td>
+				<td width="33%">时间</td>
 			</tr>
-			<logic:notPresent name="mybbslist" scope="session">
+			<logic:notPresent name="myanswerlist" scope="session">
 				<tr height="180">
-					<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，帖子列表不存在！</li></td>
+					<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，你还没有回复</li></td>
 				</tr>
 			</logic:notPresent>
-			<logic:present name="mybbslist" scope="session">
-				<logic:empty name="mybbslist" scope="session">
+			<logic:present name="myanswerlist" scope="session">
+				<logic:empty name="myanswerlist" scope="session">
 					<tr height="180">
-						<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，帖子列表不存在！</li></td>
+						<td bgcolor="#F9F9F9" align="center" colspan="6"><li>对不起，你还没有回复！</li></td>
 					</tr>
 				</logic:empty>
-				<logic:notEmpty name="mybbslist" scope="session">
+				<logic:notEmpty name="myanswerlist" scope="session">
 					<tr>
 						<td colspan="6">
 							<table border="1" width="100%" cellspacing="0" cellpadding="0"
 								bordercolor="#F0F0F0" bordercolorlight="#F0F0F0"
 								bordercolordark="white" rules="all">
-								<logic:iterate id="myBbsSingle" name="mybbslist">
-									<tr height="30" bgcolor="#F9F9F9">
-										<td width="6%" align="center"><logic:equal value="1"
-												name="myBbsSingle" property="bbsIsGood">
-                  	    		  精华
-	                  	      </logic:equal> <logic:equal value="1" name="myBbsSingle"
-												property="bbsIsTop">
-      		                	  置顶
-                   		      </logic:equal> <logic:equal value="0" name="myBbsSingle"
-												property="bbsIsGood">
-												<logic:equal value="0" name="myBbsSingle"
-													property="bbsIsTop">
-      		                	      普通
-                    		      </logic:equal>
-											</logic:equal></td>
-										<td width="32%" style="text-indent: 10"><img
-											src="images/face/bbs/${myBbsSingle.bbsFace}"> <a
-											href="user/openShow.do?method=openShow&bbsId=${myBbsSingle.bbsId}"><bean:write
-													name="myBbsSingle" property="subBbsTitle[18]"
+								<logic:iterate id="myanswerSingle" name="myanswerlist">
+										<td width="32%" style="text-indent: 10"> <a
+											href="user/openShow.do?method=openShow&bbsId=${myanswerSingle.bbsAnswerRootID}"><bean:write
+													name="myanswerSingle" property="bbsAnswerTitle"
 													filter="false" /></a></td>
-										<td width="7%" align="center"><bean:write
-												name="myBbsSingle" property="bbsAnswerNum" /></td>
-										<td width="25%" align="center"><a
-											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myBbsSingle.bbsSender}">
-												<b><bean:write name="myBbsSingle" property="bbsSender"
-														filter="false" /></b> <br>
-											<bean:write name="myBbsSingle" property="bbsSendTime" />
-										</a></td>
-										<td width="25%" align="center"><a
-											href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myBbsSingle.bbsLastUpdateUser}">
-												<b><bean:write name="myBbsSingle"
-														property="bbsLastUpdateUser" filter="false" /></b> <br>
-											<bean:write name="myBbsSingle" property="bbsLastUpdateTime" />
-										</a></td>
-										<td width="5%" align="center"><a
-											href="needLogin/deleteRoot.do?method=deleteRootBbs&bbsId=${myBbsSingle.bbsId}&bbsSender=${myBbsSingle.bbsSender}"
-											title="楼主/管理员操作"
-											onclick="javaScript:return confirm('确认要删除该信息?')">删除</a></td>
-									</tr>
+										<td width="33%" align="center"><bean:write
+												name="myanswerSingle" property="bbsAnswerContent" /></td>
+										<td width="33%" align="center"><bean:write
+												name="myanswerSingle" property="bbsAnswerSendTime" /></td>
+							</tr>
 								</logic:iterate>
 							</table>
 						</td>

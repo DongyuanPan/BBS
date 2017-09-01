@@ -55,7 +55,7 @@ public class OwnAction extends MySuperAction {
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
-			String sql="select * from tb_bbs where bbs_sender=? order by bbs_opTime DESC";
+			String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
 			Object[] params={bbsown};
 			OpDB myOp=new OpDB();
 			
@@ -70,7 +70,7 @@ public class OwnAction extends MySuperAction {
 			myOp.setMark(true);								//进行分页显示
 			myOp.setPageInfo(perR, currentP, gowhich);		//设置进行分页显示需要的信息	
 			
-			List myanswerlist=myOp.OpBbsListShow(sql, params);
+			List myanswerlist=myOp.OpBbsAnswerShow(sql, params);
 			CreatePage page=myOp.getPage();
 			
 			session.setAttribute("myanswerlist",myanswerlist);

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-08-31 18:49:32
+Date: 2017-09-01 10:12:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `tb_accessory`;
 CREATE TABLE `tb_accessory` (
   `accessory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `accessory_bbs_id` int(11) NOT NULL,
   `accessory_file_name` varchar(255) NOT NULL,
   `accessory_path` varchar(255) NOT NULL,
   `accessory_upload_time` datetime NOT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE `tb_accessory` (
 -- ----------------------------
 -- Records of tb_accessory
 -- ----------------------------
-INSERT INTO `tb_accessory` VALUES ('1', 'accessory1.cpp', '/accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
+INSERT INTO `tb_accessory` VALUES ('1', '1', 'accessory1.cpp', 'accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
@@ -132,14 +133,14 @@ DROP TABLE IF EXISTS `tb_broadcast`;
 CREATE TABLE `tb_broadcast` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `broadcast_message` varchar(255) NOT NULL,
-  `broadcase_time` datetime NOT NULL,
+  `broadcast_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_broadcast
 -- ----------------------------
-INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告', '2017-08-30 14:53:19');
+INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告，修改了。', '2017-09-01 09:04:18');
 
 -- ----------------------------
 -- Table structure for `tb_class`
@@ -191,26 +192,26 @@ CREATE TABLE `tb_user` (
   `user_phone` varchar(12) DEFAULT NULL,
   `user_OICQ` varchar(14) DEFAULT NULL,
   `user_email` varchar(100) DEFAULT NULL,
-  `user_from` varchar(200) CHARACTER SET gb2312 DEFAULT NULL,
-  `user_able` varchar(1) DEFAULT NULL,
+  `user_from` varchar(200) CHARACTER SET gb2312 NOT NULL DEFAULT '',
+  `user_able` varchar(1) NOT NULL DEFAULT '0',
+  `user_forbidden` varchar(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` VALUES ('1', 'tsoft', '111', 'user0.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '新疆', '2');
-INSERT INTO `tb_user` VALUES ('2', '莫明', '555', 'user4.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '黑龙江', '1');
-INSERT INTO `tb_user` VALUES ('5', '荣*天', '888', 'user15.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '湖南', '1');
-INSERT INTO `tb_user` VALUES ('8', '雨飞', '333', 'user18.gif', '女', '134****4783', '10500646A', 'xujiu1@***.com.cn', '广东', '1');
-INSERT INTO `tb_user` VALUES ('9', '许久', '444', 'user5.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '云南', '1');
-INSERT INTO `tb_user` VALUES ('14', '00', '000000', 'user6.gif', '女', '135*****117', '5454', '11@11.com', '贵州', '1');
-INSERT INTO `tb_user` VALUES ('15', 'java1234', '123', 'user15.gif', '女', '12345678900', '12321', '231@qq.com', '江西', '0');
-INSERT INTO `tb_user` VALUES ('16', 'me', '000000', 'user9.gif', '?', '11111111111', '120', '110@seu.edu.cn', '福建', '0');
-INSERT INTO `tb_user` VALUES ('18', 'you', '111111', 'user0.gif', '?', '11111111111', '111', '111@qq.com', '??', '0');
-INSERT INTO `tb_user` VALUES ('19', 'op', '11111', 'user0.gif', '?', '11111111111', '111', '111@11.com', '??', '0');
-INSERT INTO `tb_user` VALUES ('20', 'll', '11111', 'user0.gif', '?', '11111111111', '111', '111@qq.com', '??', '0');
-INSERT INTO `tb_user` VALUES ('21', '我', '111', 'user0.gif', '男', '111', '111', '11.qq.com', '广州', '0');
-INSERT INTO `tb_user` VALUES ('22', '王', '111', 'user0.gif', '男', '112', '111', '11', '新酱', '0');
-INSERT INTO `tb_user` VALUES ('23', '1', '1111', 'user0.gif', '?', '11111111111', '11', '11@qq.com', '??', '0');
-INSERT INTO `tb_user` VALUES ('26', '??', '111', 'user0.gif', '?', '11111111111', '111', '112@qq.com', '???', '0');
+INSERT INTO `tb_user` VALUES ('1', 'tsoft', '111', 'user0.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '新疆', '2', '0');
+INSERT INTO `tb_user` VALUES ('2', '莫明', '555', 'user4.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '黑龙江', '1', '0');
+INSERT INTO `tb_user` VALUES ('5', '荣*天', '888', 'user15.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '湖南', '1', '0');
+INSERT INTO `tb_user` VALUES ('8', '雨飞', '333', 'user18.gif', '女', '134****4783', '10500646A', 'xujiu1@***.com.cn', '广东', '1', '0');
+INSERT INTO `tb_user` VALUES ('9', '许久', '444', 'user5.gif', '男', '134****4783', '10500646A', 'xujiu1@***.com.cn', '云南', '1', '0');
+INSERT INTO `tb_user` VALUES ('14', '00', '000000', 'user6.gif', '女', '135*****117', '5454', '11@11.com', '贵州', '1', '0');
+INSERT INTO `tb_user` VALUES ('15', 'java1234', '123', 'user15.gif', '女', '12345678900', '12321', '231@qq.com', '江西', '0', '0');
+INSERT INTO `tb_user` VALUES ('16', 'me', '000000', 'user9.gif', '男', '11111111111', '120', '110@seu.edu.cn', '福建', '0', '0');
+INSERT INTO `tb_user` VALUES ('18', 'you', '111111', 'user0.gif', '男', '11111111111', '111', '111@qq.com', '福建', '0', '0');
+INSERT INTO `tb_user` VALUES ('19', 'op', '11111', 'user0.gif', '男', '11111111111', '111', '111@11.com', '福建', '0', '0');
+INSERT INTO `tb_user` VALUES ('20', 'll', '11111', 'user0.gif', '男', '11111111111', '111', '111@qq.com', '福建', '0', '0');
+INSERT INTO `tb_user` VALUES ('21', '我', '111', 'user0.gif', '男', '111', '111', '11.qq.com', '广州', '0', '1');
+INSERT INTO `tb_user` VALUES ('22', '王', '111', 'user0.gif', '男', '112', '111', '11@seu.com', '新酱', '0', '0');
+INSERT INTO `tb_user` VALUES ('23', '1', '1111', 'user0.gif', '女', '11111111111', '11', '11@qq.com', '福建', '0', '0');
