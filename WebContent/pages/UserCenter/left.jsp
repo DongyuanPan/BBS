@@ -49,7 +49,7 @@
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.jpg"><a
-								href="needLogin/admin/getBoardList.do?method=getBoardList"> ’≤ÿ</a></td>
+								href="user/collectBbs.do?method=showCollect&showpage=1"> ’≤ÿ</a></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"

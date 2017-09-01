@@ -300,16 +300,14 @@ public class OpDB {
 
 	// String sql = "select * from tb_bbs where bbs_id in (select collect_bbs_id
 	// from tb_collect where collect_collector = ?)";
-	public List<BbsForm> OpCollectShow(String sql, Object[] params) {
+	public List<BbsForm> OpCollectShow(String sql,Object[] params) {
 
-		List<BbsForm> listshow = new ArrayList<BbsForm>();
-		DB mydb = new DB();
-		mydb.doPstm(sql, params);
-		ResultSet rs = mydb.getRs();
+		List<BbsForm> listshow=new ArrayList<BbsForm>();
+		ResultSet rs= getRs(sql, params);
+		int i = 1;
 		try {
-			if (rs != null) {
-				while (rs.next()) {
-					BbsForm bbsform = new BbsForm();
+			while(rs.next()&&(!mark||i<=perR)){	
+					BbsForm bbsform=new BbsForm();
 					bbsform.setBbsId(String.valueOf(rs.getInt(1)));
 					bbsform.setBbsBoardID(String.valueOf(rs.getInt(2)));
 					bbsform.setBbsType(rs.getString(3));
@@ -323,17 +321,15 @@ public class OpDB {
 					bbsform.setBbsIsTop(rs.getString(11));
 					bbsform.setBbsToTopTime(Change.dateTimeChange(rs.getTimestamp(12)));
 					bbsform.setBbsIsGood(rs.getString(13));
-					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));
+					bbsform.setBbsToGoodTime(Change.dateTimeChange(rs.getTimestamp(14)));					
 					bbsform.setBbsReason(rs.getString(15));
 					listshow.add(bbsform);
-				}
-				rs.close();
+					++i;
 			}
+			rs.close();			
 		} catch (SQLException e) {
 			System.out.println("调用OpDB类中的OpCollectShow()方法出错！");
 			e.printStackTrace();
-		} finally {
-			mydb.closed();
 		}
 		return listshow;
 	}
