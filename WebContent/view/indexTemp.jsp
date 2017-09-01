@@ -14,7 +14,7 @@
 <link style="text/css" rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/bbs.js"></script>
 </head>
-<body bgcolor="#AA8D60">
+<body bgcolor="#242424">
 	<center>
 		<table bgcolor="#F0F0F0" border="0" width="800" cellspacing="0"
 			cellpadding="0" bordercolor="lightgrey" bordercolorlight="lightgrey"
