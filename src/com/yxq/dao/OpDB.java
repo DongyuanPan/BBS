@@ -412,9 +412,10 @@ public class OpDB {
 		ResultSet rs = getRs(sql, params);
 
 		List<BbsAnswerForm> listshow = null;
+		listshow = new ArrayList<BbsAnswerForm>();
 		int i = 1;
 		if (rs != null) {
-			listshow = new ArrayList<BbsAnswerForm>();
+			
 			try {
 				while (rs.next() && (!mark || i <= perR)) {
 					BbsAnswerForm bbsAnswerform = new BbsAnswerForm();
@@ -425,6 +426,7 @@ public class OpDB {
 					bbsAnswerform.setBbsAnswerSender(rs.getString(5));
 					bbsAnswerform.setBbsAnswerSendTime(Change.dateTimeChange(rs.getTimestamp(6)));
 					bbsAnswerform.setBbsFace(rs.getString(7));
+					listshow.add(bbsAnswerform);
 					++i;
 				}
 			} catch (SQLException e) {

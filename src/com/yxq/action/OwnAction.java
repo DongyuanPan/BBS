@@ -48,15 +48,15 @@ public class OwnAction extends MySuperAction {
 		return (mapping.findForward("success"));
 	}
 	
-	/** 查看收藏的根帖 */
-	public ActionForward showCollect(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
+
+	public ActionForward lookMyAnswer(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/bbs/myCollectShow.jsp");
+		session.setAttribute("mainPage","/pages/show/bbs/myAnswerShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
-			String sql = "select * from tb_bbs where bbs_id in (select collect_bbs_id from tb_collect where collect_collector = ?)";
+			String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
 			Object[] params={bbsown};
 			OpDB myOp=new OpDB();
 			
@@ -66,22 +66,18 @@ public class OwnAction extends MySuperAction {
 				currentP=(String)session.getAttribute("currentPmy");
 			else
 				session.setAttribute("currentPmy",currentP);
-			String gowhich="needLogin/my/listShow.do?method=showCollect";	
+			String gowhich="needLogin/my/myAnswer.do?method=lookMyAnswer";	
 			
 			myOp.setMark(true);								//进行分页显示
 			myOp.setPageInfo(perR, currentP, gowhich);		//设置进行分页显示需要的信息	
 			
-			List mybbslist=myOp.OpCollectShow(sql, params);
+			List myanswerlist=myOp.OpBbsAnswerShow(sql, params);
 			CreatePage page=myOp.getPage();
 			
-			session.setAttribute("mybbslist",mybbslist);
+			session.setAttribute("myanswerlist",myanswerlist);
 			session.setAttribute("page",page);
-			return (mapping.findForward("success"));
-			}		
-		else {
-			return mapping.findForward("noLogin");
-		}
-	}	
-	
-	
+		}		
+		return (mapping.findForward("success"));
+	}
+
 }
