@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-09-01 10:12:18
+Date: 2017-09-01 11:03:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,12 +29,13 @@ CREATE TABLE `tb_accessory` (
   `accessory_size` varchar(255) NOT NULL,
   `accessory_download_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accessory_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_accessory
 -- ----------------------------
 INSERT INTO `tb_accessory` VALUES ('1', '1', 'accessory1.cpp', 'accessory/', '2017-08-30 16:20:35', '这是第一份附件', '2M', '0');
+INSERT INTO `tb_accessory` VALUES ('2', '1', 'accessory2.c', 'accessory/', '2017-09-01 11:02:37', '这是第二份附件', '3M', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
@@ -171,13 +172,12 @@ CREATE TABLE `tb_collect` (
   `collect_collector` varchar(255) NOT NULL,
   `collect_bbs_id` int(11) NOT NULL,
   PRIMARY KEY (`collect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_collect
 -- ----------------------------
-INSERT INTO `tb_collect` VALUES ('1', 'tsoft', '2');
-INSERT INTO `tb_collect` VALUES ('2', 'tsoft', '13');
+INSERT INTO `tb_collect` VALUES ('3', 'tsoft', '2');
 
 -- ----------------------------
 -- Table structure for `tb_user`
