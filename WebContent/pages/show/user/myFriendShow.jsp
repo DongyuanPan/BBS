@@ -49,7 +49,9 @@
 									href="bbs/user/getUserSingle.do?method=getUserSingle&userName=${myFrienfSingle.friendname}">
 									<b><bean:write name="myFrienfSingle" property="friendname" filter="false" /></b> <br>
 								</a></td>		
-													
+								<td align="center"><a
+									href="bbs/user/deleteFriend.do?method=deleteFriend&friendName=${myFrienfSingle.friendname}"
+									onclick="javaScript:return confirm('确认要删除该信息?')">×删除</a></td>					
 								</tr>
 								</logic:iterate>
 							</table>
