@@ -24,7 +24,9 @@
 			<tr height="30" bgcolor="#F0F0F0">
 				<td style="text-indent: 5" width="27%">★ 楼主</td>
 				<td colspan="2">【主题】<bean:write name="bbsRootSingle"
-						property="bbsTitle" filter="false" /></td>
+						property="bbsTitle" filter="false" />
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						【类型】<bean:write name="bbsRootSingle" property="bbsType" /></td>
 			</tr>
 			<tr bgcolor="#F9F9F9">
 				<!-- 发帖者信息 -->
