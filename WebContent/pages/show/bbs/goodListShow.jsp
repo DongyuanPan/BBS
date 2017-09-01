@@ -14,7 +14,7 @@
 			bordercolordark="white" rules="rows" style="margin-top: 8">
 			<tr height="30">
 				<td colspan="5" style="text-indent: 5"
-					background="images/index/classT.jpg"><b><font
+					background="images/index/classT.png"><b><font
 						color="white">Ёі ОЋЛЊЬћзг</font></b></td>
 			</tr>
 			<tr height="30" align="center" bgcolor="#F0F0F0">

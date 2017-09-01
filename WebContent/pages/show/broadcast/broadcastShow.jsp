@@ -15,7 +15,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="E3E3E3"
 			bordercolordark="white" rules="rows" style="margin-top: 8">
 			<tr height="30">
-				<td colspan="5" style="text-indent: 5" background="images/index/classT.jpg"><b><font
+				<td colspan="5" style="text-indent: 5" background="images/index/classT.png"><b><font
 						color="white">¡ö ¹«&nbsp;&nbsp;¸æ</font></b></td>
 			</tr>
 			<tr height="30" align="center" bgcolor="#F0F0F0">

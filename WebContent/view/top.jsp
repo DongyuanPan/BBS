@@ -9,7 +9,7 @@
 		<table border="0" width="100%" height="115" cellspacing="0"
 			cellpadding="0">
 			<tr>
-				<td><img src="images/index/indexT.jpg"></td>
+				<td><img src="images/index/indexT.png"></td>
 			</tr>
 		</table>
 	</center>

@@ -13,7 +13,7 @@
 			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
 			bordercolordark="white" rules="rows" style="margin-top: 8">
 			<tr height="30">
-				<td colspan="6" background="images/index/classT.jpg"
+				<td colspan="6" background="images/index/classT.png"
 					style="text-indent: 5"><b><font color="white">¡צ
 							ÎÒµÄÌû×Ó</font></b></td>
 			</tr>

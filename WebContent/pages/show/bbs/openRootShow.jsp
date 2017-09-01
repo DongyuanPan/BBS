@@ -17,7 +17,7 @@
 			bordercolordark="white" rules="all"
 			style="margin-top: 8; word-break: break-all">
 			<tr height="30">
-				<td colspan="3" background="images/index/classT.jpg"
+				<td colspan="3" background="images/index/classT.png"
 					style="text-indent: 5"><b><font color="white">¡ö
 							ÏÔÊ¾¸ùÌû</font></b></td>
 			</tr>

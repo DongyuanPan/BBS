@@ -39,7 +39,7 @@
 			<!-- ****************显示置顶帖子**************** -->
 			<tr height="30">
 				<td colspan="6" style="text-indent: 5"
-					background="images/index/classT.jpg"><b><font
+					background="images/index/classT.png"><b><font
 						color="white">■ 置顶帖子</font></b></td>
 			</tr>
 			<tr height="30" align="center">
@@ -109,7 +109,7 @@
 			<!-- ****************显示普通帖子**************** -->
 			<tr height="30">
 				<td colspan="6" style="text-indent: 5"
-					background="images/index/classT.jpg"><b><font
+					background="images/index/classT.png"><b><font
 						color="white">■ 其他帖子</font></b></td>
 			</tr>
 			<tr height="30" align="center" bgcolor="#F4F4F4">

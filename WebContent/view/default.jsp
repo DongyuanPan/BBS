@@ -18,7 +18,7 @@
 							cellpadding="3" bordercolor="lightgrey"
 							bordercolorlight="lightgrey" bordercolordark="white">
 							<tr height="30">
-								<td style="text-indent: 5" background="images/index/classT.jpg"><b><font
+								<td style="text-indent: 5" background="images/index/classT.png"><b><font
 										color="white">¡ö <bean:write name="classSingle"
 												property="className" /></font></b></td>
 							</tr>

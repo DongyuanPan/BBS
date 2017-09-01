@@ -5,18 +5,18 @@
 <%@ taglib uri="struts-logic" prefix="logic"%>
 
 <%
-    String[] weekdays={"","日","一","二","三","四","五","六"};
-    String[] days=new String[42];
-    for(int i=0;i<42;i++)
-    	days[i]="";
+	String[] weekdays = {"", "日", "一", "二", "三", "四", "五", "六"};
+	String[] days = new String[42];
+	for (int i = 0; i < 42; i++)
+		days[i] = "";
 
-    Date currentDay = new Date();
-    int year=1900+currentDay.getYear();
-    int month=currentDay.getMonth();
-    int today=currentDay.getDate();
-    int weekday=currentDay.getDay()+1;
-    
-    String now=year+"年"+(month+1)+"月"+today+"日"+" 星期"+weekdays[weekday];
+	Date currentDay = new Date();
+	int year = 1900 + currentDay.getYear();
+	int month = currentDay.getMonth();
+	int today = currentDay.getDate();
+	int weekday = currentDay.getDay() + 1;
+
+	String now = year + "年" + (month + 1) + "月" + today + "日" + " 星期" + weekdays[weekday];
 %>
 
 <html>
@@ -41,40 +41,40 @@
 	}
 </script>
 </head>
-<body onload="showTime(time)" bgcolor="#F0F0F0">
+<body onload="showTime(time)" bgcolor="#F7F7F7">
 	<center>
 		<table border="0" width="100%" cellspacing="0" cellpadding="0"
 			style="margin-top: 1">
 			<tr height="38">
-				<td colspan="2" background="images/index/menu.jpg">
+				<td colspan="2" background="images/index/menu.png">
 					<table border="0" width="100%" height="100%" cellspacing="0"
 						cellpadding="0">
 						<tr height="50%" style="font-size: 10pt">
-							<td align="center"><%=now %> <input type="text"
-								style="border: 0; background-color: #F7F7F7" disable="true"
+							<td align="center"><%=now%> <input type="text"
+								style="border: 0;" true"
 								id="time" size="9"></td>
-							<td align="center" width="8%"><a href="goIndex.do">首 页</a></td>
+							<td align="center" width="8%" ><a href="goIndex.do" style="color: white">首 页</a></td>
 							<td align="center" width="8%"><a
-								href="user/isUserLogin.do?method=isUserLogin">登 录</a></td>
+								href="user/isUserLogin.do?method=isUserLogin" style="color: white">登 录</a></td>
 							<td align="center" width="8%"><a
-								href="user/broadcast.do?method=broadcastListShow&showpage=1">公
+								href="user/broadcast.do?method=broadcastListShow&showpage=1" style="color: white">公
 									告</a></td>
 							<td align="center" width="8%"><a
-								href="user/personCen.do?method=personCenter">个人中心</a></td>
+								href="user/personCen.do?method=personCenter" style="color: white">个人中心</a></td>
 							<td align="center" width="10%"><a
-								href="user/goodListShow.do?method=goodListShow&showpage=1">精华帖子</a></td>
+								href="user/goodListShow.do?method=goodListShow&showpage=1" style="color: white">精华帖子</a></td>
 							<td align="center" width="10%"><a
-								href="user/isAdminLogin.do?method=isAdminLogin">进入后台</a></td>
+								href="user/isAdminLogin.do?method=isAdminLogin" style="color: white">进入后台</a></td>
 							<td align="center" width="8%"><a
-								href="user/reg.do?method=userReg">注 册</a></td>
+								href="user/reg.do?method=userReg" style="color: white">注 册</a></td>
 							<td align="center" width="8%"><a
-								href="user/logout.do?method=logout">注 销</a></td>
+								href="user/logout.do?method=logout" style="color: white">注 销</a></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr height="40">
-				<td width="529" align="center" background="images/index/indexP.jpg">
+				<td width="529" align="center" background="images/index/indexP.png">
 					<marquee onmouseover=this.stop() onmouseout=this.start()
 						scrollamount="1" scrolldelay="10" direction="left" width="470">
 						<img src="images/index/pcard.gif"> Tsoft服务热线：(0431)8491***
@@ -82,7 +82,7 @@
 					</marquee>
 				</td>
 				<td align="center" width="271"
-					background="images/index/messages.jpg"><html:errors
+					background="images/index/messages.png"><html:errors
 						property="userOpR" /> <html:errors property="sqlvalue" /></td>
 			</tr>
 			<html:form action="/user/search.do" method="post">
