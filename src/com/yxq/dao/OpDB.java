@@ -429,6 +429,7 @@ public class OpDB {
 					userform.setUserEmail(rs.getString(8));
 					userform.setUserFrom(rs.getString(9));
 					userform.setUserAble(rs.getString(10));
+					userform.setUserForbidden(rs.getString(11));
 					userlist.add(userform);
 				}
 				rs.close();
@@ -460,6 +461,7 @@ public class OpDB {
 					userform.setUserEmail(rs.getString(8));
 					userform.setUserFrom(rs.getString(9));
 					userform.setUserAble(rs.getString(10));
+					userform.setUserForbidden(rs.getString(11));
 				}
 				rs.close();
 			}
@@ -490,6 +492,7 @@ public class OpDB {
 				userform.setUserEmail(rs.getString(8));
 				userform.setUserFrom(rs.getString(9));
 				userform.setUserAble(rs.getString(10));
+				userform.setUserForbidden(rs.getString(11));
 				rs.close();
 			}
 		} catch (SQLException e) {

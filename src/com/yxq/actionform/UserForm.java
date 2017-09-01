@@ -18,7 +18,8 @@ public class UserForm extends ValidatorForm {
 	private String userOICQ;
 	private String userEmail;
 	private String userFrom;
-	private String userAble;	
+	private String userAble;
+	private String userForbidden;
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		String validate=request.getParameter("validate");
@@ -99,23 +100,30 @@ public class UserForm extends ValidatorForm {
 	public void setUserFace(String userFace) {
 		this.userFace = userFace;
 	}
+	public String getUserForbidden() {
+		return userForbidden;
+	}
+	public void setUserForbidden(String userForbidden) {
+		this.userForbidden = userForbidden;
+	}
 	public String getSubUserFrom(int len){
 		if(len<=0||len>this.userFrom.length())
 			len=this.userFrom.length();
 		return this.userFrom.substring(0,len)+"..";
 	}
 	public void clear(){
-		id="";
-		userName="";
-		oldPassword="";
-		userPassword="";
-		aginPassword="";
-		userFace="user0.gif";
-		userSex="ÄÐ";
-		userPhone="";
-		userOICQ="";
-		userEmail="";
-		userFrom="";
-		userAble="";
+		id = "";
+		userName = "";
+		oldPassword = "";
+		userPassword = "";
+		aginPassword = "";
+		userFace = "user0.gif";
+		userSex = "ÄÐ";
+		userPhone = "";
+		userOICQ = "";
+		userEmail = "";
+		userFrom = "";
+		userAble = "";
+		userForbidden = "";
 	}
 }
