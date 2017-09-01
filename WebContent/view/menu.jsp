@@ -57,8 +57,7 @@
 							<td align="center" width="8%"><a
 								href="user/isUserLogin.do?method=isUserLogin">登 录</a></td>
 							<td align="center" width="8%"><a
-								href="user/broadcast.do?method=broadcastListShow&showpage=1">公
-									告</a></td>
+								href="user/broadcast.do?method=broadcastListShow&showpage=1">公告</a></td>
 							<td align="center" width="8%"><a
 								href="user/personCen.do?method=personCenter">个人中心</a></td>
 							<td align="center" width="10%"><a
@@ -77,8 +76,8 @@
 				<td width="529" align="center" background="images/index/indexP.jpg">
 					<marquee onmouseover=this.stop() onmouseout=this.start()
 						scrollamount="1" scrolldelay="10" direction="left" width="470">
-						<img src="images/index/pcard.gif"> Tsoft服务热线：(0431)8491***
-						E-mail：tsoft***@tsoft.com
+						<img src="images/index/pcard.gif"> BBS服务热线：(520) 110
+						E-mail：东南大学计算机科学与工程学院@seu.edu.com
 					</marquee>
 				</td>
 				<td align="center" width="271"
