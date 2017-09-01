@@ -62,6 +62,10 @@
 								<td align="center">°æƒ⁄»›°ø</td>
 								<td align="center"><%@ include file="font.jsp"%></td>
 							</tr>
+							<tr height="30">
+								<td align="center">°æ¿‡–Õ°ø</td>
+								<td align="center"><%@ include file="bbsType.jsp"%></td>
+							</tr>
 							<tr height="30" bgcolor="#F9F9F9">
 								<td colspan="2" align="right" valign="bottom"><%@ include
 										file="count.jsp"%></td>
