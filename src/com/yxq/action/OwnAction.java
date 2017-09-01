@@ -47,4 +47,37 @@ public class OwnAction extends MySuperAction {
 		}		
 		return (mapping.findForward("success"));
 	}
+	
+
+	public ActionForward lookMyAnswer(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
+		super.setParams(request);
+		HttpSession session=request.getSession();
+		session.setAttribute("mainPage","/pages/show/bbs/myAnswerShow.jsp");
+		UserForm logoner=(UserForm)session.getAttribute("logoner");
+		if(logoner!=null&&(logoner instanceof UserForm)){
+			String bbsown=logoner.getUserName();
+			String sql = "select * from tb_bbsanswer where bbsAnswer_sender=? order by bbsAnswer_sendTime desc";
+			Object[] params={bbsown};
+			OpDB myOp=new OpDB();
+			
+			int perR=5;
+			String currentP=request.getParameter("showpage");
+			if(currentP==null||currentP.equals(""))
+				currentP=(String)session.getAttribute("currentPmy");
+			else
+				session.setAttribute("currentPmy",currentP);
+			String gowhich="needLogin/my/myAnswer.do?method=lookMyAnswer";	
+			
+			myOp.setMark(true);								//进行分页显示
+			myOp.setPageInfo(perR, currentP, gowhich);		//设置进行分页显示需要的信息	
+			
+			List myanswerlist=myOp.OpBbsAnswerShow(sql, params);
+			CreatePage page=myOp.getPage();
+			
+			session.setAttribute("myanswerlist",myanswerlist);
+			session.setAttribute("page",page);
+		}		
+		return (mapping.findForward("success"));
+	}
+
 }
