@@ -62,12 +62,12 @@
 						</tr>
 
 						<!-- “返回”超链接 -->
-						<tr height="30">						
+						<tr height="30">
 							<td colspan="2" style="text-indent: 70"><a
 								href="${sessionScope.servletPath}?method=${sessionScope.method}">[返回]</a></td>
 						</tr>
-						
-						
+
+
 					</table>
 				</td>
 				<!-- 根帖信息 -->
@@ -77,14 +77,7 @@
 						name="bbsRootSingle" property="bbsSendTime" />』&nbsp;
 				</td>
 			</tr>
-			<logic:equal name="bbsRootSingle" property="bbsType" value="普通主题">
-				<tr height="130">
-					<td colspan="2" valign="top"
-						style="padding-top: 6; padding-left: 6; padding-right: 6; padding-bottom: 6"><bean:write
-							name="bbsRootSingle" property="bbsContent" scope="session"
-							filter="false" /></td>
-				</tr>
-			</logic:equal>
+
 			<logic:equal name="bbsRootSingle" property="bbsType" value="投票贴">
 				<tr height="130">
 					<td colspan="2" valign="top"
@@ -112,7 +105,14 @@
 					</td>
 				</tr>
 			</logic:equal>
-
+			<logic:notEqual name="bbsRootSingle" property="bbsType" value="投票贴">
+				<tr height="130">
+					<td colspan="2" valign="top"
+						style="padding-top: 6; padding-left: 6; padding-right: 6; padding-bottom: 6"><bean:write
+							name="bbsRootSingle" property="bbsContent" scope="session"
+							filter="false" /></td>
+				</tr>
+			</logic:notEqual>
 			<!-- 实现对根帖进行操作的超链接 -->
 			<tr height="30" bgcolor="#F9F9F9">
 				<td align="right" colspan="2">◆<html:link
