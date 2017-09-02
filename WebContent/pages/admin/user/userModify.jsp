@@ -42,14 +42,14 @@
 					<td colspan="3"><html:errors property="userName" /></td>
 				</tr>
 				<tr>
-					<td align="right">旧密码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td colspan="3" colspan="3"><html:hidden
-							property="oldPassword" write="true" /></td>
+					<td align="right">改密码确认：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><html:radio property="isModifyPass" value="1" />改密码 <html:radio
+							property="isModifyPass" value="0" />不改密码</td>
 				</tr>
 				<tr>
 					<td align="right">新密码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td colspan="3"><html:password property="userPassword"
-							size="40" redisplay="false" /></td>
+							size="40" value="${userForm.oldPassword}" redisplay="false" /></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -58,7 +58,7 @@
 				<tr>
 					<td align="right">确认密码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td colspan="3"><html:password property="aginPassword"
-							size="40" redisplay="false" /></td>
+							size="40" value="${userForm.oldPassword}" redisplay="false" /></td>
 				</tr>
 				<tr>
 					<td></td>

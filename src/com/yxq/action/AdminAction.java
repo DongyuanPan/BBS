@@ -21,8 +21,10 @@ import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
 import com.yxq.actionform.UserForm;
+import com.yxq.actionform.ForbiddenIPForm;
 import com.yxq.dao.OpDB;
 import com.yxq.tools.Change;
+import com.yxq.tools.Encryption;
 
 public class AdminAction extends DispatchAction {
 
@@ -642,6 +644,20 @@ public class AdminAction extends DispatchAction {
 		}
 		return mapping.findForward("success");
 	}
+	
+	public ActionForward getUserIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+		HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.setAttribute("backMainPage", "../user/userIPShow.jsp");
+
+			String sql = "";
+			sql = "select * from tb_forbidden_ip";
+			OpDB myOp = new OpDB();			
+			List IPlist = myOp.OpForbiddenIPShow(sql, null);
+			request.setAttribute("backIPList", IPlist);
+
+		return mapping.findForward("success");
+	}
 
 	/** 后台-修改用户 */
 	public ActionForward modifyUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -684,8 +700,17 @@ public class AdminAction extends DispatchAction {
 			ActionMessages messages = new ActionMessages();
 
 			userId = userForm.getId();
+			String isModifyPassword=userForm.getIsModifyPass();
 			String userName = Change.HTMLChange(userForm.getUserName());
-			String userPassword = Change.HTMLChange(userForm.getUserPassword());
+			String userPassword="";
+			if (isModifyPassword.equals("1")) {
+				userPassword = Change.HTMLChange(userForm.getUserPassword());
+				userPassword = Encryption.getHash(userPassword,"MD5");
+			}else {
+				userPassword = userForm.getUserPassword();
+			}
+			    
+			
 			String userFace = userForm.getUserFace();
 			String userSex = userForm.getUserSex();
 			String userPhone = userForm.getUserPhone();
@@ -715,6 +740,7 @@ public class AdminAction extends DispatchAction {
 		return mapping.findForward(forwardPath);
 	}
 
+	//修改自己用户信息
 	public ActionForward modifyUser1(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -871,6 +897,61 @@ public class AdminAction extends DispatchAction {
 			System.out.println("删除用户成功！");
 			forwardPath = "success";
 			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.user.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 后台-删除IP */
+	public ActionForward deleteIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String IP = request.getParameter("IP");
+		
+		String sql = "delete from tb_forbidden_ip where forbidden_IP=?";
+		Object[] params = { IP };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("删除IP失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.IP.E"));
+		} else {
+			System.out.println("删除IP成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.IP.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 后台-添加禁止IP */
+	public ActionForward addForbidIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		ForbiddenIPForm IPForm = (ForbiddenIPForm)form;
+		String sql = "insert into tb_forbidden_ip values(?)";
+		String IP = IPForm.getForbiddenIP();
+		Object[] params = { IP };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("添加IP失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.add.IP.E"));
+		} else {
+			System.out.println("添加IP成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.add.IP.S"));
 		}
 		saveErrors(request, messages);
 		return mapping.findForward(forwardPath);

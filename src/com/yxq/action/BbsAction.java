@@ -50,9 +50,9 @@ public class BbsAction extends MySuperAction {
 
 		/* 生成“跳转版面”下拉列表中的选项，这些选项应为当前论坛类别中的版面 */
 		Vector<LabelValueBean> jumpBoard = new Vector<LabelValueBean>();
-		List boardlist = (ArrayList) session.getAttribute("class" + classId);
+		List<BoardForm> boardlist = (ArrayList) session.getAttribute("class" + classId);
 		if (boardlist != null && boardlist.size() != 0) {
-			for (int i = 0; i < boardlist.size(); i++) {
+			for (int i = 0; i < boardlist.size(); ++i) {
 				BoardForm boardSingle = (BoardForm) boardlist.get(i);
 				jumpBoard.add(new LabelValueBean(boardSingle.getBoardName(), boardSingle.getBoardId()));
 				if (boardId.equals(boardSingle.getBoardId())) { // 如果是当前版面
@@ -85,7 +85,7 @@ public class BbsAction extends MySuperAction {
 		myOp.setMark(true); // 进行分页显示
 		myOp.setPageInfo(perR, currentP, gowhich); // 设置进行分页显示需要的信息
 
-		sql = "select * from tb_bbs where bbs_boardID=? and (bbs_isTop='0' or bbs_isGood='1') order by bbs_opTime DESC";
+		sql = "select * from tb_bbs where bbs_boardID=? and bbs_isTop='0' order by bbs_opTime DESC";
 		List otherbbslist = myOp.OpBbsListShow(sql, params);
 		CreatePage page = myOp.getPage();
 
@@ -121,7 +121,8 @@ public class BbsAction extends MySuperAction {
 			String bbsContent = bbsRootSingle.getBbsContent();
 			int totalSelNum = Integer.parseInt(bbsContent.substring(0, bbsContent.indexOf("@")));
 			session.setAttribute("totalSelNum", totalSelNum);
-			int totalVoteNum = Integer.parseInt(bbsContent.substring(bbsContent.indexOf("@")+1,bbsContent.indexOf(":")));
+			int totalVoteNum = Integer
+					.parseInt(bbsContent.substring(bbsContent.indexOf("@") + 1, bbsContent.indexOf(":")));
 			session.setAttribute("totalVoteNum", totalVoteNum);
 			int beginIndex = bbsContent.indexOf(":") + 1;
 			int endIndex = bbsContent.indexOf(";", beginIndex);
@@ -165,7 +166,7 @@ public class BbsAction extends MySuperAction {
 		/* 查询tb_user数据表，获取当前回复帖发表者信息 */
 		sql = "select * from tb_user where user_name=?";
 		Map answerMap = new HashMap();
-		for (int i = 0; i < answerbbslist.size(); i++) {
+		for (int i = 0; i < answerbbslist.size(); ++i) {
 			String answerer = ((BbsAnswerForm) answerbbslist.get(i)).getBbsAnswerSender();
 			if (!answerMap.containsKey(answerer)) {
 				params[0] = answerer;
@@ -208,7 +209,6 @@ public class BbsAction extends MySuperAction {
 	}
 
 	/** 发表帖子 */
-
 	public ActionForward addBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -218,35 +218,54 @@ public class BbsAction extends MySuperAction {
 		String logonerForbidden = logoner.getUserForbidden();
 		String validate = request.getParameter("validate");
 		ActionMessages messages = new ActionMessages();
+		int i, j = 1;
+
 		if (logonerForbidden.equals("0")) {
 			if (validate == null || validate.equals("") || !validate.equals("yes")) {
 				return mapping.findForward("showAddJSP");
 			} else {
 				BbsForm bbsForm = (BbsForm) form;
-
+				/* 帖子相关信息 */
 				String boardId = (String) session.getAttribute("boardId");
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
 				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
-				// String bbsSendTime = Change.dateTimeChange(new Date());
 				String bbsSendIP = request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
-				// String bbsOpTime = bbsSendTime;
 				String bbsIsTop = "0";
 				String bbsToTopTime = "";
 				String bbsIsGood = "0";
 				String bbsToGoodTime = "";
 
+				OpDB myOp = new OpDB();
 				String sql = "insert into tb_bbs values(null,?,?,?,?,?,now(),?,?,now(),?,null,?,null,null)";
 				Object[] params = { boardId, bbsType, bbsTitle, bbsContent, bbsSender, bbsSendIP, bbsFace, bbsIsTop,
 						bbsIsGood };
+				i = myOp.OpUpdate(sql, params);
 
-				OpDB myOp = new OpDB();
-				int i = myOp.OpUpdate(sql, params);
+				/* 附件相关信息 */
+				String fileName = (String) session.getAttribute("fileName");
+				if (fileName != null) {
+
+					int fileSize = (Integer) session.getAttribute("fileSize");
+					int downloadCount = 0;
+					String filePath = (String) session.getAttribute("filePath");
+					int bbsID = myOp.getMaxBbsId() + 1;
+
+					String sql2 = "insert into tb_accessory values(null,?,?,?,now(),' ',?,?)";
+					Object[] params2 = { bbsID, fileName, filePath, fileSize, downloadCount };
+
+					j = myOp.OpUpdate(sql2, params2);
+				}
 				if (i <= 0) {
 					System.out.println("发表帖子失败！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.add.E"));
+					saveErrors(request, messages);
+					return mapping.findForward("error");
+				} else if (j <= 0) {
+					System.out.println("配置附件信息失败！");
+					messages.add("userOpR", new ActionMessage("luntan.bbs.setaccessory.E"));
 					saveErrors(request, messages);
 					return mapping.findForward("error");
 				} else {

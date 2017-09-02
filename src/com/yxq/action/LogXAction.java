@@ -64,23 +64,34 @@ public class LogXAction extends DispatchAction {
 	
 	/** µÇÂ¼ */
 	public ActionForward login(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
-		HttpSession session=request.getSession();
-		UserForm logoner=(UserForm)form;
-		String userName=Change.HTMLChange(logoner.getUserName());
-		String userPassword=Change.HTMLChange(logoner.getUserPassword());
-		new Encryption();
+		HttpSession session = request.getSession();
+		UserForm logoner = (UserForm)form;
+		String userName = Change.HTMLChange(logoner.getUserName());
+		String userPassword = Change.HTMLChange(logoner.getUserPassword());
 		userPassword = Encryption.getHash(userPassword, "MD5");
-		System.out.println(userPassword);
+		String loginIP = request.getRemoteAddr();
+		//System.out.println(loginIP);
 		
-		String sql="select * from tb_user where user_name=? and user_password=?";
-		Object[] params={userName,userPassword};
-		
-		ActionMessages messages=new ActionMessages();
 		OpDB myOp = new OpDB();
+		ActionMessages messages = new ActionMessages();
+		
+		String sql2 = "select * from tb_forbidden_ip where forbidden_IP = ?";
+		Object[] params2 = {loginIP};
+		Boolean loginCheck = myOp.OpLoginCheck(sql2, params2);
+		if (!loginCheck) {
+			messages.add("loginR",new ActionMessage("luntan.bbs.login.IPForbidden"));
+			saveErrors(request,messages);
+			return mapping.findForward("IPforbidden");
+		}
+		
+		
+		String sql = "select * from tb_user where user_name=? and user_password=?";
+		Object[] params = {userName, userPassword};
+		
 		logoner = myOp.OpUserSingleShow(sql, params);
 		if(logoner!=null){			
 			session.setAttribute("logoner",logoner);
-			return (mapping.findForward("success"));
+			return mapping.findForward("success");
 		}
 		else{			
 			messages.add("loginR",new ActionMessage("luntan.bbs.login.E"));
@@ -178,7 +189,7 @@ public class LogXAction extends DispatchAction {
 	public ActionForward myPersonInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		ActionMessages messages=new ActionMessages();
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","../UserCenter/personCenter.jsp");
+		session.setAttribute("perCentermainPage","../UserCenter/personCenter.jsp");
 		
 		Object obj=session.getAttribute("logoner");
 		if(obj!=null&&(obj instanceof UserForm)){
@@ -213,15 +224,7 @@ public class LogXAction extends DispatchAction {
 		if(obj!=null&&(obj instanceof UserForm)){
 			UserForm logoner=(UserForm)obj;
 			String able=logoner.getUserAble();
-
-			if(!able.equals("2")){				
-				messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.N"));
-				saveErrors(request,messages);
-				return mapping.findForward("noAble");				
-			}
-			else{
-				return mapping.findForward("BhaveLogin");
-			}
+			return mapping.findForward("BhaveLogin");
 		}
 		else{
 			messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.E"));
@@ -232,7 +235,7 @@ public class LogXAction extends DispatchAction {
 	
 	public ActionForward modifyUser1(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
     	HttpSession session=request.getSession();
-    	session.setAttribute("mainPage","../UserCenter/userModify.jsp");
+    	session.setAttribute("perCentermainPage","../UserCenter/userModify.jsp");
     	Object obj=session.getAttribute("logoner");
     	String ID=null;
 		if(obj!=null&&(obj instanceof UserForm)){
@@ -277,17 +280,17 @@ public class LogXAction extends DispatchAction {
     		
     		userId = userForm.getId();
     		String userName=Change.HTMLChange(userForm.getUserName());
-    		String userPassword=Change.HTMLChange(userForm.getUserPassword());    	
+    		String userPassword=Change.HTMLChange(userForm.getUserPassword());    
+    		userPassword = Encryption.getHash(userPassword, "MD5");
     		String userFace=userForm.getUserFace();
     		String userSex=userForm.getUserSex();
     		String userPhone=userForm.getUserPhone();
     		String userOICQ=userForm.getUserOICQ();
     		String userEmail=userForm.getUserEmail();
     		String userFrom=Change.HTMLChange(userForm.getUserFrom());
-    		String userAble=userForm.getUserAble();
     		
-    		String sql="update tb_user set user_name=?,user_password=?,user_face=?,user_sex=?,user_phone=?,user_OICQ=?,user_email=?,user_from=?,user_able=? where id=?";
-    		Object[] params={userName,userPassword,userFace,userSex,userPhone,userOICQ,userEmail,userFrom,userAble,userId};
+    		String sql="update tb_user set user_name=?,user_password=?,user_face=?,user_sex=?,user_phone=?,user_OICQ=?,user_email=?,user_from=? where id=?";
+    		Object[] params={userName,userPassword,userFace,userSex,userPhone,userOICQ,userEmail,userFrom,userId};
     		
     		OpDB myOp=new OpDB();
     		int i=myOp.OpUpdate(sql, params);    		

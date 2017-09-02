@@ -12,6 +12,8 @@
 		<form-bean name="bbsForm" type="com.yxq.actionform.BbsForm" />
 		<form-bean name="bbsAnswerForm" type="com.yxq.actionform.BbsAnswerForm" />
 		<form-bean name="userForm" type="com.yxq.actionform.UserForm" />
+		<form-bean name="ForbiddenIPForm" type="com.yxq.actionform.ForbiddenIPForm" />
+		<form-bean name="FileUploadForm" type="com.yxq.actionform.FileUploadForm" />
 	</form-beans>
 	<action-mappings>
 		<!-- 进入首页 -->
@@ -35,7 +37,7 @@
 		<!-- 进入个人中心(超链接触发，判断用户是否已经登录，若登录，则判断登录的用户是否是管理员) -->
 		<action path="/user/personCen" type="com.yxq.action.LogXAction"
 			parameter="method" name="userForm">
-			<forward name="noLogin" path="/pages/login.jsp" />                       <!-- 没有登录返回的视图 -->
+			<forward name="noLogin" path="/pages/login.jsp" />                          <!-- 没有登录返回的视图 -->
 			<forward name="BhaveLogin" path="/pages/UserCenter/adminTemp.jsp" />		<!-- 已经登录返回的视图 -->
 		</action>
 		
@@ -45,6 +47,7 @@
 			scope="request">
 			<forward name="success" path="/index.jsp" />
 			<forward name="fault" path="/pages/login.jsp" />
+			<forward name="IPforbidden" path="/pages/IPForbiden.jsp" />
 		</action>
 		<!-- 我的信息(提交表单触发) -->
 		<action path="/needLogin/user/myPersonInfo" type="com.yxq.action.LogXAction"
@@ -65,7 +68,7 @@
 			input="/pages/UserCenter/adminTemp.jsp">
 			<forward name="showModifyJSP" path="/pages/UserCenter/adminTemp.jsp" />
 			<forward name="success"
-				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo;type=show" />
+				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo" />
 			<forward name="error" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
 		
@@ -136,14 +139,23 @@
 			parameter="method" validate="false">
 			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
+		
+		<!-- 添加好友 -->
+		<action path="/bbs/user/addFriend" type="com.yxq.action.OwnAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/my/myFriend.do?method=lookMyFriend&amp;type=show" />
+			<forward name="errr" path="/pages/message.jsp" />
+		</action>
+		
 		<!-- 删除好友 -->
 		<action path="/bbs/user/deleteFriend" type="com.yxq.action.OwnAction"
 			parameter="method">
 			<forward name="success"
 				path="/needLogin/my/myFriend.do?method=lookMyFriend&amp;type=show" />
-
 			<forward name="errr" path="/pages/message.jsp" />
 		</action>
+		
 		<!-- *************以下配置管理员的操作************* -->
 		<!-- 前台-管理员置顶帖子、设为精华帖 、取消置顶-->
 		<action path="/needLogin/admin/doTopGood" type="com.yxq.action.AdminAction"
@@ -246,6 +258,21 @@
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		
+		<!-- 后台-管理员添加禁止的IP -->
+		<action path="/needLogin/admin/addForbidIP" type="com.yxq.action.AdminAction"
+			name="ForbiddenIPForm" scope="request" parameter="method" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="success" path="/needLogin/admin/getUserIP.do?method=getUserIP" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
+		<!-- 后台-列表禁止IP -->
+		<action path="/needLogin/admin/getUserIP" type="com.yxq.action.AdminAction"
+			parameter="method" name="ableForm" scope="request" validate="false">
+			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-管理员修改用户 -->
 		<action path="/needLogin/admin/modifyUser" type="com.yxq.action.AdminAction"
 			parameter="method" name="userForm" scope="request" validate="true"
@@ -262,6 +289,15 @@
 				path="/needLogin/admin/getUserList.do?method=getUserList&amp;type=show" />
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		
+		<!-- 后台-删除IP -->
+		<action path="/needLogin/admin/deleteIP" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getUserIP.do?method=getUserIP&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-设置用户禁言 -->
 		<action path="/needLogin/admin/forbidUser" type="com.yxq.action.AdminAction"
 			parameter="method">
@@ -285,6 +321,11 @@
 			<forward name="showAddJSP" path="/view/indexTemp.jsp" />
 			<forward name="success" path="/user/listShow.do?method=rootListShow" />
 			<forward name="error" path="/view/indexTemp.jsp" />
+		</action>
+		<!-- 上传附件 -->
+		<action path="/needLogin/addAccessory" type="com.yxq.action.FileUploadAction"
+		parameter="method" name="FileUploadForm" scope="request" validate="true">		
+		    <forward name="success" path="/needLogin/addBbs.do?method=addBbs" />
 		</action>
 		<!-- 回复帖子 -->
 		<action path="/needLogin/answerBbs" type="com.yxq.action.BbsAction"

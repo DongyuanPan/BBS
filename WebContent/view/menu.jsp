@@ -55,14 +55,14 @@
 								id="time" size="9"></td>
 							<td align="center" width="8%" ><a href="goIndex.do" style="color: white">首 页</a></td>
 							<td align="center" width="8%"><a
-								href="user/isUserLogin.do?method=isUserLogin" style="color: white">登 录</a></td>
-							<td align="center" width="8%"><a
 								href="user/broadcast.do?method=broadcastListShow&showpage=1" style="color: white">公
 									告</a></td>
 							<td align="center" width="8%"><a
 								href="user/personCen.do?method=personCenter" style="color: white">个人中心</a></td>
 							<td align="center" width="10%"><a
 								href="user/goodListShow.do?method=goodListShow&showpage=1" style="color: white">精华帖子</a></td>
+							<td align="center" width="8%"><a
+								href="user/isUserLogin.do?method=isUserLogin" style="color: white">登 录</a></td>
 							<td align="center" width="10%"><a
 								href="user/isAdminLogin.do?method=isAdminLogin" style="color: white">进入后台</a></td>
 							<td align="center" width="8%"><a
