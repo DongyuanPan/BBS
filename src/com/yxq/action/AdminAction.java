@@ -21,6 +21,7 @@ import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
 import com.yxq.actionform.UserForm;
+import com.yxq.actionform.ForbiddenIPForm;
 import com.yxq.dao.OpDB;
 import com.yxq.tools.Change;
 import com.yxq.tools.Encryption;
@@ -649,38 +650,12 @@ public class AdminAction extends DispatchAction {
 		HttpSession session = request.getSession();
 		session.setAttribute("backMainPage", "../user/userIPShow.jsp");
 
-		String getType = request.getParameter("type");
-		if (getType == null || getType.equals("") || !getType.equals("show")) {
-			List<LabelValueBean> ableList = new ArrayList<LabelValueBean>();
-			ableList.add(new LabelValueBean("全部", "all"));
-			ableList.add(new LabelValueBean("管理员", "2"));
-			ableList.add(new LabelValueBean("版主", "1"));
-			ableList.add(new LabelValueBean("普通用户", "0"));
-			session.setAttribute("backListAble", ableList);
-		} else {
-			AbleForm ableform = (AbleForm) form;
-			String able = ableform.getShowAble();
-
-			if (able == null || able.equals("")) {
-				able = (String) session.getAttribute("userAble");
-				ableform.setShowAble(able);
-			} else
-				session.setAttribute("userAble", able);
-
 			String sql = "";
-			Object[] params = null;
-			if (able.equals("all")) {
-				sql = "select * from tb_user order by user_able DESC";
-			} else {
-				sql = "select * from tb_user where user_able=?";
-				params = new Object[1];
-				params[0] = able;
-			}
+			sql = "select * from tb_forbidden_ip";
+			OpDB myOp = new OpDB();			
+			List IPlist = myOp.OpForbiddenIPShow(sql, null);
+			request.setAttribute("backIPList", IPlist);
 
-			OpDB myOp = new OpDB();
-			List userlist = myOp.OpUserListShow(sql, params);
-			request.setAttribute("backUserList", userlist);
-		}
 		return mapping.findForward("success");
 	}
 
@@ -922,6 +897,33 @@ public class AdminAction extends DispatchAction {
 			System.out.println("删除用户成功！");
 			forwardPath = "success";
 			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.user.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 后台-删除IP */
+	public ActionForward deleteIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String IP = request.getParameter("IP");
+		
+		String sql = "delete from tb_forbidden_ip where forbidden_IP=?";
+		Object[] params = { IP };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("删除IP失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.IP.E"));
+		} else {
+			System.out.println("删除IP成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.IP.S"));
 		}
 		saveErrors(request, messages);
 		return mapping.findForward(forwardPath);

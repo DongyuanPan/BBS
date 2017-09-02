@@ -256,7 +256,7 @@
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		
-		<!-- 后台-列表查看用户列表 -->
+		<!-- 后台-列表禁止IP -->
 		<action path="/needLogin/admin/getUserIP" type="com.yxq.action.AdminAction"
 			parameter="method" name="ableForm" scope="request" validate="false">
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
@@ -278,6 +278,15 @@
 				path="/needLogin/admin/getUserList.do?method=getUserList&amp;type=show" />
 			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
+		
+		<!-- 后台-删除IP -->
+		<action path="/needLogin/admin/deleteIP" type="com.yxq.action.AdminAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/admin/getUserIP.do?method=getUserIP&amp;type=show" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-设置用户禁言 -->
 		<action path="/needLogin/admin/forbidUser" type="com.yxq.action.AdminAction"
 			parameter="method">
