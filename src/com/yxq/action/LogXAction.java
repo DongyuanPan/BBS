@@ -178,7 +178,7 @@ public class LogXAction extends DispatchAction {
 	public ActionForward myPersonInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
 		ActionMessages messages=new ActionMessages();
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","../UserCenter/personCenter.jsp");
+		session.setAttribute("perCentermainPage","../UserCenter/personCenter.jsp");
 		
 		Object obj=session.getAttribute("logoner");
 		if(obj!=null&&(obj instanceof UserForm)){
@@ -213,15 +213,7 @@ public class LogXAction extends DispatchAction {
 		if(obj!=null&&(obj instanceof UserForm)){
 			UserForm logoner=(UserForm)obj;
 			String able=logoner.getUserAble();
-
-			if(!able.equals("2")){				
-				messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.N"));
-				saveErrors(request,messages);
-				return mapping.findForward("noAble");				
-			}
-			else{
-				return mapping.findForward("BhaveLogin");
-			}
+			return mapping.findForward("BhaveLogin");
 		}
 		else{
 			messages.add("loginR",new ActionMessage("luntan.bbs.loginBack.E"));
@@ -232,7 +224,7 @@ public class LogXAction extends DispatchAction {
 	
 	public ActionForward modifyUser1(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
     	HttpSession session=request.getSession();
-    	session.setAttribute("mainPage","../UserCenter/userModify.jsp");
+    	session.setAttribute("perCentermainPage","../UserCenter/userModify.jsp");
     	Object obj=session.getAttribute("logoner");
     	String ID=null;
 		if(obj!=null&&(obj instanceof UserForm)){

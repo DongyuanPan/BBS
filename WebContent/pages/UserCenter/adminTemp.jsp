@@ -3,7 +3,7 @@
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-  String backMainPage=(String)session.getAttribute("mainPage");
+  String backMainPage=(String)session.getAttribute("perCentermainPage");
   if(backMainPage==null||backMainPage.equals(""))
 	  backMainPage="default.jsp";
 %>
@@ -15,7 +15,7 @@
 <link style="text/css" rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/bbs.js"></script>
 </head>
-<body bgcolor="#AA8D60">
+<body bgcolor="#242424">
 	<center>
 		<table border="0" width="800" cellspacing="0" cellpadding="0">
 			<tr>
@@ -24,7 +24,7 @@
 						page="left.jsp" /></td>
 				<td align="center"><jsp:include page="top.jsp" /></td>
 			</tr>
-			<tr height="33">
+			<tr height="35">
 				<td width="center" align="center"
 					background="images/admin/message.png"><html:errors
 						property="adminOpR" /></td>

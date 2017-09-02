@@ -54,10 +54,14 @@
 				<td><bean:write name="bbsUserSingle" property="userFrom" /></td>
 			</tr>
 			<tr height="60">
-				<td colspan="2" align="center" style="text-indent: 20"><html:button
+				<td colspan="2" align=center style="text-indent: 20"><html:button
+						property="back" value="Ìí¼ÓºÃÓÑ"
+						onclick="javascript:window.history.go(-1)" />
+				<html:button
 						property="back" value="·µ»Ø"
 						onclick="javascript:window.history.go(-1)" /></td>
 			</tr>
+
 		</table>
 		<br>
 	</center>

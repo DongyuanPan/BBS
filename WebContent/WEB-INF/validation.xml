@@ -106,7 +106,7 @@
 					position="1" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>10</var-value>
+					<var-value>50</var-value>
 				</var>
 			</field>
 			<field property="aginPassword" depends="required,maxlength">
@@ -115,7 +115,7 @@
 					position="1" />
 				<var>
 					<var-name>maxlength</var-name>
-					<var-value>10</var-value>
+					<var-value>50</var-value>
 				</var>
 			</field>
 			<field property="userPhone" depends="required,mask">

@@ -20,6 +20,7 @@ public class UserForm extends ValidatorForm {
 	private String userFrom;
 	private String userAble;
 	private String userForbidden;
+	private String isModifyPass="0";
 
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		String validate=request.getParameter("validate");
@@ -125,5 +126,11 @@ public class UserForm extends ValidatorForm {
 		userFrom = "";
 		userAble = "";
 		userForbidden = "";
+	}
+	public String getIsModifyPass() {
+		return isModifyPass;
+	}
+	public void setIsModifyPass(String isModifyPass) {
+		this.isModifyPass = isModifyPass;
 	}
 }

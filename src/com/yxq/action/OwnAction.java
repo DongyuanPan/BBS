@@ -22,7 +22,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward lookMyBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/bbs/myBbsShow.jsp");
+		session.setAttribute("perCentermainPage","/pages/show/bbs/myBbsShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
@@ -54,7 +54,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward lookMyAnswer(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/bbs/myAnswerShow.jsp");
+		session.setAttribute("perCentermainPage","/pages/show/bbs/myAnswerShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
@@ -86,7 +86,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward showCollect(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/bbs/myCollectShow.jsp");
+		session.setAttribute("perCentermainPage","/pages/show/bbs/myCollectShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
@@ -120,7 +120,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward deleteFriend(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/user/myFriendShow.jsp");
+		session.setAttribute("perCentermainPage","/pages/show/user/myFriendShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
@@ -161,7 +161,7 @@ public class OwnAction extends MySuperAction {
 	public ActionForward lookMyFriend(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){		
 		super.setParams(request);
 		HttpSession session=request.getSession();
-		session.setAttribute("mainPage","/pages/show/user/myFriendShow.jsp");
+		session.setAttribute("perCentermainPage","/pages/show/user/myFriendShow.jsp");
 		UserForm logoner=(UserForm)session.getAttribute("logoner");
 		if(logoner!=null&&(logoner instanceof UserForm)){
 			String bbsown=logoner.getUserName();
