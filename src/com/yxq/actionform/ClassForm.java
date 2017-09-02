@@ -6,7 +6,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
-public class ClassForm extends ValidatorForm{
+public class ClassForm extends ValidatorForm {
 	private String classId;
 	private String className;
 	private String classIntro="ª∂”≠∑√Œ £°";	
