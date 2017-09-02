@@ -23,6 +23,7 @@ import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.UserForm;
+import com.yxq.actionform.VoteForm;
 import com.yxq.dao.OpDB;
 import com.yxq.model.CreatePage;
 import com.yxq.tools.Change;
@@ -115,6 +116,24 @@ public class BbsAction extends MySuperAction {
 		BbsForm bbsRootSingle = myOp.OpBbsSingleShow(sql, params);
 		session.setAttribute("bbsRootSingle", bbsRootSingle);
 
+		/* 对投票贴进行字符串解析 */
+		if (bbsRootSingle.getBbsType().equals("投票贴")) {
+			String bbsContent = bbsRootSingle.getBbsContent();
+			int totalSelNum = Integer.parseInt(bbsContent.substring(0, bbsContent.indexOf("@")));
+			session.setAttribute("totalSelNum", totalSelNum);
+			int totalVoteNum = Integer.parseInt(bbsContent.substring(bbsContent.indexOf("@")+1,bbsContent.indexOf(":")));
+			session.setAttribute("totalVoteNum", totalVoteNum);
+			int beginIndex = bbsContent.indexOf(":") + 1;
+			int endIndex = bbsContent.indexOf(";", beginIndex);
+			String contentShow = "";
+			List<VoteForm> votes = new ArrayList<VoteForm>();
+			for (int i = 0; i < totalSelNum; i++) {
+				votes.add(new VoteForm(bbsContent.substring(beginIndex, endIndex)));
+				beginIndex = endIndex + 1;
+				endIndex = bbsContent.indexOf(";", beginIndex);
+			}
+			session.setAttribute("votes", votes);
+		}
 		/* 查询tb_user数据表，获取该根帖发表者信息 */
 		String asker = bbsRootSingle.getBbsSender();
 		sql = "select * from tb_user where user_name=?";
@@ -207,20 +226,21 @@ public class BbsAction extends MySuperAction {
 
 				String boardId = (String) session.getAttribute("boardId");
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
-				String bbsType=Change.HTMLChange(bbsForm.getBbsType());
+				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
-//				String bbsSendTime = Change.dateTimeChange(new Date());
-				String bbsSendIP=request.getRemoteAddr();
+				// String bbsSendTime = Change.dateTimeChange(new Date());
+				String bbsSendIP = request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
-//				String bbsOpTime = bbsSendTime;
+				// String bbsOpTime = bbsSendTime;
 				String bbsIsTop = "0";
 				String bbsToTopTime = "";
 				String bbsIsGood = "0";
 				String bbsToGoodTime = "";
 
-				String sql="insert into tb_bbs values(null,?,?,?,?,?,now(),?,?,now(),?,null,?,null,null)";
-				Object[] params={boardId,bbsType,bbsTitle,bbsContent,bbsSender,bbsSendIP,bbsFace,bbsIsTop,bbsIsGood};
+				String sql = "insert into tb_bbs values(null,?,?,?,?,?,now(),?,?,now(),?,null,?,null,null)";
+				Object[] params = { boardId, bbsType, bbsTitle, bbsContent, bbsSender, bbsSendIP, bbsFace, bbsIsTop,
+						bbsIsGood };
 
 				OpDB myOp = new OpDB();
 				int i = myOp.OpUpdate(sql, params);
@@ -290,118 +310,118 @@ public class BbsAction extends MySuperAction {
 			}
 			saveErrors(request, messages);
 			return mapping.findForward(forwardPath);
-		}else {
-			System.out.println("您当前已被禁言，无法回复该帖!");			
-			messages.add("userOpR",new ActionMessage("luntan.bbs.answer.forbidden"));
-			saveErrors(request,messages);
+		} else {
+			System.out.println("您当前已被禁言，无法回复该帖!");
+			messages.add("userOpR", new ActionMessage("luntan.bbs.answer.forbidden"));
+			saveErrors(request, messages);
 			return mapping.findForward("error");
 		}
 	}
 
+	/** 收藏帖子 */
+	public ActionForward collectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String forwardPath = "";
 
-    /** 收藏帖子 */
-    public ActionForward collectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
-		String forwardPath="";		
-		
-		HttpSession session=request.getSession();			
-		UserForm logoner=(UserForm)session.getAttribute("logoner");		
-		if(logoner!=null&&(logoner instanceof UserForm)){	
-			
-			String bbsId = request.getParameter("bbsId");					//获取被提前帖子的ID
-			String collector = logoner.getUserName();						//获取当前登录用户的用户名		
-			
-			if(bbsId!=null&&!bbsId.equals("")){
-				String sql="insert into tb_collect value(null,?,?)";
-				Object[] params={collector,bbsId};
-				
-				ActionMessages messages=new ActionMessages();
-				
-				OpDB myOp=new OpDB();
-				int i=myOp.OpUpdate(sql, params);
-				if(i<=0){
+		HttpSession session = request.getSession();
+		UserForm logoner = (UserForm) session.getAttribute("logoner");
+		if (logoner != null && (logoner instanceof UserForm)) {
+
+			String bbsId = request.getParameter("bbsId"); // 获取被提前帖子的ID
+			String collector = logoner.getUserName(); // 获取当前登录用户的用户名
+
+			if (bbsId != null && !bbsId.equals("")) {
+				String sql = "insert into tb_collect value(null,?,?)";
+				Object[] params = { collector, bbsId };
+
+				ActionMessages messages = new ActionMessages();
+
+				OpDB myOp = new OpDB();
+				int i = myOp.OpUpdate(sql, params);
+				if (i <= 0) {
 					System.out.println("收藏失败！");
-					forwardPath="error";
-					messages.add("userOpR",new ActionMessage("luntan.user.add.collect.E"));
-				}
-				else{
+					forwardPath = "error";
+					messages.add("userOpR", new ActionMessage("luntan.user.add.collect.E"));
+				} else {
 					System.out.println("收藏成功！");
-					forwardPath="success";
-					messages.add("userOpR",new ActionMessage("luntan.user.add.collect.S"));
-				}			
-				saveErrors(request,messages);
+					forwardPath = "success";
+					messages.add("userOpR", new ActionMessage("luntan.user.add.collect.S"));
+				}
+				saveErrors(request, messages);
 			}
 			return mapping.findForward(forwardPath);
+		} else {
+			return mapping.findForward("error");
 		}
-		else {
-			return mapping.findForward("error");	
-		}
-	}	
-	
-    /** 取消收藏帖子 */
-    public ActionForward cancelcollectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
-		String forwardPath="";		
-		
-		HttpSession session=request.getSession();			
-		UserForm logoner=(UserForm)session.getAttribute("logoner");		
-		
-		String bbsId = request.getParameter("bbsId");					//获取被提前帖子的ID
-		String collector = logoner.getUserName();						//获取当前登录用户的用户名		
+	}
 
-		
-		
-		if(bbsId!=null&&!bbsId.equals("")){
-			String sql="delete from tb_collect where collect_collector = ? and collect_bbs_id = ?";
-			Object[] params={collector,bbsId};
-			
-			ActionMessages messages=new ActionMessages();
+	/** 取消收藏帖子 */
+	public ActionForward cancelcollectBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		String forwardPath = "";
 
-			OpDB myOp=new OpDB();
-			int i=myOp.OpUpdate(sql, params);
-			if(i<=0){
+		HttpSession session = request.getSession();
+		UserForm logoner = (UserForm) session.getAttribute("logoner");
+
+		String bbsId = request.getParameter("bbsId"); // 获取被提前帖子的ID
+		String collector = logoner.getUserName(); // 获取当前登录用户的用户名
+
+		if (bbsId != null && !bbsId.equals("")) {
+			String sql = "delete from tb_collect where collect_collector = ? and collect_bbs_id = ?";
+			Object[] params = { collector, bbsId };
+
+			ActionMessages messages = new ActionMessages();
+
+			OpDB myOp = new OpDB();
+			int i = myOp.OpUpdate(sql, params);
+			if (i <= 0) {
 				System.out.println("取消收藏失败，您没有收藏该帖！");
-				forwardPath="error";
-				messages.add("userOpR",new ActionMessage("luntan.user.delete.collect.E"));
-			}
-			else{
+				forwardPath = "error";
+				messages.add("userOpR", new ActionMessage("luntan.user.delete.collect.E"));
+			} else {
 				System.out.println("取消收藏成功！");
-				forwardPath="success";
-				messages.add("userOpR",new ActionMessage("luntan.user.delete.collect.S"));
-			}			
-			saveErrors(request,messages);
+				forwardPath = "success";
+				messages.add("userOpR", new ActionMessage("luntan.user.delete.collect.S"));
+			}
+			saveErrors(request, messages);
 		}
 		return mapping.findForward(forwardPath);
 	}
-	
-	/** 将帖子提前
-	 *  @throws UnsupportedEncodingException */
-	public ActionForward toFirstBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-		HttpSession session=request.getSession();			
-		UserForm logoner=(UserForm)session.getAttribute("logoner");		
-		
-		String bbsId=request.getParameter("bbsId");						//获取被提前帖子的ID
-		String bbsSender=request.getParameter("bbsSender");				//获取被提前帖子的发布者
-		//bbsSender=new String(bbsSender.getBytes("ISO-8859-1"),"gbk");	
-		String time=Change.dateTimeChange(new Date());					//获取操作时间
-		String lognerAble=logoner.getUserAble();						//获取当前登录用户的权限
-		String lognerName=logoner.getUserName();						//获取当前登录用户的用户名
-		String master=(String)session.getAttribute("boardMaster");		//获取当前版面的斑竹		
-		
-		if(bbsId==null)
-			bbsId="-1";
-		if(bbsSender==null)
-			bbsSender="";	
-		
-		String forwardPath="";
-		ActionMessages messages=new ActionMessages();
-		
-		/* 如果当前登录的用户是帖子的发表者、帖子所属版面的斑竹、管理员 */		
-		if(lognerAble.equals("2")||lognerName.equals(master)||lognerName.equals(bbsSender)){
-			if(bbsId!=null&&!bbsId.equals("")){
-				Object[] params={time,bbsId};
-				String sql="update tb_bbs set bbs_opTime=? where bbs_id=?";
-				OpDB myOp=new OpDB();
-				int i=myOp.OpUpdate(sql,params);
-				if(i<=0){
+
+	/**
+	 * 将帖子提前
+	 * 
+	 * @throws UnsupportedEncodingException
+	 */
+	public ActionForward toFirstBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws UnsupportedEncodingException {
+		HttpSession session = request.getSession();
+		UserForm logoner = (UserForm) session.getAttribute("logoner");
+
+		String bbsId = request.getParameter("bbsId"); // 获取被提前帖子的ID
+		String bbsSender = request.getParameter("bbsSender"); // 获取被提前帖子的发布者
+		// bbsSender=new String(bbsSender.getBytes("ISO-8859-1"),"gbk");
+		String time = Change.dateTimeChange(new Date()); // 获取操作时间
+		String lognerAble = logoner.getUserAble(); // 获取当前登录用户的权限
+		String lognerName = logoner.getUserName(); // 获取当前登录用户的用户名
+		String master = (String) session.getAttribute("boardMaster"); // 获取当前版面的斑竹
+
+		if (bbsId == null)
+			bbsId = "-1";
+		if (bbsSender == null)
+			bbsSender = "";
+
+		String forwardPath = "";
+		ActionMessages messages = new ActionMessages();
+
+		/* 如果当前登录的用户是帖子的发表者、帖子所属版面的斑竹、管理员 */
+		if (lognerAble.equals("2") || lognerName.equals(master) || lognerName.equals(bbsSender)) {
+			if (bbsId != null && !bbsId.equals("")) {
+				Object[] params = { time, bbsId };
+				String sql = "update tb_bbs set bbs_opTime=? where bbs_id=?";
+				OpDB myOp = new OpDB();
+				int i = myOp.OpUpdate(sql, params);
+				if (i <= 0) {
 					System.out.println("提前帖子失败");
 					forwardPath = "error";
 					messages.add("userOpR", new ActionMessage("luntan.bbs.first.E"));
