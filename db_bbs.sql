@@ -10,6 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
+
 Date: 2017-09-02 14:58:30
 */
 
@@ -59,6 +60,7 @@ CREATE TABLE `tb_bbs` (
   `bbs_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`bbs_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Records of tb_bbs

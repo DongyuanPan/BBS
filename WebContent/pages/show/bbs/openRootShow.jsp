@@ -1,3 +1,4 @@
+<%@page import="com.yxq.actionform.VoteForm"%>
 <%@ page contentType="text/html; charset=gb2312"%>
 <%@ page import="java.util.*,com.yxq.actionform.UserForm"%>
 <%@ taglib uri="struts-html" prefix="html"%>
@@ -25,12 +26,13 @@
 				<td style="text-indent: 5" width="27%">★ 楼主</td>
 				<td colspan="2">【主题】<bean:write name="bbsRootSingle"
 						property="bbsTitle" filter="false" />
-						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						【类型】<bean:write name="bbsRootSingle" property="bbsType" /></td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 【类型】<bean:write
+						name="bbsRootSingle" property="bbsType" /></td>
 			</tr>
 			<tr bgcolor="#F9F9F9">
 				<!-- 发帖者信息 -->
-				<td rowspan="3" align="center" valign="top">
+				<td rowspan="4" align="center" valign="top">
 					<table width="95%" height="180" border="0" cellspacing="0"
 						cellpadding="0" style="margin-top: 3">
 						<tr height="35%">
@@ -75,31 +77,54 @@
 						name="bbsRootSingle" property="bbsSendTime" />』&nbsp;
 				</td>
 			</tr>
-			<tr height="130">
-				<td colspan="2" valign="top"
-					style="padding-top: 6; padding-left: 6; padding-right: 6; padding-bottom: 6"><bean:write
-						name="bbsRootSingle" property="bbsContent" scope="session"
-						filter="false" /></td>
-			</tr>
+			<logic:equal name="bbsRootSingle" property="bbsType" value="普通主题">
+				<tr height="130">
+					<td colspan="2" valign="top"
+						style="padding-top: 6; padding-left: 6; padding-right: 6; padding-bottom: 6"><bean:write
+							name="bbsRootSingle" property="bbsContent" scope="session"
+							filter="false" /></td>
+				</tr>
+			</logic:equal>
+			<logic:equal name="bbsRootSingle" property="bbsType" value="投票贴">
+				<tr height="130">
+					<td colspan="2" valign="top"
+						style="padding-top: 6; padding-left: 6; padding-right: 6; padding-bottom: 6">
+						<form action="pages/vote.jsp" method="post">
+							<table width="100%" border="0" rules="rows">
+								<tr>
+									<logic:iterate id="voteSel" name="votes" indexId="index">
+										<tr height="15" width="80%">
+											<td width="5%"><input type="radio" name="sel"
+												value="${index}"></td>
+											<td width="20%" style="text-indent: 5">${voteSel.content}</td>
+											<td width="60%"><img src="images/index/bar.png"
+												width="${voteSel.voteNum/totalVoteNum*300.0 }" height="10"></td>
+											<td width="18%">${voteSel.voteNum}(${voteSel.voteNum/totalVoteNum*100.00}%)</td>
+										</tr>
+									</logic:iterate>
+								</tr>
+							</table>
+							<tr colspan="2">
+								<td align="right" colspan="2"><input name="vote"
+									type="image" src="images/index/vote.gif" /></td>
+							</tr>
+						</form>
+					</td>
+				</tr>
+			</logic:equal>
 
 			<!-- 实现对根帖进行操作的超链接 -->
 			<tr height="30" bgcolor="#F9F9F9">
 				<td align="right" colspan="2">◆<html:link
-						href="view/indexTemp.jsp" anchor="answer">回复该帖&nbsp;</html:link>
+						href="view/indexTemp.jsp" anchor="answer">回复该帖&nbsp;</html:link> <!-- 显示“收藏该帖”超链接 -->
+					◆<a
+					href="needLogin/collectBbs.do?method=collectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}">收藏该帖</a>&nbsp;
 
-			<!-- 显示“收藏该帖”超链接 -->			
-		 ◆<a
-								href="needLogin/collectBbs.do?method=collectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
-								>收藏该帖</a>&nbsp;
+					<!-- 显示“取消收藏”超链接 --> ◆<a
+					href="needLogin/cancelcollectBbs.do?method=cancelcollectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}">取消收藏</a>&nbsp;
 
-			<!-- 显示“取消收藏”超链接 -->			
-		 ◆<a
-								href="needLogin/cancelcollectBbs.do?method=cancelcollectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
-								>取消收藏</a>&nbsp;
-								
-						<!-- 如果该贴不是精华帖子，并且不是置顶帖子(实际上就是普通帖子) -->
-					<logic:notEqual value="1" name="bbsRootSingle" property="bbsIsGood"
-						scope="session">
+					<!-- 如果该贴不是精华帖子，并且不是置顶帖子(实际上就是普通帖子) --> <logic:notEqual value="1"
+						name="bbsRootSingle" property="bbsIsGood" scope="session">
 						<logic:notEqual value="1" name="bbsRootSingle" property="bbsIsTop">
 							<!-- 显示“将帖子提前”超链接 -->
                           ◆<a
@@ -112,15 +137,13 @@
                       ◆<a
 							href="needLogin/admin/doTopGood.do?method=setTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
 							title="管理员操作">置顶帖子</a>&nbsp;
-                  </logic:notEqual>
-                  
-                   <!-- 如果该帖是置顶帖子 -->
-                  <logic:notEqual value="0" name="bbsRootSingle" property="bbsIsTop">
-					  <!-- 显示“取消置顶”超链接 -->
-                      ◆<a href="needLogin/admin/doTopGood.do?method=cancleTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}" title="管理员操作">取消置顶</a>&nbsp;
-                  </logic:notEqual>
-                  
-                   <!-- 如果该帖不是精华帖子 --> <logic:notEqual value="1"
+                  </logic:notEqual> <!-- 如果该帖是置顶帖子 --> <logic:notEqual value="0"
+						name="bbsRootSingle" property="bbsIsTop">
+						<!-- 显示“取消置顶”超链接 -->
+                      ◆<a
+							href="needLogin/admin/doTopGood.do?method=cancleTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
+							title="管理员操作">取消置顶</a>&nbsp;
+                  </logic:notEqual> <!-- 如果该帖不是精华帖子 --> <logic:notEqual value="1"
 						name="bbsRootSingle" property="bbsIsGood">
 						<!-- 显示“设为精华帖”超链接 -->
                       ◆<a

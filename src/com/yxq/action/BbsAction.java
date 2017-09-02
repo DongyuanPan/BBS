@@ -23,6 +23,7 @@ import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.UserForm;
+import com.yxq.actionform.VoteForm;
 import com.yxq.dao.OpDB;
 import com.yxq.model.CreatePage;
 import com.yxq.tools.Change;
@@ -115,6 +116,25 @@ public class BbsAction extends MySuperAction {
 		BbsForm bbsRootSingle = myOp.OpBbsSingleShow(sql, params);
 		session.setAttribute("bbsRootSingle", bbsRootSingle);
 
+		/* 对投票贴进行字符串解析 */
+		if (bbsRootSingle.getBbsType().equals("投票贴")) {
+			String bbsContent = bbsRootSingle.getBbsContent();
+			int totalSelNum = Integer.parseInt(bbsContent.substring(0, bbsContent.indexOf("@")));
+			session.setAttribute("totalSelNum", totalSelNum);
+			int totalVoteNum = Integer
+					.parseInt(bbsContent.substring(bbsContent.indexOf("@") + 1, bbsContent.indexOf(":")));
+			session.setAttribute("totalVoteNum", totalVoteNum);
+			int beginIndex = bbsContent.indexOf(":") + 1;
+			int endIndex = bbsContent.indexOf(";", beginIndex);
+			String contentShow = "";
+			List<VoteForm> votes = new ArrayList<VoteForm>();
+			for (int i = 0; i < totalSelNum; i++) {
+				votes.add(new VoteForm(bbsContent.substring(beginIndex, endIndex)));
+				beginIndex = endIndex + 1;
+				endIndex = bbsContent.indexOf(";", beginIndex);
+			}
+			session.setAttribute("votes", votes);
+		}
 		/* 查询tb_user数据表，获取该根帖发表者信息 */
 		String asker = bbsRootSingle.getBbsSender();
 		sql = "select * from tb_user where user_name=?";
@@ -146,7 +166,7 @@ public class BbsAction extends MySuperAction {
 		/* 查询tb_user数据表，获取当前回复帖发表者信息 */
 		sql = "select * from tb_user where user_name=?";
 		Map answerMap = new HashMap();
-		for (int i = 0; i < answerbbslist.size(); i++) {
+		for (int i = 0; i < answerbbslist.size(); ++i) {
 			String answerer = ((BbsAnswerForm) answerbbslist.get(i)).getBbsAnswerSender();
 			if (!answerMap.containsKey(answerer)) {
 				params[0] = answerer;
@@ -198,8 +218,8 @@ public class BbsAction extends MySuperAction {
 		String logonerForbidden = logoner.getUserForbidden();
 		String validate = request.getParameter("validate");
 		ActionMessages messages = new ActionMessages();
-		int i,j = 1;
-		
+		int i, j = 1;
+
 		if (logonerForbidden.equals("0")) {
 			if (validate == null || validate.equals("") || !validate.equals("yes")) {
 				return mapping.findForward("showAddJSP");
@@ -227,7 +247,7 @@ public class BbsAction extends MySuperAction {
 				/* 附件相关信息 */
 				String fileName = (String) session.getAttribute("fileName");
 				if (fileName != null) {
-					
+
 					int fileSize = (Integer) session.getAttribute("fileSize");
 					int downloadCount = 0;
 					String filePath = (String) session.getAttribute("filePath");
