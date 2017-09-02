@@ -49,9 +49,9 @@ public class BbsAction extends MySuperAction {
 
 		/* 生成“跳转版面”下拉列表中的选项，这些选项应为当前论坛类别中的版面 */
 		Vector<LabelValueBean> jumpBoard = new Vector<LabelValueBean>();
-		List boardlist = (ArrayList) session.getAttribute("class" + classId);
+		List<BoardForm> boardlist = (ArrayList) session.getAttribute("class" + classId);
 		if (boardlist != null && boardlist.size() != 0) {
-			for (int i = 0; i < boardlist.size(); i++) {
+			for (int i = 0; i < boardlist.size(); ++i) {
 				BoardForm boardSingle = (BoardForm) boardlist.get(i);
 				jumpBoard.add(new LabelValueBean(boardSingle.getBoardName(), boardSingle.getBoardId()));
 				if (boardId.equals(boardSingle.getBoardId())) { // 如果是当前版面
@@ -84,7 +84,7 @@ public class BbsAction extends MySuperAction {
 		myOp.setMark(true); // 进行分页显示
 		myOp.setPageInfo(perR, currentP, gowhich); // 设置进行分页显示需要的信息
 
-		sql = "select * from tb_bbs where bbs_boardID=? and (bbs_isTop='0' or bbs_isGood='1') order by bbs_opTime DESC";
+		sql = "select * from tb_bbs where bbs_boardID=? and bbs_isTop='0' order by bbs_opTime DESC";
 		List otherbbslist = myOp.OpBbsListShow(sql, params);
 		CreatePage page = myOp.getPage();
 
@@ -189,7 +189,6 @@ public class BbsAction extends MySuperAction {
 	}
 
 	/** 发表帖子 */
-
 	public ActionForward addBbs(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -210,10 +209,8 @@ public class BbsAction extends MySuperAction {
 				String bbsType=Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
-//				String bbsSendTime = Change.dateTimeChange(new Date());
 				String bbsSendIP=request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
-//				String bbsOpTime = bbsSendTime;
 				String bbsIsTop = "0";
 				String bbsToTopTime = "";
 				String bbsIsGood = "0";
