@@ -226,7 +226,7 @@ public class OpDB {
 					bbsform.setBbsLastUpdateUser(lastUpdateUser);
 					bbsform.setBbsLastUpdateTime(lastUpdateTime);
 					listshow.add(bbsform);
-					i++;
+					++i;
 				}
 			} catch (SQLException e) {
 				System.out.println("OpBbsListShow()·½·¨³ö´í£¡");
@@ -307,7 +307,7 @@ public class OpDB {
 		ResultSet rs= getRs(sql, params);
 		int i = 1;
 		try {
-			while(rs.next()&&(!mark||i<=perR)){	
+			while(rs.next() && (!mark || i <= perR)){	
 					BbsForm bbsform=new BbsForm();
 					bbsform.setBbsId(String.valueOf(rs.getInt(1)));
 					bbsform.setBbsBoardID(String.valueOf(rs.getInt(2)));
@@ -359,7 +359,6 @@ public class OpDB {
 				e.printStackTrace();
 			}
 		}
-
 		return listshow;
 	}
 
@@ -447,7 +446,6 @@ public class OpDB {
 		DB mydb = new DB();
 		mydb.doPstm(sql, params);
 		ResultSet rs = mydb.getRs();
-		int i = 0;
 		try {
 			if (rs != null) {
 				while (rs.next()) {
@@ -461,7 +459,6 @@ public class OpDB {
 					accessoryform.setAccessorySize(rs.getString(7));
 					accessoryform.setAccessoryDownloadCount(String.valueOf(rs.getInt(8)));
 					accessorylist.add(accessoryform);
-					++i;
 				}
 				rs.close();
 			}
@@ -574,7 +571,6 @@ public class OpDB {
 		ResultSet rs = getRs(sql, params);
 		int i = 1;
 		if (rs != null) {
-			
 			try {
 				while (rs.next() && (!mark || i <= perR)) {
 					FriendForm form = new FriendForm();
@@ -589,8 +585,7 @@ public class OpDB {
 			}
 		}
 
-		return list;
-		
+		return list;	
 	}
 
 	public int OpUpdate(String sql, Object[] params) {

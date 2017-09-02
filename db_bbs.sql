@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-09-01 15:41:57
+Date: 2017-09-02 09:56:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,7 +58,7 @@ CREATE TABLE `tb_bbs` (
   `bbs_toGoodTime` datetime DEFAULT NULL,
   `bbs_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`bbs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bbs
@@ -68,6 +68,7 @@ INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '�
 INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'fdsfdsfd', 'fdsfdsfdsfdfdfdfdfd', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
 INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('20', '1', '投票贴', '你喜欢谁？', '4:妈妈,2;,爸爸,3;姐姐,2;弟弟,1;', 'tsoft', '2017-09-02 09:50:22', '127.1.0.1', 'face3.gif', '2017-09-02 09:50:22', '0', null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for `tb_bbsanswer`

@@ -64,18 +64,17 @@ public class LogXAction extends DispatchAction {
 	
 	/** µÇÂ¼ */
 	public ActionForward login(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response){
-		HttpSession session=request.getSession();
-		UserForm logoner=(UserForm)form;
-		String userName=Change.HTMLChange(logoner.getUserName());
-		String userPassword=Change.HTMLChange(logoner.getUserPassword());
-		new Encryption();
+		HttpSession session = request.getSession();
+		UserForm logoner = (UserForm)form;
+		String userName = Change.HTMLChange(logoner.getUserName());
+		String userPassword = Change.HTMLChange(logoner.getUserPassword());
 		userPassword = Encryption.getHash(userPassword, "MD5");
-		System.out.println(userPassword);
+		//System.out.println(userPassword);
 		
-		String sql="select * from tb_user where user_name=? and user_password=?";
-		Object[] params={userName,userPassword};
+		String sql = "select * from tb_user where user_name=? and user_password=?";
+		Object[] params = {userName, userPassword};
 		
-		ActionMessages messages=new ActionMessages();
+		ActionMessages messages = new ActionMessages();
 		OpDB myOp = new OpDB();
 		logoner = myOp.OpUserSingleShow(sql, params);
 		if(logoner!=null){			
