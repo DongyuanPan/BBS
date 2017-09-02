@@ -255,6 +255,12 @@
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		
+		<!-- 后台-列表查看用户列表 -->
+		<action path="/needLogin/admin/getUserIP" type="com.yxq.action.AdminAction"
+			parameter="method" name="ableForm" scope="request" validate="false">
+			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-管理员修改用户 -->
 		<action path="/needLogin/admin/modifyUser" type="com.yxq.action.AdminAction"
 			parameter="method" name="userForm" scope="request" validate="true"

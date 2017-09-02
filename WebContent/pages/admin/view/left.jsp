@@ -80,6 +80,12 @@
 								background="images/admin/subMenu.png"><a
 								href="needLogin/admin/getUserList.do?method=getUserList">查看/修改/删除用户</a></td>
 						</tr>
+						
+						<tr height="34">
+							<td style="text-indent: 40" colspan="2"
+								background="images/admin/subMenu.png"><a
+								href="needLogin/admin/getUserIP.do?method=getUserIP">查看/修改/删除IP</a></td>
+						</tr>
 					</table>
 				</td>
 			</tr>

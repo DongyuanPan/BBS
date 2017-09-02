@@ -643,6 +643,46 @@ public class AdminAction extends DispatchAction {
 		}
 		return mapping.findForward("success");
 	}
+	
+	public ActionForward getUserIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+		HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.setAttribute("backMainPage", "../user/userIPShow.jsp");
+
+		String getType = request.getParameter("type");
+		if (getType == null || getType.equals("") || !getType.equals("show")) {
+			List<LabelValueBean> ableList = new ArrayList<LabelValueBean>();
+			ableList.add(new LabelValueBean("全部", "all"));
+			ableList.add(new LabelValueBean("管理员", "2"));
+			ableList.add(new LabelValueBean("版主", "1"));
+			ableList.add(new LabelValueBean("普通用户", "0"));
+			session.setAttribute("backListAble", ableList);
+		} else {
+			AbleForm ableform = (AbleForm) form;
+			String able = ableform.getShowAble();
+
+			if (able == null || able.equals("")) {
+				able = (String) session.getAttribute("userAble");
+				ableform.setShowAble(able);
+			} else
+				session.setAttribute("userAble", able);
+
+			String sql = "";
+			Object[] params = null;
+			if (able.equals("all")) {
+				sql = "select * from tb_user order by user_able DESC";
+			} else {
+				sql = "select * from tb_user where user_able=?";
+				params = new Object[1];
+				params[0] = able;
+			}
+
+			OpDB myOp = new OpDB();
+			List userlist = myOp.OpUserListShow(sql, params);
+			request.setAttribute("backUserList", userlist);
+		}
+		return mapping.findForward("success");
+	}
 
 	/** 后台-修改用户 */
 	public ActionForward modifyUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
