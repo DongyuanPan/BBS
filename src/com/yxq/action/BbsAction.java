@@ -146,7 +146,7 @@ public class BbsAction extends MySuperAction {
 		/* 查询tb_user数据表，获取当前回复帖发表者信息 */
 		sql = "select * from tb_user where user_name=?";
 		Map answerMap = new HashMap();
-		for (int i = 0; i < answerbbslist.size(); i++) {
+		for (int i = 0; i < answerbbslist.size(); ++i) {
 			String answerer = ((BbsAnswerForm) answerbbslist.get(i)).getBbsAnswerSender();
 			if (!answerMap.containsKey(answerer)) {
 				params[0] = answerer;
