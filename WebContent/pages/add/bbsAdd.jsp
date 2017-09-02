@@ -85,6 +85,15 @@
 					</td>
 				</tr>
 			</html:form>
+					<tr height="30">
+						<td align="center">【附件】</td>
+						<td	align="center">上传文件: 
+							<html:form action="/needLogin/addAccessory.do" enctype="multipart/form-data" method="post">
+								<html:file property="file" />  
+								<html:submit value="上传"/>   
+							</html:form>								
+						</td>
+					</tr>
 		</table>
 	</center>
 </body>

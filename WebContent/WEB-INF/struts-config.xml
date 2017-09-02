@@ -12,6 +12,8 @@
 		<form-bean name="bbsForm" type="com.yxq.actionform.BbsForm" />
 		<form-bean name="bbsAnswerForm" type="com.yxq.actionform.BbsAnswerForm" />
 		<form-bean name="userForm" type="com.yxq.actionform.UserForm" />
+		<form-bean name="ForbiddenIPForm" type="com.yxq.actionform.ForbiddenIPForm" />
+		<form-bean name="FileUploadForm" type="com.yxq.actionform.FileUploadForm" />
 	</form-beans>
 	<action-mappings>
 		<!-- 进入首页 -->
@@ -256,10 +258,19 @@
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		
+		<!-- 后台-管理员添加禁止的IP -->
+		<action path="/needLogin/admin/addForbidIP" type="com.yxq.action.AdminAction"
+			name="ForbiddenIPForm" scope="request" parameter="method" validate="true"
+			input="/pages/admin/view/adminTemp.jsp">
+			<forward name="success" path="/needLogin/admin/getUserIP.do?method=getUserIP" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
+		</action>
+		
 		<!-- 后台-列表禁止IP -->
 		<action path="/needLogin/admin/getUserIP" type="com.yxq.action.AdminAction"
 			parameter="method" name="ableForm" scope="request" validate="false">
 			<forward name="success" path="/pages/admin/view/adminTemp.jsp" />
+			<forward name="error" path="/pages/admin/view/adminTemp.jsp" />
 		</action>
 		
 		<!-- 后台-管理员修改用户 -->
@@ -310,6 +321,11 @@
 			<forward name="showAddJSP" path="/view/indexTemp.jsp" />
 			<forward name="success" path="/user/listShow.do?method=rootListShow" />
 			<forward name="error" path="/view/indexTemp.jsp" />
+		</action>
+		<!-- 上传附件 -->
+		<action path="/needLogin/addAccessory" type="com.yxq.action.FileUploadAction"
+		parameter="method" name="FileUploadForm" scope="request" validate="true">		
+		    <forward name="success" path="/needLogin/addBbs.do?method=addBbs" />
 		</action>
 		<!-- 回复帖子 -->
 		<action path="/needLogin/answerBbs" type="com.yxq.action.BbsAction"
