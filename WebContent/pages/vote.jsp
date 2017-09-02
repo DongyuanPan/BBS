@@ -26,7 +26,7 @@
 	while (itor.hasNext()) {
 		VoteForm tempform = itor.next();
 		bbsContent += tempform.getContent();
-		bbsContent += ",";
+		bbsContent += "$";
 		bbsContent += tempform.getVoteNum();
 		bbsContent += ";";
 	}
