@@ -35,7 +35,7 @@ public class DB {
 				if(params == null){
 					params = new Object[0];
 				}
-				for(int i = 0;i < params.length; ++i){
+				for(int i = 0; i < params.length; ++i){
 					pstm.setObject(i+1,params[i]);
 				}
 				pstm.execute();

@@ -23,6 +23,21 @@ public class OpDB {
 	private String currentP = "1";
 	private String gowhich = "";
 	private CreatePage page = null;
+	
+	
+	public int getMaxBbsId () {
+		String sql = "select max(bbs_id) from tb_bbs";
+		DB mydb = new DB();
+		mydb.doPstm(sql, null);
+		ResultSet rs = mydb.getRs();
+		try {
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	}
 
 	public List<ClassForm> OpClassListShow() {
 		List<ClassForm> listshow = null;
@@ -534,6 +549,21 @@ public class OpDB {
 			mydb.closed();
 		}
 		return userform;
+	}
+	
+	public Boolean OpLoginCheck(String sql, Object[] params) {
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		Boolean result = false;
+		try {
+			result = (rs.getRow() == 0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mydb.closed();
+		return result;
 	}
 
 	public UserForm OpUserSingleShow(String sql, Object[] params) {
