@@ -10,9 +10,15 @@
 <body>
 	<center>
 		<br>
-		<html:form action="needLogin/admin/getUserIP.do">
-			<input type="hidden" name="method" value="getIPList">
-			<input type="hidden" name="type" value="show">
+		<html:form action="needLogin/admin/addForbidIP.do">
+			<input type="hidden" name="method" value="addForbidIP">
+			<input type="hidden" name="IP" value="show">
+			<table border="0" width="580" cellspacing="0" cellpadding="0">
+				<td align='right'>
+				<html:text property="forbiddenIP" size="40" />
+				 <html:submit  value="Ìí¼Ó½ûÖ¹IP" />
+				</td>
+			</table>
 		</html:form>
 
 		<table border="1" width="580" cellspacing="0" cellpadding="0"
