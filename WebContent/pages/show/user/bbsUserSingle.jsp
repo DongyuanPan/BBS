@@ -54,10 +54,12 @@
 				<td><bean:write name="bbsUserSingle" property="userFrom" /></td>
 			</tr>
 			<tr height="60">
-				<td colspan="2" align="center" style="text-indent: 20"><html:button
-						property="back" value="返回"
-						onclick="javascript:window.history.go(-1)" /></td>
+				<td colspan="2" align=center style="text-indent: 20">
+					<a href="bbs/user/addFriend.do?method=addFriend&friendName=${bbsUserSingle.userName}">[添加好友]</a>
+					<a href="javascript:window.history.go(-1)">[返回]</a>
+				</td>
 			</tr>
+
 		</table>
 		<br>
 	</center>

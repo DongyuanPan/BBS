@@ -23,6 +23,7 @@ import com.yxq.actionform.ClassForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.dao.OpDB;
 import com.yxq.tools.Change;
+import com.yxq.tools.Encryption;
 
 public class AdminAction extends DispatchAction {
 
@@ -684,8 +685,17 @@ public class AdminAction extends DispatchAction {
 			ActionMessages messages = new ActionMessages();
 
 			userId = userForm.getId();
+			String isModifyPassword=userForm.getIsModifyPass();
 			String userName = Change.HTMLChange(userForm.getUserName());
-			String userPassword = Change.HTMLChange(userForm.getUserPassword());
+			String userPassword="";
+			if (isModifyPassword.equals("1")) {
+				userPassword = Change.HTMLChange(userForm.getUserPassword());
+				userPassword = Encryption.getHash(userPassword,"MD5");
+			}else {
+				userPassword = userForm.getUserPassword();
+			}
+			    
+			
 			String userFace = userForm.getUserFace();
 			String userSex = userForm.getUserSex();
 			String userPhone = userForm.getUserPhone();
@@ -715,6 +725,7 @@ public class AdminAction extends DispatchAction {
 		return mapping.findForward(forwardPath);
 	}
 
+	//修改自己用户信息
 	public ActionForward modifyUser1(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();

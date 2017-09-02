@@ -65,7 +65,7 @@
 			input="/pages/UserCenter/adminTemp.jsp">
 			<forward name="showModifyJSP" path="/pages/UserCenter/adminTemp.jsp" />
 			<forward name="success"
-				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo;type=show" />
+				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo" />
 			<forward name="error" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
 		
@@ -136,14 +136,23 @@
 			parameter="method" validate="false">
 			<forward name="success" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
+		
+		<!-- 添加好友 -->
+		<action path="/bbs/user/addFriend" type="com.yxq.action.OwnAction"
+			parameter="method">
+			<forward name="success"
+				path="/needLogin/my/myFriend.do?method=lookMyFriend&amp;type=show" />
+			<forward name="errr" path="/pages/message.jsp" />
+		</action>
+		
 		<!-- 删除好友 -->
 		<action path="/bbs/user/deleteFriend" type="com.yxq.action.OwnAction"
 			parameter="method">
 			<forward name="success"
 				path="/needLogin/my/myFriend.do?method=lookMyFriend&amp;type=show" />
-
 			<forward name="errr" path="/pages/message.jsp" />
 		</action>
+		
 		<!-- *************以下配置管理员的操作************* -->
 		<!-- 前台-管理员置顶帖子、设为精华帖 、取消置顶-->
 		<action path="/needLogin/admin/doTopGood" type="com.yxq.action.AdminAction"

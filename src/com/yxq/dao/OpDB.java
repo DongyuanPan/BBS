@@ -11,6 +11,7 @@ import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
+import com.yxq.actionform.ForbiddenIPForm;
 import com.yxq.actionform.FriendForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.model.CreatePage;
@@ -226,7 +227,7 @@ public class OpDB {
 					bbsform.setBbsLastUpdateUser(lastUpdateUser);
 					bbsform.setBbsLastUpdateTime(lastUpdateTime);
 					listshow.add(bbsform);
-					i++;
+					++i;
 				}
 			} catch (SQLException e) {
 				System.out.println("OpBbsListShow()方法出错！");
@@ -307,7 +308,7 @@ public class OpDB {
 		ResultSet rs= getRs(sql, params);
 		int i = 1;
 		try {
-			while(rs.next()&&(!mark||i<=perR)){	
+			while(rs.next() && (!mark || i <= perR)){	
 					BbsForm bbsform=new BbsForm();
 					bbsform.setBbsId(String.valueOf(rs.getInt(1)));
 					bbsform.setBbsBoardID(String.valueOf(rs.getInt(2)));
@@ -359,7 +360,6 @@ public class OpDB {
 				e.printStackTrace();
 			}
 		}
-
 		return listshow;
 	}
 
@@ -447,7 +447,6 @@ public class OpDB {
 		DB mydb = new DB();
 		mydb.doPstm(sql, params);
 		ResultSet rs = mydb.getRs();
-		int i = 0;
 		try {
 			if (rs != null) {
 				while (rs.next()) {
@@ -461,7 +460,6 @@ public class OpDB {
 					accessoryform.setAccessorySize(rs.getString(7));
 					accessoryform.setAccessoryDownloadCount(String.valueOf(rs.getInt(8)));
 					accessorylist.add(accessoryform);
-					++i;
 				}
 				rs.close();
 			}
@@ -574,7 +572,6 @@ public class OpDB {
 		ResultSet rs = getRs(sql, params);
 		int i = 1;
 		if (rs != null) {
-			
 			try {
 				while (rs.next() && (!mark || i <= perR)) {
 					FriendForm form = new FriendForm();
@@ -589,8 +586,30 @@ public class OpDB {
 			}
 		}
 
-		return list;
-		
+		return list;	
+	}
+	
+	// String sql = "select * from tb_forbidden_IP";
+	public List<ForbiddenIPForm> OpForbiddenIPShow(String sql, Object[] params) {
+		List<ForbiddenIPForm> list = new ArrayList<ForbiddenIPForm>();
+		ResultSet rs = getRs(sql, params);
+		int i = 1;
+		if (rs != null) {
+			try {
+				while (rs.next() && (!mark || i <= perR)) {
+					ForbiddenIPForm form = new ForbiddenIPForm();
+					form.setForbiddenIP(rs.getString(1));
+					list.add(form);
+					++i;
+				}
+			} catch (SQLException e) {
+				System.out.println("OpForbiddenIPShow()方法出错！");
+				System.out.println("标记：" + mark);
+				e.printStackTrace();
+			}
+		}
+
+		return list;	
 	}
 
 	public int OpUpdate(String sql, Object[] params) {
