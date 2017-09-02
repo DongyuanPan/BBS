@@ -535,6 +535,21 @@ public class OpDB {
 		}
 		return userform;
 	}
+	
+	public Boolean OpLoginCheck(String sql, Object[] params) {
+		DB mydb = new DB();
+		mydb.doPstm(sql, params);
+		ResultSet rs = mydb.getRs();
+		Boolean result = false;
+		try {
+			result = (rs.getRow() == 0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mydb.closed();
+		return result;
+	}
 
 	public UserForm OpUserSingleShow(String sql, Object[] params) {
 		DB mydb = new DB();

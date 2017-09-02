@@ -69,17 +69,29 @@ public class LogXAction extends DispatchAction {
 		String userName = Change.HTMLChange(logoner.getUserName());
 		String userPassword = Change.HTMLChange(logoner.getUserPassword());
 		userPassword = Encryption.getHash(userPassword, "MD5");
-		//System.out.println(userPassword);
+		String loginIP = request.getRemoteAddr();
+		//System.out.println(loginIP);
+		
+		OpDB myOp = new OpDB();
+		ActionMessages messages = new ActionMessages();
+		
+		String sql2 = "select * from tb_forbidden_ip where forbidden_IP = ?";
+		Object[] params2 = {loginIP};
+		Boolean loginCheck = myOp.OpLoginCheck(sql2, params2);
+		if (!loginCheck) {
+			messages.add("loginR",new ActionMessage("luntan.bbs.login.IPForbidden"));
+			saveErrors(request,messages);
+			return mapping.findForward("IPforbidden");
+		}
+		
 		
 		String sql = "select * from tb_user where user_name=? and user_password=?";
 		Object[] params = {userName, userPassword};
 		
-		ActionMessages messages = new ActionMessages();
-		OpDB myOp = new OpDB();
 		logoner = myOp.OpUserSingleShow(sql, params);
 		if(logoner!=null){			
 			session.setAttribute("logoner",logoner);
-			return (mapping.findForward("success"));
+			return mapping.findForward("success");
 		}
 		else{			
 			messages.add("loginR",new ActionMessage("luntan.bbs.login.E"));
