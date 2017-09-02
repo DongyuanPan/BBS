@@ -58,11 +58,14 @@
 							<td style="text-indent: 10"><bean:write name="askUser"
 									property="subUserFrom[10]" filter="false" /></td>
 						</tr>
+
 						<!-- “返回”超链接 -->
-						<tr height="30">
+						<tr height="30">						
 							<td colspan="2" style="text-indent: 70"><a
 								href="${sessionScope.servletPath}?method=${sessionScope.method}">[返回]</a></td>
 						</tr>
+						
+						
 					</table>
 				</td>
 				<!-- 根帖信息 -->
