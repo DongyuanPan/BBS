@@ -269,17 +269,17 @@ public class LogXAction extends DispatchAction {
     		
     		userId = userForm.getId();
     		String userName=Change.HTMLChange(userForm.getUserName());
-    		String userPassword=Change.HTMLChange(userForm.getUserPassword());    	
+    		String userPassword=Change.HTMLChange(userForm.getUserPassword());    
+    		userPassword = Encryption.getHash(userPassword, "MD5");
     		String userFace=userForm.getUserFace();
     		String userSex=userForm.getUserSex();
     		String userPhone=userForm.getUserPhone();
     		String userOICQ=userForm.getUserOICQ();
     		String userEmail=userForm.getUserEmail();
     		String userFrom=Change.HTMLChange(userForm.getUserFrom());
-    		String userAble=userForm.getUserAble();
     		
-    		String sql="update tb_user set user_name=?,user_password=?,user_face=?,user_sex=?,user_phone=?,user_OICQ=?,user_email=?,user_from=?,user_able=? where id=?";
-    		Object[] params={userName,userPassword,userFace,userSex,userPhone,userOICQ,userEmail,userFrom,userAble,userId};
+    		String sql="update tb_user set user_name=?,user_password=?,user_face=?,user_sex=?,user_phone=?,user_OICQ=?,user_email=?,user_from=? where id=?";
+    		Object[] params={userName,userPassword,userFace,userSex,userPhone,userOICQ,userEmail,userFrom,userId};
     		
     		OpDB myOp=new OpDB();
     		int i=myOp.OpUpdate(sql, params);    		

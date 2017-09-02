@@ -10,8 +10,8 @@
 <body>
 	<center>
 		<br>
-		<html:form action="needLogin/admin/modifyUser.do">
-			<input type="hidden" name="method" value="modifyUser">
+		<html:form action="needLogin/user/modifyMyInfo.do">
+			<input type="hidden" name="method" value="modifyUser1">
 			<input type="hidden" name="validate" value="yes">
 			<table border="0" width="90%" height="630" cellspacing="0"
 				cellpadding="0">

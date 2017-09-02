@@ -65,7 +65,7 @@
 			input="/pages/UserCenter/adminTemp.jsp">
 			<forward name="showModifyJSP" path="/pages/UserCenter/adminTemp.jsp" />
 			<forward name="success"
-				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo;type=show" />
+				path="/needLogin/user/myPersonInfo.do?method=myPersonInfo" />
 			<forward name="error" path="/pages/UserCenter/adminTemp.jsp" />
 		</action>
 		
