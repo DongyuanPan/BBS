@@ -11,6 +11,7 @@ import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
+import com.yxq.actionform.ForbiddenIPForm;
 import com.yxq.actionform.FriendForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.model.CreatePage;
@@ -580,6 +581,29 @@ public class OpDB {
 				}
 			} catch (SQLException e) {
 				System.out.println("OpBbsAnswerShow()方法出错！");
+				System.out.println("标记：" + mark);
+				e.printStackTrace();
+			}
+		}
+
+		return list;	
+	}
+	
+	// String sql = "select * from tb_forbidden_IP";
+	public List<ForbiddenIPForm> OpForbiddenIPShow(String sql, Object[] params) {
+		List<ForbiddenIPForm> list = new ArrayList<ForbiddenIPForm>();
+		ResultSet rs = getRs(sql, params);
+		int i = 1;
+		if (rs != null) {
+			try {
+				while (rs.next() && (!mark || i <= perR)) {
+					ForbiddenIPForm form = new ForbiddenIPForm();
+					form.setForbiddenIP(rs.getString(1));
+					list.add(form);
+					++i;
+				}
+			} catch (SQLException e) {
+				System.out.println("OpForbiddenIPShow()方法出错！");
 				System.out.println("标记：" + mark);
 				e.printStackTrace();
 			}

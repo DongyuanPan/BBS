@@ -6,10 +6,10 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
-public class FriendForm extends ValidatorForm {
+public class ForbiddenIPForm extends ValidatorForm {
 
 	private static final long serialVersionUID = 1L;
-	private String friendname;
+	private String forbiddenIP;
 	
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		String validate=request.getParameter("validate");
@@ -19,15 +19,16 @@ public class FriendForm extends ValidatorForm {
 			return super.validate(mapping, request);	
 	}
 
-	public String getFriendname() {
-		return friendname;
+	public void clear(){
+		setForbiddenIP("");
 	}
 
-	public void setFriendname(String friendname) {
-		this.friendname = friendname;
+	public String getForbiddenIP() {
+		return forbiddenIP;
 	}
-	
-	public void clear(){
-		friendname="";				
+
+	public void setForbiddenIP(String forbiddenIP) {
+		this.forbiddenIP = forbiddenIP;
 	}
 }
+
