@@ -7,41 +7,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DB {
-	private String className;
-	private String url;
-	private String username;
-	private String password;
+	private String className = "com.mysql.jdbc.Driver";
+	private String url = "jdbc:mysql://localhost:3306/db_bbs";
+	private String username = "root";
+	private String password = "";
 	private Connection con;
 	private PreparedStatement pstm;
 	
 	public DB(){
-		className="com.mysql.jdbc.Driver";
-		url="jdbc:mysql://localhost:3306/db_bbs";
-		username="root";
-		password="";
 		try{
 			Class.forName(className);
+			con = DriverManager.getConnection(url,username,password);
 		}catch(ClassNotFoundException e){
 			System.out.println("加载数据库驱动程序失败！");
 			e.printStackTrace();
-		}
-	}
-	public void getCon(){
-		try {
-			con = DriverManager.getConnection(url,username,password);
 		} catch (SQLException e) {
 			System.out.println("获取数据库连接失败！");
 			e.printStackTrace();
 		}
 	}
+	
 	public void doPstm(String sql,Object[] params){
 		if(sql!=null&&!sql.equals("")){
-			System.out.println(sql);
-			getCon();
+			//System.out.println(sql);
 			try {
 				pstm=con.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-				if(params==null){
-					params=new Object[0];
+				if(params == null){
+					params = new Object[0];
 				}
 				for(int i = 0;i < params.length; ++i){
 					pstm.setObject(i+1,params[i]);
@@ -87,6 +79,4 @@ public class DB {
 			System.out.println("关闭con对象失败！");
 		}
 	}
-	
-
 }
