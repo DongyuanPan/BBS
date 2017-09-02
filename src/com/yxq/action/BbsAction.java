@@ -84,7 +84,7 @@ public class BbsAction extends MySuperAction {
 		myOp.setMark(true); // 进行分页显示
 		myOp.setPageInfo(perR, currentP, gowhich); // 设置进行分页显示需要的信息
 
-		sql = "select * from tb_bbs where bbs_boardID=? and (bbs_isTop='0' or bbs_isGood='1') order by bbs_opTime DESC";
+		sql = "select * from tb_bbs where bbs_boardID=? and bbs_isTop='0' order by bbs_opTime DESC";
 		List otherbbslist = myOp.OpBbsListShow(sql, params);
 		CreatePage page = myOp.getPage();
 
