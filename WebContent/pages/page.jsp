@@ -10,10 +10,10 @@
 		<tr >
 			<td width="45%" align="center" ><bean:write name="page"
 					property="pageInfo" filter="false" /></td>
-			<td align="center" width="30%"><bean:write name="page"
+			<td align="center" width="20%"><bean:write name="page"
 					property="pageLink" filter="false" /></td>
 			<form action="${param['gowhich']}" method="post">
-				<td width="26%">转到： <input type="text" name="showpage" size="7">
+				<td width="25%">转到： <input type="text" name="showpage" size="7">
 					<input type="submit" value="跳转页面">
 				</td>
 			</form>

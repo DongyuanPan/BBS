@@ -45,15 +45,15 @@
 															<table border="0" width="90%" cellspacing="3"
 																cellpadding="0">
 																<tr>
-																	<td>帖子总数：<b><font color="blue"><bean:write
+																	<td>帖子总数：<b><font color="#242424"><bean:write
 																					name="boardSingle" property="boardBbsnum" /></font></b></td>
 																</tr>
 																<tr>
-																	<td>精华帖子：<b><font color="green"><bean:write
+																	<td>精华帖子：<b><font color="#242424"><bean:write
 																					name="boardSingle" property="boardBbsgoodnum" /></font></b></td>
 																</tr>
 																<tr>
-																	<td>未 回 复：<b><font color="red"><bean:write
+																	<td>今日新帖：<b><font color="#FFAE00"><bean:write
 																					name="boardSingle" property="boardBbsundonum" /></font></b></td>
 																</tr>
 															</table>
