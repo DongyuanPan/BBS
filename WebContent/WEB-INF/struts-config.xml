@@ -326,7 +326,12 @@
 		<action path="/needLogin/addAccessory" type="com.yxq.action.FileUploadAction"
 		parameter="method" name="FileUploadForm" scope="request" validate="true">		
 		    <forward name="success" path="/needLogin/addBbs.do?method=addBbs" />
-		</action>
+		</action>		
+		<!-- 下载附件(点击下载) -->
+		<action path="/needLogin/downloadAccessory" type="com.yxq.action.FileDownloadAction"
+		parameter="method"  name="FileUploadForm" scope="request" validate="true">		
+		    <forward name="success" path="/show/bbs/accessoryDownload.jsp" />
+		</action>	
 		<!-- 回复帖子 -->
 		<action path="/needLogin/answerBbs" type="com.yxq.action.BbsAction"
 			parameter="method" name="bbsAnswerForm" scope="request" validate="true"

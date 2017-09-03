@@ -53,10 +53,19 @@ public class FileUploadAction extends Action {
             //得到上传文件的流，可以通过这个流读取上传文件   
             in = myFile.getInputStream();     
             //得到上传文件的名字   
-            out = new FileOutputStream(savePath + "/" + fileName);     
-            session.setAttribute("fileSize", fileSize); 
-            session.setAttribute("fileName", fileName);             
-            session.setAttribute("filePath", filePath);            
+            out = new FileOutputStream(savePath + "/" + fileName);    
+            
+			String fileNameAll = (String) session.getAttribute("fileName");
+			fileNameAll = fileNameAll + "|" + fileName;
+			String filePathAll = (String) session.getAttribute("filePath");
+			filePathAll = filePathAll + "|" + filePath;
+			String fileSizeAll = (String) session.getAttribute("fileSize");
+			fileSizeAll = fileSizeAll + "|" + String.valueOf(fileSize);
+			
+            session.setAttribute("fileSize", fileSizeAll); 
+            session.setAttribute("fileName", fileNameAll);             
+            session.setAttribute("filePath", filePathAll);            
+            
             byte[] b = new byte[1024];   
             int length = 0;   
             //开始上传文件,每读取1024个字节，就向服务器指定路径位置写入读取到的字节。   

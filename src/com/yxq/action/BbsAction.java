@@ -1,5 +1,6 @@
 package com.yxq.action;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,7 @@ import org.apache.struts.util.LabelValueBean;
 import com.yxq.actionform.BbsAnswerForm;
 import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
+import com.yxq.actionform.FileUploadForm;
 import com.yxq.actionform.UserForm;
 import com.yxq.actionform.VoteForm;
 import com.yxq.dao.OpDB;
@@ -115,6 +117,24 @@ public class BbsAction extends MySuperAction {
 		sql = "select * from tb_bbs where bbs_id=?";
 		BbsForm bbsRootSingle = myOp.OpBbsSingleShow(sql, params);
 		session.setAttribute("bbsRootSingle", bbsRootSingle);
+
+		/* 查询tb_accessory数据表，获取附件信息 */
+		sql = "select * from tb_accessory where accessory_bbs_id = ?";
+		List<FileUploadForm> bbsAccessory = myOp.OpAccessoryShow(sql, params);
+		if (bbsAccessory.size() != 0) {
+			FileUploadForm bbsFirstsAccessory = bbsAccessory.get(0);
+			session.setAttribute("bbsFirstFileName", bbsFirstsAccessory.getFileName());
+
+			List<String> listFileNames = new ArrayList<String>();
+			for (int p = 0; p < bbsAccessory.size(); p++) {
+				listFileNames.add(bbsAccessory.get(p).getFileName());
+			}
+			session.setAttribute("listFileNames", listFileNames);
+			session.setAttribute("bbsFileNameList", bbsAccessory);
+
+		} else {
+			session.setAttribute("bbsFirstFileName", "无附件上传");
+		}
 
 		/* 对投票贴进行字符串解析 */
 		if (bbsRootSingle.getBbsType().equals("投票贴")) {
@@ -230,6 +250,9 @@ public class BbsAction extends MySuperAction {
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
 				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
+				if(bbsType.equals("投票贴")) {
+					bbsContent=Change.voteContentChange(bbsContent);
+				}
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
 				String bbsSendIP = request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
@@ -248,15 +271,25 @@ public class BbsAction extends MySuperAction {
 				String fileName = (String) session.getAttribute("fileName");
 				if (fileName != null) {
 
-					int fileSize = (Integer) session.getAttribute("fileSize");
+					String fileSize = (String) session.getAttribute("fileSize");
 					int downloadCount = 0;
 					String filePath = (String) session.getAttribute("filePath");
-					int bbsID = myOp.getMaxBbsId() + 1;
+					int bbsID = myOp.getMaxBbsId();
 
-					String sql2 = "insert into tb_accessory values(null,?,?,?,now(),' ',?,?)";
-					Object[] params2 = { bbsID, fileName, filePath, fileSize, downloadCount };
+					String[] fileNameEach = fileName.split("\\|");
+					String[] fileSizeEach = fileSize.split("\\|");
+					String[] filePathEach = filePath.split("\\|");
 
-					j = myOp.OpUpdate(sql2, params2);
+					for (int p = 1; p < fileNameEach.length; p++) {
+
+						String sql2 = "insert into tb_accessory values(null,?,?,?,now(),' ',?,?)";
+						Object[] params2 = { bbsID, fileNameEach[p], filePathEach[p], fileSizeEach[p], downloadCount };
+						j = myOp.OpUpdate(sql2, params2);
+						if (j <= 0) {
+							break;
+						}
+					}
+
 				}
 				if (i <= 0) {
 					System.out.println("发表帖子失败！");
@@ -494,10 +527,34 @@ public class BbsAction extends MySuperAction {
 				Object[] params = { bbsId };
 
 				OpDB myOp = new OpDB();
+
+				String sql3 = "select * from tb_accessory where accessory_bbs_id = ?";
+				List<FileUploadForm> bbsAccessory = myOp.OpAccessoryShow(sql3, params);
+
 				int i = myOp.OpUpdate(sql, params);
+
+				String sql2 = "delete from tb_accessory where accessory_bbs_id=?";
+				int j = myOp.OpUpdate(sql2, params);
+
+				String filepath = servlet.getServletContext().getRealPath("/WEB-INF/upload");
+				/* 查询tb_accessory数据表，获取附件信息 */
+				List<String> fileNames = new ArrayList<String>();
+
+				for (int p = 0; p < bbsAccessory.size(); p++) {
+					fileNames.add(bbsAccessory.get(p).getFileName());
+				}
+				for (int k = 0; k < bbsAccessory.size(); k++) {
+					String filePathFull = filepath + File.separator + fileNames.get(k);
+					new File(filePathFull).delete();
+				}
+
 				if (i <= 0) {
 					System.out.println("删除出错！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.E"));
+					saveErrors(request, messages);
+				} else if (j <= 0) {
+					System.out.println("删除附件出错！");
+					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteAccessory.E"));
 					saveErrors(request, messages);
 				} else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
 					System.out.println("删除成功！");
