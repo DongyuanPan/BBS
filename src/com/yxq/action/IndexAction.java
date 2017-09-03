@@ -24,7 +24,7 @@ public class IndexAction extends Action {
 		HttpSession session=request.getSession();		
 		session.setAttribute("mainPage","default.jsp");
 		session.setAttribute("backMainPage","default.jsp");
-		OpDB myOp=new OpDB();
+		OpDB myOp = new OpDB();
 		
 		List classType=myOp.OpClassListShow();
 		if(classType!=null&&classType.size()!=0){
@@ -32,7 +32,7 @@ public class IndexAction extends Action {
 				String classID=((ClassForm)classType.get(i)).getClassId();
 				String sql="select * from tb_board where board_classID=?";
 				Object[] params={classID};
-				List oneboardlist=myOp.OpBoardListShow(sql,params);
+				List oneboardlist = myOp.OpBoardListShow(sql,params);
 				session.setAttribute("class"+classID,oneboardlist);				
 			}
 		}
@@ -43,14 +43,14 @@ public class IndexAction extends Action {
 	}
 	
 	static{
-		searchSQL=new Vector();
+		searchSQL = new Vector();
 		searchSQL.add(new LabelValueBean("帖子标题","bbs_title"));
 		searchSQL.add(new LabelValueBean("帖子内容","bbs_content"));
 		searchSQL.add(new LabelValueBean("发表者","bbs_sender"));		
 		
 		headFace=new Vector();
-		for(int i=0;i<22;i++){
-			String gif="user"+i+".gif";
+		for(int i = 0; i < 22; ++i){
+			String gif = "user" + i + ".gif";
 			headFace.add(new LabelValueBean("头像"+(i+1),gif));			
 		}		
 	}

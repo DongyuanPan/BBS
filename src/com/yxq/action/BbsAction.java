@@ -25,6 +25,7 @@ import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.FileUploadForm;
 import com.yxq.actionform.UserForm;
+import com.yxq.actionform.VoteForm;
 import com.yxq.dao.OpDB;
 import com.yxq.model.CreatePage;
 import com.yxq.tools.Change;
@@ -123,18 +124,37 @@ public class BbsAction extends MySuperAction {
 		if (bbsAccessory.size() != 0) {
 			FileUploadForm bbsFirstsAccessory = bbsAccessory.get(0);
 			session.setAttribute("bbsFirstFileName", bbsFirstsAccessory.getFileName());
-			
+
 			List<String> listFileNames = new ArrayList<String>();
 			for (int p = 0; p < bbsAccessory.size(); p++) {
 				listFileNames.add(bbsAccessory.get(p).getFileName());
 			}
-			session.setAttribute("listFileNames", listFileNames);			
+			session.setAttribute("listFileNames", listFileNames);
 			session.setAttribute("bbsFileNameList", bbsAccessory);
-			
+
 		} else {
 			session.setAttribute("bbsFirstFileName", "无附件上传");
 		}
 
+		/* 对投票贴进行字符串解析 */
+		if (bbsRootSingle.getBbsType().equals("投票贴")) {
+			String bbsContent = bbsRootSingle.getBbsContent();
+			int totalSelNum = Integer.parseInt(bbsContent.substring(0, bbsContent.indexOf("@")));
+			session.setAttribute("totalSelNum", totalSelNum);
+			int totalVoteNum = Integer
+					.parseInt(bbsContent.substring(bbsContent.indexOf("@") + 1, bbsContent.indexOf(":")));
+			session.setAttribute("totalVoteNum", totalVoteNum);
+			int beginIndex = bbsContent.indexOf(":") + 1;
+			int endIndex = bbsContent.indexOf(";", beginIndex);
+			String contentShow = "";
+			List<VoteForm> votes = new ArrayList<VoteForm>();
+			for (int i = 0; i < totalSelNum; i++) {
+				votes.add(new VoteForm(bbsContent.substring(beginIndex, endIndex)));
+				beginIndex = endIndex + 1;
+				endIndex = bbsContent.indexOf(";", beginIndex);
+			}
+			session.setAttribute("votes", votes);
+		}
 		/* 查询tb_user数据表，获取该根帖发表者信息 */
 		String asker = bbsRootSingle.getBbsSender();
 		sql = "select * from tb_user where user_name=?";
@@ -166,7 +186,7 @@ public class BbsAction extends MySuperAction {
 		/* 查询tb_user数据表，获取当前回复帖发表者信息 */
 		sql = "select * from tb_user where user_name=?";
 		Map answerMap = new HashMap();
-		for (int i = 0; i < answerbbslist.size(); i++) {
+		for (int i = 0; i < answerbbslist.size(); ++i) {
 			String answerer = ((BbsAnswerForm) answerbbslist.get(i)).getBbsAnswerSender();
 			if (!answerMap.containsKey(answerer)) {
 				params[0] = answerer;
@@ -230,6 +250,9 @@ public class BbsAction extends MySuperAction {
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
 				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
+				if(bbsType.equals("投票贴")) {
+					bbsContent=Change.voteContentChange(bbsContent);
+				}
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
 				String bbsSendIP = request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
@@ -504,37 +527,36 @@ public class BbsAction extends MySuperAction {
 				Object[] params = { bbsId };
 
 				OpDB myOp = new OpDB();
-				
+
 				String sql3 = "select * from tb_accessory where accessory_bbs_id = ?";
 				List<FileUploadForm> bbsAccessory = myOp.OpAccessoryShow(sql3, params);
-				
+
 				int i = myOp.OpUpdate(sql, params);
-				
+
 				String sql2 = "delete from tb_accessory where accessory_bbs_id=?";
 				int j = myOp.OpUpdate(sql2, params);
-				
+
 				String filepath = servlet.getServletContext().getRealPath("/WEB-INF/upload");
 				/* 查询tb_accessory数据表，获取附件信息 */
 				List<String> fileNames = new ArrayList<String>();
-				
+
 				for (int p = 0; p < bbsAccessory.size(); p++) {
 					fileNames.add(bbsAccessory.get(p).getFileName());
-				}				
+				}
 				for (int k = 0; k < bbsAccessory.size(); k++) {
 					String filePathFull = filepath + File.separator + fileNames.get(k);
 					new File(filePathFull).delete();
-				}					
-				
-				
+				}
+
 				if (i <= 0) {
 					System.out.println("删除出错！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.E"));
 					saveErrors(request, messages);
-				}else if(j<=0) {
+				} else if (j <= 0) {
 					System.out.println("删除附件出错！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteAccessory.E"));
-					saveErrors(request, messages);					
-				}else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
+					saveErrors(request, messages);
+				} else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
 					System.out.println("删除成功！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.S"));
 					saveErrors(request, messages);

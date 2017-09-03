@@ -110,7 +110,7 @@ public class OpDB {
 					String sql1 = "";
 					Object[] params1 = { boardSingle.getBoardId() };
 					ResultSet rs1;
-
+					
 					// 查询该版面中所有的根帖数
 					sql1 = "select count(bbs_id) from tb_bbs where bbs_boardID=?";
 					mydb.doPstm(sql1, params1);
@@ -120,7 +120,12 @@ public class OpDB {
 					}
 
 					// 查询该版面中所有未处理的根帖数
-					sql1 = "SELECT COUNT(bbs_id) AS num FROM tb_bbs WHERE (bbs_boardID = ?) AND (bbs_id NOT IN (SELECT bbsAnswer_rootID FROM tb_bbsAnswer))";
+					sql1 = "select count(bbs_id) from tb_bbs "
+							+ "where (bbs_boardID = ?) "
+							+ "and day(bbs_opTime) = day(now()) "
+							+ "and month(bbs_opTime) = month(now()) "
+							+ "and year(bbs_opTime) = year(now()) "
+							+ "and (bbs_id NOT IN (SELECT bbsAnswer_rootID FROM tb_bbsAnswer))";
 					mydb.doPstm(sql1, params1);
 					rs1 = mydb.getRs();
 					if (rs1 != null && rs1.next()) {
@@ -622,7 +627,7 @@ public class OpDB {
 		return list;	
 	}
 	
-	// String sql = "select * from tb_forbidden_IP";
+	// String sql = "select * from tb_forbidden_ip";
 	public List<ForbiddenIPForm> OpForbiddenIPShow(String sql, Object[] params) {
 		List<ForbiddenIPForm> list = new ArrayList<ForbiddenIPForm>();
 		ResultSet rs = getRs(sql, params);

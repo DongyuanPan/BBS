@@ -789,6 +789,7 @@ public class AdminAction extends DispatchAction {
 			userId = userForm.getId();
 			String userName = Change.HTMLChange(userForm.getUserName());
 			String userPassword = Change.HTMLChange(userForm.getUserPassword());
+			userPassword = Encryption.getHash(userPassword, "MD5");
 			String userFace = userForm.getUserFace();
 			String userSex = userForm.getUserSex();
 			String userPhone = userForm.getUserPhone();
@@ -924,6 +925,34 @@ public class AdminAction extends DispatchAction {
 			System.out.println("删除IP成功！");
 			forwardPath = "success";
 			messages.add("adminOpR", new ActionMessage("luntan.amdin.delete.IP.S"));
+		}
+		saveErrors(request, messages);
+		return mapping.findForward(forwardPath);
+	}
+	
+	/** 后台-添加禁止IP */
+	public ActionForward addForbidIP(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		ForbiddenIPForm IPForm = (ForbiddenIPForm)form;
+		String sql = "insert into tb_forbidden_ip values(?)";
+		String IP = IPForm.getForbiddenIP();
+		Object[] params = { IP };
+
+		OpDB myOp = new OpDB();
+		int i = myOp.OpUpdate(sql, params);
+
+		ActionMessages messages = new ActionMessages();
+		String forwardPath = "";
+
+		if (i <= 0) {
+			System.out.println("添加IP失败！");
+			forwardPath = "error";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.add.IP.E"));
+		} else {
+			System.out.println("添加IP成功！");
+			forwardPath = "success";
+			messages.add("adminOpR", new ActionMessage("luntan.amdin.add.IP.S"));
 		}
 		saveErrors(request, messages);
 		return mapping.findForward(forwardPath);
