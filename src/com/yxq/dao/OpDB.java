@@ -11,6 +11,7 @@ import com.yxq.actionform.BbsForm;
 import com.yxq.actionform.BoardForm;
 import com.yxq.actionform.BroadcastForm;
 import com.yxq.actionform.ClassForm;
+import com.yxq.actionform.FileUploadForm;
 import com.yxq.actionform.ForbiddenIPForm;
 import com.yxq.actionform.FriendForm;
 import com.yxq.actionform.UserForm;
@@ -458,23 +459,24 @@ public class OpDB {
 	
 	
 	// String sql = "select * from tb_accessory where accessory_bbs_id = ?";
-	public List<AccessoryForm> OpAccessoryShow(String sql, Object[] params) {
-		List<AccessoryForm> accessorylist = new ArrayList<AccessoryForm>();
+	public List<FileUploadForm> OpAccessoryShow(String sql, Object[] params) {
+		List<FileUploadForm> accessorylist = null;
 		DB mydb = new DB();
 		mydb.doPstm(sql, params);
 		ResultSet rs = mydb.getRs();
 		try {
 			if (rs != null) {
+				accessorylist = new ArrayList<FileUploadForm>();
 				while (rs.next()) {
-					AccessoryForm accessoryform = new AccessoryForm();
-					accessoryform.setAccessoryId(String.valueOf(rs.getInt(1)));
-					accessoryform.setAccessoryBbsId(String.valueOf(rs.getInt(2)));
-					accessoryform.setAccessoryFileName(rs.getString(3));
-					accessoryform.setAccessoryPath(rs.getString(4));
-					accessoryform.setAccessoryUploadTime(Change.dateTimeChange(rs.getTimestamp(5)));
-					accessoryform.setAccessoryDescription(rs.getString(6));
-					accessoryform.setAccessorySize(rs.getString(7));
-					accessoryform.setAccessoryDownloadCount(String.valueOf(rs.getInt(8)));
+					FileUploadForm accessoryform = new FileUploadForm();
+					accessoryform.setFileName(rs.getString(3));
+					accessoryform.setFileSize(rs.getString(7));
+					accessoryform.setUploadTime(Change.dateTimeChange(rs.getTimestamp(5)));
+					accessoryform.setFileBbsID(String.valueOf(rs.getInt(2)));
+					accessoryform.setFileID(String.valueOf(rs.getInt(1)));
+					accessoryform.setFilePath(rs.getString(4));
+					accessoryform.setFileDescription(rs.getString(6));
+					accessoryform.setFileDownloadCount(String.valueOf(rs.getInt(8)));
 					accessorylist.add(accessoryform);
 				}
 				rs.close();

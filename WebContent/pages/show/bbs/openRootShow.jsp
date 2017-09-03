@@ -8,6 +8,12 @@
 <head>
 <title>查看根帖</title>
 </head>
+<script language="javascript">
+	function cw() {
+		window.open("pages/show/bbs/accessoryDownload.jsp", "mywindow",
+						"toolbar=no,left=650,top=300,width=600,height=300,menubar=no,systemMenu=no,fullscreen=no");
+	}
+</script>
 <body>
 	<center>
 		<!-- ****************显示根帖信息**************** -->
@@ -69,7 +75,7 @@
 					</table>
 				</td>
 				<!-- 根帖信息 -->
-				<td width="10%">【表情】<img
+				<td width="15%">【表情】<img
 					src="images/face/bbs/${sessionScope.bbsRootSingle.bbsFace}"></td>
 				<td height="30" align="right">发表时间：『<bean:write
 						name="bbsRootSingle" property="bbsSendTime" />』&nbsp;
@@ -88,13 +94,11 @@
 						href="view/indexTemp.jsp" anchor="answer">回复该帖&nbsp;</html:link>
 
 			<!-- 显示“收藏该帖”超链接 -->			
-		 ◆<a
-								href="needLogin/collectBbs.do?method=collectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+		 ◆<a href="needLogin/collectBbs.do?method=collectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
 								>收藏该帖</a>&nbsp;
 
 			<!-- 显示“取消收藏”超链接 -->			
-		 ◆<a
-								href="needLogin/cancelcollectBbs.do?method=cancelcollectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+		 ◆<a href="needLogin/cancelcollectBbs.do?method=cancelcollectBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
 								>取消收藏</a>&nbsp;
 								
 						<!-- 如果该贴不是精华帖子，并且不是置顶帖子(实际上就是普通帖子) -->
@@ -102,15 +106,13 @@
 						scope="session">
 						<logic:notEqual value="1" name="bbsRootSingle" property="bbsIsTop">
 							<!-- 显示“将帖子提前”超链接 -->
-                          ◆<a
-								href="needLogin/firstBbs.do?method=toFirstBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+                          ◆<a href="needLogin/firstBbs.do?method=toFirstBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
 								title="帖子所属者/楼主/管理员操作">将帖子提前</a>&nbsp;
                       </logic:notEqual>
 					</logic:notEqual> <!-- 如果该帖不是置顶帖子 --> <logic:notEqual value="1" name="bbsRootSingle"
 						property="bbsIsTop">
 						<!-- 显示“置顶帖子”超链接 -->
-                      ◆<a
-							href="needLogin/admin/doTopGood.do?method=setTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
+                      ◆<a href="needLogin/admin/doTopGood.do?method=setTopBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
 							title="管理员操作">置顶帖子</a>&nbsp;
                   </logic:notEqual>
                   
@@ -127,11 +129,24 @@
 							href="needLogin/admin/doTopGood.do?method=setGoodBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}"
 							title="管理员操作">设为精华帖</a>&nbsp;                  
                   </logic:notEqual> <!-- 显示“删除帖子”超链接 --> ◆<a
-					href="needLogin/deleteRoot.do?method=deleteRootBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
+					href="needLogin/deleteRootBbs.do?method=deleteRootBbs&bbsId=${sessionScope.bbsRootSingle.bbsId}&bbsSender=${sessionScope.bbsRootSingle.bbsSender}"
 					title="帖子所属者/楼主/管理员操作">删除帖子</a>&nbsp;
 				</td>
 			</tr>
 		</table>
+		
+		<!-- ****************显示附件**************** -->		
+		<table border="1" width="99%" cellspacing="0" cellpadding="0"
+			bordercolor="#E3E3E3" bordercolorlight="#E3E3E3"
+			bordercolordark="white">
+			<tr height="30">
+				<td style="text-indent: 5" width="27%"></td>
+				<td colspan="2" width="61%">【附件】<bean:write name="bbsFirstFileName" />	</td> 
+				<td align="right" >
+				◆<a href="javascript:cw()">下载附件</a>&nbsp;
+				</td>
+		</table>
+
 
 		<!-- ****************分页导航**************** -->
 		<table border="1" width="99%" cellspacing="0" cellpadding="0"
@@ -141,7 +156,7 @@
 				<td align="right" background="images/index/boardE30.png"><jsp:include
 						flush="true" page="/pages/page.jsp">
 						<jsp:param name="gowhich" value="user/openShow.do?method=openShow" />
-					</jsp:include></td>
+					</jsp:include></td>	
 			</tr>
 		</table>
 
