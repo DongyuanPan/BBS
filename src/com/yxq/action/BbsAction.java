@@ -250,8 +250,8 @@ public class BbsAction extends MySuperAction {
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
 				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
-				if(bbsType.equals("投票贴")) {
-					bbsContent=Change.voteContentChange(bbsContent);
+				if (bbsType.equals("投票贴")) {
+					bbsContent = Change.voteContentChange(bbsContent);
 				}
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
 				String bbsSendIP = request.getRemoteAddr();
@@ -532,29 +532,31 @@ public class BbsAction extends MySuperAction {
 				List<FileUploadForm> bbsAccessory = myOp.OpAccessoryShow(sql3, params);
 
 				int i = myOp.OpUpdate(sql, params);
+				if (bbsAccessory.size() > 0) {
+					String sql2 = "delete from tb_accessory where accessory_bbs_id=?";
+					int j = myOp.OpUpdate(sql2, params);
 
-				String sql2 = "delete from tb_accessory where accessory_bbs_id=?";
-				int j = myOp.OpUpdate(sql2, params);
+					String filepath = servlet.getServletContext().getRealPath("/WEB-INF/upload");
+					/* 查询tb_accessory数据表，获取附件信息 */
+					List<String> fileNames = new ArrayList<String>();
 
-				String filepath = servlet.getServletContext().getRealPath("/WEB-INF/upload");
-				/* 查询tb_accessory数据表，获取附件信息 */
-				List<String> fileNames = new ArrayList<String>();
-
-				for (int p = 0; p < bbsAccessory.size(); p++) {
-					fileNames.add(bbsAccessory.get(p).getFileName());
-				}
-				for (int k = 0; k < bbsAccessory.size(); k++) {
-					String filePathFull = filepath + File.separator + fileNames.get(k);
-					new File(filePathFull).delete();
+					for (int p = 0; p < bbsAccessory.size(); p++) {
+						fileNames.add(bbsAccessory.get(p).getFileName());
+					}
+					for (int k = 0; k < bbsAccessory.size(); k++) {
+						String filePathFull = filepath + File.separator + fileNames.get(k);
+						new File(filePathFull).delete();
+					}
+					if (j <= 0) {
+						System.out.println("删除附件出错！");
+						messages.add("userOpR", new ActionMessage("luntan.bbs.deleteAccessory.E"));
+						saveErrors(request, messages);
+					}
 				}
 
 				if (i <= 0) {
 					System.out.println("删除出错！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.E"));
-					saveErrors(request, messages);
-				} else if (j <= 0) {
-					System.out.println("删除附件出错！");
-					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteAccessory.E"));
 					saveErrors(request, messages);
 				} else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
 					System.out.println("删除成功！");
