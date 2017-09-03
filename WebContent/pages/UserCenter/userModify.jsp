@@ -41,11 +41,7 @@
 					<td></td>
 					<td colspan="3"><html:errors property="userName" /></td>
 				</tr>
-				<tr>
-					<td align="right">¾ÉÃÜÂë£º&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td colspan="3" colspan="3"><html:hidden
-							property="oldPassword" write="true" /></td>
-				</tr>
+
 				<tr>
 					<td align="right">ĞÂÃÜÂë£º&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td colspan="3"><html:password property="userPassword"

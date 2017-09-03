@@ -789,6 +789,7 @@ public class AdminAction extends DispatchAction {
 			userId = userForm.getId();
 			String userName = Change.HTMLChange(userForm.getUserName());
 			String userPassword = Change.HTMLChange(userForm.getUserPassword());
+			userPassword = Encryption.getHash(userPassword, "MD5");
 			String userFace = userForm.getUserFace();
 			String userSex = userForm.getUserSex();
 			String userPhone = userForm.getUserPhone();
