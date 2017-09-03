@@ -304,6 +304,9 @@ public class BbsAction extends MySuperAction {
 				} else {
 					System.out.println("发表帖子成功！");
 					session.setAttribute("currentP", "1");
+					session.setAttribute("fileName", null);
+					session.setAttribute("fileSize", null);					
+					session.setAttribute("filePath", null);					
 					messages.add("userOpR", new ActionMessage("luntan.bbs.add.S"));
 					bbsForm.clear();
 					saveErrors(request, messages);
