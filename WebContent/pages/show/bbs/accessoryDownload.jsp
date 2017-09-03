@@ -18,7 +18,7 @@
 			for (String fileName : fileNames) {
 		%>
 
-		<html:form action="/needLogin/downloadAccessory.do" method="get">
+		<html:form action="/needLogin/downloadAccessory.do" method="post" >
 			<input type="hidden" name="fileName" value="<%=fileName%>" />
 			<input type="submit" value="<%=fileName%>" />
 		</html:form>

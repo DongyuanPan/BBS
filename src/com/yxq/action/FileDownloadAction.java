@@ -22,23 +22,28 @@ public class FileDownloadAction extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
+		
+		request.setCharacterEncoding("gb2312");
+		response.setCharacterEncoding("gb2312");
+//		String path = String(request.getParameter("fileName").getBytes("iso-8859-1","gb2312"));
 		String path = request.getParameter("fileName");
 		System.out.println(path);
 
 		String filepath = servlet.getServletContext().getRealPath("/WEB-INF/upload");
 
-		System.out.println("ÎÄ¼şÂ·¾¶" + filepath);
+		System.out.println("æ–‡ä»¶è·¯å¾„" + filepath);
 
 		InputStream iStream = new FileInputStream(filepath + File.separator + path);
 		OutputStream oStream = response.getOutputStream();
-		// Õâ¸ö¾Í¾ÍÊÇµ¯³öÏÂÔØ¶Ô»°¿òµÄ¹Ø¼ü´úÂë
-		response.addHeader("content-disposition",
-				"attachment;filename=" + java.net.URLEncoder.encode(path, "GB2312"));
+		// è¿™ä¸ªå°±å°±æ˜¯å¼¹å‡ºä¸‹è½½å¯¹è¯æ¡†çš„å…³é”®ä»£ç 
+		response.addHeader("Content-Disposition","attachment;filename="+ new String((path).getBytes("GB2312"),"iso8859-1"));
+//		response.addHeader("content-disposition",
+//				"attachment;filename=" + java.net.URLEncoder.encode(path, "GB2312"));
 
-		byte[] b = new byte[1024];// Ò»´Î¶Á¶àÉÙ×Ö½ÚµÄÊı¾İ´ÓiStreamÖĞ
+		byte[] b = new byte[1024];// ä¸€æ¬¡è¯»å¤šå°‘å­—èŠ‚çš„æ•°æ®ä»iStreamä¸­
 		int size = iStream.read(b);
 		while (size > 0) {
-			oStream.write(b, 0, size);// ÕâÀïÒ»´ÎĞ´¶àÉÙ
+			oStream.write(b, 0, size);// è¿™é‡Œä¸€æ¬¡å†™å¤šå°‘
 			size = iStream.read(b);
 		}
 		iStream.close();

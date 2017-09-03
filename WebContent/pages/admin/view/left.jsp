@@ -84,7 +84,7 @@
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.png"><a
-								href="needLogin/admin/getUserIP.do?method=getUserIP">查看/修改/删除IP</a></td>
+								href="needLogin/admin/getUserIP.do?method=getUserIP">查看/添加/删除IP</a></td>
 						</tr>
 					</table>
 				</td>
