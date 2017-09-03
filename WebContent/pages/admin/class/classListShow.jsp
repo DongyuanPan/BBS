@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>列表查看论坛类别</title>
+<title>列表查看论坛板块</title>
 </head>
 <body>
 	<center>
@@ -16,22 +16,22 @@
 			<tr height="29">
 				<td background="images/admin/backLT.png" colspan="4"
 					style="text-indent: 5"><b><font color="white">■
-							查看论坛类别</font></b></td>
+							查看论坛板块</font></b></td>
 			</tr>
 			<tr height="30" bgcolor="#F0F0F0">
 				<td width="20%" align="center">类别ID</td>
-				<td width="60%" style="text-indent: 15">类别名称</td>
+				<td width="60%" style="text-indent: 15">板块名称</td>
 				<td align="center" colspan="2">操作</td>
 			</tr>
 			<logic:notPresent name="backClassList">
 				<tr height="80" bgcolor="#FBFBFB">
-					<td align="center" colspan="4"><li>类别列表不存在！</li></td>
+					<td align="center" colspan="4"><li>板块列表不存在！</li></td>
 				</tr>
 			</logic:notPresent>
 			<logic:present name="backClassList">
 				<logic:empty name="backClassList">
 					<tr height="80" bgcolor="#FBFBFB">
-						<td align="center" colspan="4"><li>没有类别可显示！</li></td>
+						<td align="center" colspan="4"><li>没有板块可显示！</li></td>
 					</tr>
 				</logic:empty>
 				<logic:notEmpty name="backClassList">
