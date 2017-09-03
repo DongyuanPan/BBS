@@ -28,17 +28,17 @@
 						<tr bgcolor="#F0F0F0" height="33">
 							<td style="text-indent: 5" colspan="2"
 								background="images/admin/menu.png"><b><font
-									color="white">■ 类别管理</font></b></td>
+									color="white">■ 板块管理</font></b></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.png"><a
-								href="needLogin/admin/getClassList.do?method=getClassList">查看论坛类别</a></td>
+								href="needLogin/admin/getClassList.do?method=getClassList">板块类别</a></td>
 						</tr>
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.png"><a
-								href="needLogin/admin/addClass.do?method=addClass">添加论坛类别</a></td>
+								href="needLogin/admin/addClass.do?method=addClass">添加板块</a></td>
 						</tr>
 						<tr bgcolor="#F0F0F0" height="33">
 							<td style="text-indent: 5" colspan="2"
@@ -84,7 +84,7 @@
 						<tr height="34">
 							<td style="text-indent: 40" colspan="2"
 								background="images/admin/subMenu.png"><a
-								href="needLogin/admin/getUserIP.do?method=getUserIP">查看/修改/删除IP</a></td>
+								href="needLogin/admin/getUserIP.do?method=getUserIP">查看/添加/删除IP</a></td>
 						</tr>
 					</table>
 				</td>
