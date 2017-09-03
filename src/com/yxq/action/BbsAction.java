@@ -230,6 +230,9 @@ public class BbsAction extends MySuperAction {
 				String bbsTitle = Change.HTMLChange(bbsForm.getBbsTitle());
 				String bbsType = Change.HTMLChange(bbsForm.getBbsType());
 				String bbsContent = Change.HTMLChange(bbsForm.getBbsContent());
+				if(bbsType.equals("Í¶Æ±Ìù")) {
+					bbsContent=Change.voteContentChange(bbsContent);
+				}
 				String bbsSender = ((UserForm) session.getAttribute("logoner")).getUserName();
 				String bbsSendIP = request.getRemoteAddr();
 				String bbsFace = bbsForm.getBbsFace();
