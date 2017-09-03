@@ -1,18 +1,18 @@
 <%@ taglib uri="struts-html" prefix="html"%>
 <%@ taglib uri="struts-bean" prefix="bean"%>
 <%@ taglib uri="struts-logic" prefix="logic"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=gb2312"
+	pageEncoding="gb2312"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@page import="java.util.List"%><html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title>Insert title here</title>
 </head>
 <body>
 	<center>
-		<br> --------------鐩存帴涓嬭浇------------ <br>
+		<br> --------------直接下载------------ <br>
 		<%
 			List<String> fileNames = (List) session.getAttribute("listFileNames");
 			for (String fileName : fileNames) {
@@ -25,7 +25,7 @@
 		<%
 			}
 		%>
-		<br> --------------鐩存帴鎵撳紑---------
+		<br> --------------直接打开---------
 		<%
 			for (String fileName : fileNames) {
 		%>
