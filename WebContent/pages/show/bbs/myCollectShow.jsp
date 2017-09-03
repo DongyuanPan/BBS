@@ -77,7 +77,7 @@
 											<bean:write name="myBbsSingle" property="bbsLastUpdateTime" />
 										</a></td>
 										<td width="7%" align="center"><a
-											href="needLogin/deleteRoot.do?method=deleteRootBbs&bbsId=${myBbsSingle.bbsId}&bbsSender=${myBbsSingle.bbsSender}"
+											href="needLogin/deleteRootBbs.do?method=deleteRootBbs&bbsId=${myBbsSingle.bbsId}&bbsSender=${myBbsSingle.bbsSender}"
 											title="楼主/管理员操作"
 											onclick="javaScript:return confirm('确认要删除该信息?')">删除</a></td>
 									</tr>
