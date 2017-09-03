@@ -535,6 +535,10 @@ public class BbsAction extends MySuperAction {
 				List<FileUploadForm> bbsAccessory = myOp.OpAccessoryShow(sql3, params);
 
 				int i = myOp.OpUpdate(sql, params);
+				
+				String sql4 = "delete from tb_bbsanswer where bbsAnswer_rootID = ?";
+				int n = myOp.OpUpdate(sql4, params);
+				
 				if (bbsAccessory.size() > 0) {
 					String sql2 = "delete from tb_accessory where accessory_bbs_id=?";
 					int j = myOp.OpUpdate(sql2, params);
@@ -561,7 +565,12 @@ public class BbsAction extends MySuperAction {
 					System.out.println("删除出错！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.E"));
 					saveErrors(request, messages);
-				} else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
+				}else if (n <= 0) {
+					System.out.println("删除回复出错！");
+					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteAnswer.E"));
+					saveErrors(request, messages);
+				}
+				else { // 删除成功后，要返回列表显示根帖的页面，该页面有：查看某版面下所有根帖的页面、查看我的帖子的页面、查看精华帖子的页面
 					System.out.println("删除成功！");
 					messages.add("userOpR", new ActionMessage("luntan.bbs.deleteRoot.S"));
 					saveErrors(request, messages);

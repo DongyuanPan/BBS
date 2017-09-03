@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2017-09-03 10:44:47
+Date: 2017-09-03 14:45:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,15 @@ CREATE TABLE `tb_accessory` (
   `accessory_size` varchar(255) NOT NULL,
   `accessory_download_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`accessory_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_accessory
 -- ----------------------------
+INSERT INTO `tb_accessory` VALUES ('9', '86', '详细设计1.0.docx', 'D:\\Repositories\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\BBS\\WEB-INF\\upload/详细设计1.0.docx', '2017-09-03 12:23:50', ' ', '146780', '0');
+INSERT INTO `tb_accessory` VALUES ('13', '96', '03  Web应用技术.ppt', 'D:\\Repositories\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\BBS\\WEB-INF\\upload/03  Web应用技术.ppt', '2017-09-03 13:35:02', ' ', '345088', '0');
+INSERT INTO `tb_accessory` VALUES ('14', '99', '01  程序开发体系结构.ppt', 'D:\\Repositories\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\BBS\\WEB-INF\\upload/01  程序开发体系结构.ppt', '2017-09-03 14:08:10', ' ', '651776', '0');
+INSERT INTO `tb_accessory` VALUES ('15', '102', '02  Web应用程序的工作原理.ppt', 'D:\\Repositories\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\BBS\\WEB-INF\\upload/02  Web应用程序的工作原理.ppt', '2017-09-03 14:34:29', ' ', '728064', '0');
 
 -- ----------------------------
 -- Table structure for `tb_bbs`
@@ -56,16 +60,13 @@ CREATE TABLE `tb_bbs` (
   `bbs_toGoodTime` datetime DEFAULT NULL,
   `bbs_reason` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`bbs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bbs
 -- ----------------------------
-INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2013-08-05 10:44:03', '127.0.0.1', 'face11.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '1', '2013-08-05 10:43:03', '这里是精华原因');
-INSERT INTO `tb_bbs` VALUES ('10', '2', '普通主题', 'PHP 双冒号的用法', '在PHP中，访问类的方法/变量有两种方法：\r\n1. 创建对象$object = new Class()，然后使用\"->\"调用：$object->attribute/function，前提是该变量/方法可访问。\r\n2. 直接调用类方法/变量：class::attribute/function，无论是静态/非静态都可以。但是有前提条件：\r\n    A. 如果是变量，需要该变量可访问。\r\n    B. 如果是方法，除了该方法可访问外，还需要满足：\r\n        b1) 如果是静态方法，没有特殊条件；\r\n        b2) 如果是非静态方法，需要改方法中没有使用$this，即没有调用非静态的变量/方法，当然，调用静态的变量/方法没有问题。\r\n\r\n然后我们再看一下使用$object->... 和使用class::... 都有什么区别：\r\n1. 使用$object->... ，需要执行构造函数创建对象；\r\n2. 使用class::... 调用静态方法/变量，不需要执行构造函数创建对象；\r\n3. 使用class::... 调用非静态方法/变量，也不需要执行构造函数创建对象。\r\n\r\n然后奇怪的地方就出来了，既然2和3都一样，那静态方法/变量存在还有什么意义呢？\r\n差异还是显然存在的，如下：\r\n1. 静态变量\r\n静态成员只保留一个变量值，而这个变量值对所有的实例都是有效，也就是说，所有的实例共享这个成员。\r\n2. 静态方法\r\n静态方法可以直接使用class::... 来调用，而非静态方法需要满足一定限制条件才能使用class::.. 的方法调用，如之前所述。', '00', '2017-08-30 20:52:38', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
-INSERT INTO `tb_bbs` VALUES ('13', '19', '普通主题', '随时回答你的问题', '如果你有什么问题或者疑问可随时发帖子给我，我会及时给您回复．', '00', '2013-08-05 10:43:03', '127.0.0.1', 'face0.gif', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', '0', '2013-08-05 10:43:03', null);
-INSERT INTO `tb_bbs` VALUES ('15', '1', '普通主题', '测试发帖', '测试发帖内容。<font color=red>请输入要设置颜色的文字！</font>', 'java1234', '2013-08-05 11:10:54', '127.0.0.1', 'face0.gif', '2013-08-05 11:10:54', '0', null, '0', null, null);
-INSERT INTO `tb_bbs` VALUES ('20', '1', '投票贴', '你平时喜欢使用的开发语言？', '5@124:JSP$21;C++$30;JAVA$35;PHP$17;Python$21;', 'tsoft', '2017-09-02 09:50:22', '127.1.0.1', 'face3.gif', '2017-09-02 09:50:22', '1', '2017-09-02 21:58:44', '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('2', '1', '普通主题', '乱码问题！！', '请问，在JSP中如何解决获取表单数据后的中文乱码问题？？谢谢！！', 'tsoft', '2017-08-28 10:44:03', '127.0.0.1', 'face11.gif', '2017-08-28 10:44:03', '0', '2017-08-28 10:44:03', '1', '2017-08-28 10:44:03', '这里是精华原因');
+INSERT INTO `tb_bbs` VALUES ('20', '1', '投票贴', '你平时喜欢使用的开发语言？', '5@126:JSP$22;C++$30;JAVA$35;PHP$17;Python$22;', 'tsoft', '2017-09-02 09:50:22', '127.1.0.1', 'face3.gif', '2017-09-02 09:50:22', '1', '2017-09-02 21:58:44', '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('22', '2', '普通主题', '推荐！国外程序员收集整理的 PHP 资源', '依赖管理\r\n\r\n依赖和包管理库\r\n\r\nComposer/Packagist：一个包和依赖管理器\r\nComposer Installers：一个多框架Composer库安装器\r\nPickle：一个PHP扩展安装器\r\n \r\n\r\n其他的依赖管理\r\n\r\n其他的相关依赖管理\r\n\r\nSatis：一个静态Composer存储库生成器\r\nComposition：一个在运行时检查Composer环境的库\r\nVersion：语义版本的解析和比较库\r\nNameSpacer -转化下划线到命名空间的库\r\nPatch Installer -使用Composer安装补丁的库\r\nComposer Checker -校验Composer配置的工具\r\n \r\n\r\n框架\r\n\r\nWeb开发框架\r\n\r\nSymfony2 -一个独立组件组成的框架\r\nZend Framework 2 -另一个由独立组件组成的框架\r\nLaravel 4 -另一个PHP框架\r\nAura PHP -独立组件的框架\r\nYii2 - 另一个PHP框架\r\nNette - 另一个由个体组件组成的框架\r\nPPI Framework 2 -一个互操作性框架\r\nPhalcon -通过C扩展实现的框架\r\n\r\n其他框架\r\n\r\n其他Web开发框架\r\n\r\nSymfony CMF - 创建自定义CMS的内容管理框架\r\nKnp RAD Bundle -Symfony 2的快速应用程序（RAD）包\r\n\r\n框架组件\r\n\r\n来自web开发框架的独立组件\r\n\r\nSymfony2 Components -Symfony2组件\r\nZend Framework 2 Components -ZF2组件\r\nAura Components -PHP5.4组件包\r\nHoa Project -另一个PHP组件包\r\n\r\n微型框架\r\n\r\n微型框架和路由\r\n\r\nSilex - 基于Symfony2组件的微型框架\r\nSlim - 另一个简单的微型框架\r\nBullet PHP -用于构建REST APIs的微型框架\r\nFast Route - 快速路由库\r\nPux -另一个快速路由库\r\n \r\n\r\n其他微型框架\r\n\r\n其他相关的微型框架和路由\r\n\r\nSilex Skeleton -Silex的项目架构\r\nSilex Web Profiler -Silex web调试工具条\r\nStack - Silex/Symfony的可堆叠中间件库\r\nSlim Skeleton -Slim架构\r\nSlim View -Slim的自定义视图集合\r\nSlim Middleware -Slim的自定义中间件集合\r\n\r\n模板\r\n\r\n模板化和词法分析的库和工具\r\n\r\nTwig -一个全面的模板语言\r\nTwig Cache Extension -一个用于Twig的模板片段缓存库\r\nMustache -一个Mustache模板语言的PHP实现\r\nPhly Mustache -另一个Mustache模板语言的PHP实现\r\nMtHaml - 一个HAML 模板语言的PHP实现\r\nPHPTAL -一个 TAL 模板语言的PHP实现\r\nPlates -一个原生PHP模板库\r\nLex -一个轻量级模板解析器\r\n\r\n静态站点生成器\r\n\r\n预处理工具来生成web页面的内容。\r\n\r\nSculpin -转换Markdown和Twig为静态HTML的工具\r\nPhrozn - 另一个转换Textile，Markdown和Twig为HTML的工具\r\n\r\nHTTP\r\n\r\n用于HTTP和网站爬取的库\r\n\r\nGuzzle -一个全面的HTTP客户端\r\nBuzz -另一个HTTP客户端\r\nRequests -一个简单的HTTP库\r\nHTTPFul -一个链式HTTP库\r\nGoutte -一个简单的web爬取器\r\nPHP VCR -录制和重放HTTP请求的库\r\n \r\n\r\nURL\r\n\r\n解析URL的库\r\n\r\nPurl -一个URL处理库\r\nPHP Domain Parser -一个本地前缀解析库\r\n \r\n\r\nEmail\r\n\r\n发送和解析邮件的库\r\n\r\nSwiftMailer - 一个邮件解决方案\r\nPHPMailer - 另一个邮件解决方案\r\nFetch -一个IMAP库\r\nEmail Reply Parser -一个邮件回复解析库\r\nStampie -邮件服务库，不如 SendGrid, PostMark, MailGun 和 Mandrill.\r\nCssToInlineStyles -一个在邮件模板内联CSS的库\r\n\r\n文件\r\n\r\n文件处理和MIME类型检测库\r\n\r\nGaufrette -一个文件系统抽象层\r\nFlysystem - 另一个文件系统抽象层\r\nCanal -一个检测互联网媒体类型的库\r\n PHP视频\r', 'java1234', '2017-09-02 10:26:22', '128.3.2.2', 'face0.gif', '2017-09-02 10:26:24', '1', '2017-09-02 10:51:01', '1', null, null);
 INSERT INTO `tb_bbs` VALUES ('24', '3', '普通主题', 'ajax技术的背景', '不可否认，ajax技术的流行得益于google的大力推广，正是由于google earth、google suggest以及gmail等对ajax技术的广泛应用，催生了ajax的流行。而这也让微软感到无比的尴尬，因为早在97年，微软便已经发明了ajax中的关键技术，并且在99年IE5推出之时，它便开始支持XmlHttpRequest对象，并且微软之前已经开始在它的一些产品中应用ajax，比如说MSDN网站菜单中的一些应用。遗憾的是，不知道出于什么想法，当时微软发明了ajax的核心技术之后，并没有看到它的潜力而加以发展和推广，而是将它搁置起来。对于这一点来说，我个人是觉得非常奇怪的，因为以微软的资源和它的战略眼光来说，应该不会看不到ajax技术的前景，唯一的解释也许就是因为当时它的主要竞争对手Netscape的消失反而使它变得麻痹和迟钝，毕竟巨人也有打盹的时候，比如IBM曾经在对微软战略上的失误。正是这一次的失误，成就了它现在的竞争对手google在ajax方面的领先地位，而事实上google目前在ajax技术方面的领先是微软所无法达到的，这一点在后面我讲述ajax缺陷的时候也会提到。现在微软也意识到了这个问题，因此它也开始在ajax领域奋起直追，比如说推出它自己的ajax框架atlas，并且在.NET2.0也提供了一个用来实现异步回调的接口，即ICallBack接口。那么微软为什么对自己在ajax方面的落后如此紧张呢？现在就让我们来分析一下ajax技术后面隐藏的深刻意义', 'tsoft', '2017-09-02 10:55:19', '10.101.9.10', 'face0.gif', '2017-09-02 10:55:21', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('25', '4', '普通主题', 'oracle安装笔记', '对于不熟悉Oracle的程序员来说,安装oracle真是一件痛苦的事,难安装不说还会出现各种各样的BUG,令人措手不及,像我,由于公司需求需要用到oracle10g,但由于版本比较老,官网好像已经没有的下载了,不过百度搜还是可以搜的到的,但是下载好多个oracle10g64位的都无法安装成功,我也是在网上看别人的教程一步一步的来操作但是总是卡在输完口令之后下一步就会出现\"未知错误\"这里,又在网上找各种资料解决问题,很多都说把setup.exe的兼容性修改为 Windows XP (Service pack 3)并且以管理员身份运行该程序就可以了,可以我下载的oracle10g64位的没有Windows XP (Service pack 3)这个选项呀,如下图:', 'tsoft', '2017-09-02 12:45:01', '128.3.2.1', 'face11.gif', '2017-09-02 12:45:06', '0', null, '0', null, null);
@@ -97,11 +98,38 @@ INSERT INTO `tb_bbs` VALUES ('51', '13', '普通主题', 'usb&nbsp;块传输出�
 INSERT INTO `tb_bbs` VALUES ('52', '14', '普通主题', '核心板电路的设计', '最近在做控制芯片的核心板电路的设计和布线。不过对于外围电路的电容电阻以及磁珠之类的选择和电路设计出了去参考别人的原理图，还可以怎么去判断和设计，通过芯片数据手册么，一般应该按什么样的思路去解决呢！求大神指点一二，一个在硬件道路上艰难奔跑的青年！！<br>', 'bebeyo', '2017-09-03 10:20:40', '10.10.80.211', 'face0.gif', '2017-09-03 10:20:40', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('53', '14', '直播贴', '硬件设计规范', '一、硬件设计原则：<br>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有的设计依据来自于元器件SPEC，必须详细阅读各个元件的规格书并深入理解;<br>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原理图与PCB图对应;<br>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原理图与BOM对应，在有不同搭配的地方列表注明差异;<br>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键器件注明供应商，试产结束之后如果替代必须提供规格书，小批量试产验证才能大批量导入;<br>5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用标准封装库;<br>6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元器件选型及设计标准化;<br>7.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;线路设计和PCB&nbsp;Layout时要充分考虑EMC和安规要求，确保生产时100%过EMC.', '翔子', '2017-09-03 10:21:05', '10.10.80.216', 'face13.gif', '2017-09-03 10:21:05', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('54', '15', '普通主题', '目前wifi要看哪些协议？', '目前wifi要看哪些协议？如题～', 'bebeyo', '2017-09-03 10:21:35', '10.10.80.211', 'face0.gif', '2017-09-03 10:21:35', '0', null, '0', null, null);
-INSERT INTO `tb_bbs` VALUES ('55', '19', '普通主题', '你妈让我问候你大爷', '你大爷说你妈挺好的。', '翔子', '2017-09-03 10:22:29', '10.10.80.216', 'face6.gif', '2017-09-03 10:22:29', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('56', '5', '普通主题', '如何测试对sdb功能选举测试', '1、测试sdb的选举功能&nbsp;<br>2、关掉主节点之后并没有主动选主,连入协调节点并创建连接var&nbsp;db&nbsp;=&nbsp;new&nbsp;Sdb(\"localhost\",11790)时报错没有主节点.&nbsp;<br>', 'bebeyo', '2017-09-03 10:22:43', '10.10.80.211', 'face0.gif', '2017-09-03 10:22:43', '0', null, '0', null, null);
-INSERT INTO `tb_bbs` VALUES ('57', '20', '普通主题', '哦哦哦哦哦', '你听，多么美的声音！', '翔子', '2017-09-03 10:23:39', '10.10.80.216', 'face0.gif', '2017-09-03 10:23:39', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('58', '5', '普通主题', 'hbase+hive整合问题', '先说下我的理解，如上图所示，hbase做数据实时查询，hive做数据分析，数据从hbase或者hive端用相应的工具如sqoop从外部导入，虽然导入的数据都是存储在同一个hdfs上，但是导入的表数据在hive和hbase中是互相看不见的，因为它们各自维护了一套自己的映射规则。我的疑问是：现在有没有成熟的解决方案来整合hbase和hive，让它们互通，各自查询的表数据是同一份hdfs数据。现在网上有整合的案例，好像也只是让hive可以查询hbase，并没有做到真正的互通。', 'bebeyo', '2017-09-03 10:23:44', '10.10.80.211', 'face0.gif', '2017-09-03 10:23:44', '0', null, '0', null, null);
 INSERT INTO `tb_bbs` VALUES ('59', '8', '普通主题', 'jsp好玩吗', 'jsp真的很好玩', '翔子', '2017-09-03 10:26:44', '10.10.80.216', 'face10.gif', '2017-09-03 10:26:44', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('63', '1', '普通主题', '黑客能不能劫持SessionId', '我对安全方面了解甚少。<br>最近突然有个疑问。<br>sessionId都是存储到客户端的，<br>或者cookie或者url.<br>在每次请求中都传回服务器。<br><br>那黑客有没有可能劫持请求。<br>查看sessionid，然后冒名顶替？<br><br>那session是不是太不安全了？', 'Xenomorph', '2017-09-03 10:58:29', '10.10.80.211', 'face0.gif', '2017-09-03 10:58:29', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('64', '2', '投票贴', '谈一谈目前的PHP框架', '2@1:讨论一下PHP框架&nbsp$1;不想讨论$0;', 'Xenomorph', '2017-09-03 10:59:24', '10.10.80.211', 'face0.gif', '2017-09-03 10:59:24', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('65', '3', '普通主题', 'Ajax刷新却无法更新list', '是这样的，小白想做一个聊天室。原理是两个textarea。下面的textarea发送消息存到数据库，上面的textarea每隔5秒用ajax刷新一次获取数据库的信息。问题来了，后台获取到数据库信息后返回一个list，list放在session里面，jsp页面用EL表达式获取list并用C标签遍历输出，list的值每隔5秒刷新一次，但是textarea刷新了，却没有刷新list的值，下面是图：<br>这个就是js代码，每隔5秒获取后台的list，后台list刷新了，但是jsp页面的list没有刷新', 'Xenomorph', '2017-09-03 11:00:07', '10.10.80.211', 'face0.gif', '2017-09-03 11:00:07', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('67', '8', '普通主题', '.net&nbsp;mvc&nbsp;绑', '我有一张表里面有多个列，有一个方法查询所有表的数据，我选择Id列,和names列绑定，asp.net&nbsp;mvc如何绑定DropDownList<br>控制怎么写，显示到前台怎么写。', 'Xenomorph', '2017-09-03 11:00:53', '10.10.80.211', 'face0.gif', '2017-09-03 11:00:53', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('68', '16', '普通主题', 'CreateObject创建失败！', '&nbsp;Set&nbsp;sc&nbsp;=&nbsp;CreateObject(\"MSScriptControl.ScriptControl\")<br>&nbsp;sc.Language&nbsp;=&nbsp;\"VBScript\"<br><br><br>这句话为何在&nbsp;windows&nbsp;10&nbsp;64位/office&nbsp;2013&nbsp;64位&nbsp;中文环境中，无法创建呢？哪怕用vbs文件，也无法创建。<br><br>是哪个部件没有注册吗？', 'Xenomorph', '2017-09-03 11:01:55', '10.10.80.211', 'face0.gif', '2017-09-03 11:01:55', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('69', '4', '普通主题', '求解决思路或sql语句', '本人新手，最近遇到一个问题。<br>我买一个东西，需要142个积分。<br>数据库中<br>积分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到期时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名<br>50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20170912&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;haha<br>49&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20171012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;haha<br>30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20171112&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;haha<br>45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20171212&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;haha<br>。。。。。。<br><br>我怎么根据到期时间以此减去相应的积分，直到142积分扣完<br>数据库中就剩下<br><br>32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20171212&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;haha<br>这个有什么好的方法，或sql语句可以解决吗？', 'Xenomorph', '2017-09-03 11:02:51', '10.10.80.211', 'face0.gif', '2017-09-03 11:02:51', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('70', '17', '普通主题', '有些特殊的列转行。。', '原数据：<br>a&nbsp;&nbsp;&nbsp;&nbsp;1,2,3<br>b&nbsp;&nbsp;&nbsp;&nbsp;1,2<br>c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,2,3,4<br><br><br>转后数据<br>a&nbsp;&nbsp;&nbsp;1<br>a&nbsp;&nbsp;&nbsp;2<br>a&nbsp;&nbsp;&nbsp;3<br>b&nbsp;&nbsp;&nbsp;1<br>b&nbsp;&nbsp;&nbsp;2<br>c&nbsp;&nbsp;&nbsp;1<br>c&nbsp;&nbsp;&nbsp;2<br>c&nbsp;&nbsp;&nbsp;3<br>c&nbsp;&nbsp;&nbsp;4<br><br>实在想不出来怎么转了。。', 'Xenomorph', '2017-09-03 11:03:43', '10.10.80.211', 'face0.gif', '2017-09-03 11:03:43', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('71', '18', '普通主题', '关于PB9中timer事件的问题', '程序中需要有个整点发送数据的功能，就是说&nbsp;11：00，10：00这样的需要触发一个事件，请问这个怎么来处理？如果用timer来控制的话，怎么弄呢？谢谢', 'Xenomorph', '2017-09-03 11:04:19', '10.10.80.211', 'face0.gif', '2017-09-03 11:04:19', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('72', '5', '普通主题', '父子维度缓慢变化如何处理', '比如销售企业&nbsp;主管A&nbsp;下属为B,C,D&nbsp;。B的下属为&nbsp;E.F.D。如果B经过一段时间后万为A1的下属了。那么应该处理处理。生成一条新的B1为A1的下属。那B原来下属EFD怎么处理。', 'Xenomorph', '2017-09-03 11:05:23', '10.10.80.211', 'face0.gif', '2017-09-03 11:05:23', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('73', '6', '普通主题', '前后端分离项目，如何导出excel', '前端angularJs,后端springmvc，但现在用form提交导出excel，但会弹出新页面，新页面无法通过token检查，只能后端吧检查关了才能导出。<br>我想请教有没有用接口来调用导出excel的方法，之前试过导出的excel都是乱码什么的', 'Xenomorph', '2017-09-03 11:06:29', '10.10.80.211', 'face0.gif', '2017-09-03 11:06:29', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('74', '7', '普通主题', 'C#&nbsp;泛型动态传类型问题', 'string&nbsp;classfullname&nbsp;=&nbsp;\"xxxxxxxxxxxxxx\";<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;type&nbsp;=&nbsp;Type.GetType(classfullname);&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//DisplayForm&nbsp;displayFormImp&nbsp;=type.Assembly.CreateInstance(classfullname)&nbsp;as&nbsp;DisplayForm;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//where&nbsp;T&nbsp;：DisplayForm&nbsp;&nbsp;如何动态传入类型T呢，类名指向classfullname&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic&nbsp;t&nbsp;=&nbsp;new&nbsp;DisplayTempFormManager&lt;T&gt;();<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisplayForm&nbsp;frm&nbsp;=&nbsp;t.GetInstance(ui.LevelCode);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dtuIdForm.Add(ui.LevelCode,&nbsp;frm);', 'Xenomorph', '2017-09-03 11:07:13', '10.10.80.211', 'face0.gif', '2017-09-03 11:07:13', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('75', '9', '普通主题', 'vb自定义控件问题', '如上，我想给自定义开发的控件加一个注册机制，未注册控件开发人员用不了，我在上述控件方法中加了判断，exit&nbsp;sub&nbsp;改成什么代码可以让自定义控件不能被拖拽加载到窗体上，end&nbsp;好像控件不让用，有什么办法吗？', 'Xenomorph', '2017-09-03 11:08:22', '10.10.80.211', 'face0.gif', '2017-09-03 11:08:22', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('76', '10', '普通主题', '内存泄漏', 'funB(void&nbsp;*arg)<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;*&nbsp;tmp&nbsp;=&nbsp;(char&nbsp;*)arg;&nbsp;<br>}<br>funA()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;*p&nbsp;=&nbsp;&nbsp;(char&nbsp;*)malloc(100);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(p,&nbsp;\"&nbsp;&nbsp;&nbsp;&nbsp;ffffffffffffffffffffff\");<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;funB((void*)p);<br>}<br>在一个函数中开辟一个中间，而后装载内容，&nbsp;作为参数传递给另一个函数，在另一个函数中定义另一个变量接受该采参数<br>对参数进行操作，，，，如何释放掉第一个函数时为p申请的内存？，，，，，<br><br>谢谢大神！！！！！', 'Xenomorph', '2017-09-03 11:09:53', '10.10.80.211', 'face0.gif', '2017-09-03 11:09:53', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('77', '11', '普通主题', 'Picasso加载图片问题', '我用picasso加载网络图片，可以确定加到图片了，但是显示图片的位置一直都是空白，当我下拉刷新的时候，才能显示出来，有知道是怎么回事的吗？<br><br><br>Picasso.with(mContext).load(url).transform(new&nbsp;CircleTransform()).into(holder.mIvHead);', 'Xenomorph', '2017-09-03 11:10:44', '10.10.80.211', 'face0.gif', '2017-09-03 11:10:44', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('78', '12', '普通主题', '求问一点简单的基础...', 'movsd&nbsp;xmm5,<ebp+0C><br>movsd&nbsp;<edx+000000D0>,xmm5<br>问题1：以上俩个指令是什么意思？<br><br><br>ebp：&nbsp;002C&nbsp;ECD8<br>edx&nbsp;：&nbsp;0F42&nbsp;CF58<br>问题2&nbsp;：<br>ebp+0C&nbsp;不应该是&nbsp;002CECE4&nbsp;&nbsp;吗？<br><br>edx+000000D0&nbsp;是0F42D028&nbsp;&nbsp;确认；', 'Xenomorph', '2017-09-03 11:11:32', '10.10.80.211', 'face0.gif', '2017-09-03 11:11:32', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('79', '13', '普通主题', 'SD卡文件系统', '最近在做一个SD卡文件系统读写，有个问题没搞懂。SD卡和MCU是通过SDIO连接的，也就是WP,CD,SDIO1~SDIO3，CLK等信号连接。如果以文件系统形式读写SD卡，那SD卡的上述几个信号岂不是没作用，我觉得应该是有作用，这其中是怎么关联的啊？', 'Xenomorph', '2017-09-03 11:12:25', '10.10.80.211', 'face0.gif', '2017-09-03 11:12:25', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('81', '14', '普通主题', '求助微动开关问题', '我用微动开关串接220v交流电，开关按住之后弹不出来，好像是粘住了，请教各位大神，这是怎么回事？', 'Xenomorph', '2017-09-03 11:17:57', '10.10.80.211', 'face0.gif', '2017-09-03 11:17:57', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('82', '15', '普通主题', '串口的通信接收', '在开发一个串口通信的软件，仪器有个网络接口，用网线接了个232的串口，然后连接232转USB线连上电脑，在电脑上的使用通信助手测试，通信没有问题。但是仪器通过232-485转换器（无源转换器）连接另外一个需要通信的仪器（该仪器是485的接口），发送数据的时候没有问题，但是接收数据的时候，每次都是只能接收前几个数据，后面的数据被中断接收不了！各位有没遇到过同样的问题，这一般是什么原因造成的？（可以确定485接口的仪器是没有问题的），就是在我要编写软件的这端仪器，数据为什么只接收了一部分就不再继续接收了？<br>更多&nbsp;0', 'Xenomorph', '2017-09-03 11:18:41', '10.10.80.211', 'face0.gif', '2017-09-03 11:18:41', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('84', '20', '普通主题', '南京交友', '本周日，东南大学九龙湖校区八点钟，钢菊西广场，欢迎你来。', 'admin', '2017-09-03 12:20:42', '127.0.0.1', 'face0.gif', '2017-09-03 12:20:42', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('87', '20', '普通主题', '南京交友', '本周日，东南大学九龙湖校区八点钟，钢菊西广场，欢迎你来。', 'admin', '2017-09-03 12:24:14', '127.0.0.1', 'face0.gif', '2017-09-03 12:24:14', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('88', '8', '普通主题', 'asp.net开发思路', '17年3月<br><br>asp.NET的webform开发，我所接触到的.net开发是webform开发，webform的开发分两部分，一部分是webservice，<br><br>一部分是webform三层架构，webservice主要用来写一些接口来实现数据访问，而webform的三层架构用来访问<br><br>webservice的接口来实现业务和一些界面，三层架构为UI层，数据访问层，业务层，当然也可以多一个层就是实体层，<br><br>webform的窗体编写文件为aspx文件，他是个page类里面的代码编写掺杂了HTML和一些自己特有的元素，新建一个<br><br>窗体时会创建两个文件，一个是cs后缀文件，一个是aspx文件，cs文件主要用来实现后台数据处理，aspx文件主要<br><br>用来编写前端的页面设计。<br><br>', 'xiangzi', '2017-09-03 12:32:12', '10.10.80.216', 'face0.gif', '2017-09-03 12:32:12', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('89', '16', '投票贴', '以下哪几个是你最看好的方向？', '4@1:1.大数据$0;2.云计算$0;3.物联网$1;4.移动计算$0;', 'xiangzi', '2017-09-03 12:37:20', '10.10.80.216', 'face14.gif', '2017-09-03 12:37:20', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('90', '1', '普通主题', 'ssm&nbsp;jsp&nbsp;传值', '&lt;input&nbsp;type=\"text\"&nbsp;class=\"form-control\"&nbsp;name=\"generalParam.parameter1.paramsTagName\"&nbsp;value=\"${&nbsp;rtp.paramsTagDefaultVal&nbsp;}\"&nbsp;/&gt;<br>jsp&nbsp;传值是对象.对象.属性&nbsp;这样传controller怎么获取呢？', 'Divine', '2017-09-03 12:38:58', '10.10.80.211', 'face0.gif', '2017-09-03 12:38:58', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('91', '2', '普通主题', '关于redis事务', 'php&nbsp;redis怎么知道事务是否执行成功了？', 'Divine', '2017-09-03 12:39:53', '10.10.80.211', 'face0.gif', '2017-09-03 12:39:53', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('96', '6', '普通主题', 'Web应用技术PPT', '文件分享', 'Alston', '2017-09-03 13:35:01', '10.10.80.225', 'face0.gif', '2017-09-03 13:35:01', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('98', '1', '投票贴', '投票', '4@1:A$1;B$0;C$0;D$0;', 'User', '2017-09-03 14:07:00', '10.10.80.225', 'face0.gif', '2017-09-03 14:07:00', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('99', '1', '普通主题', 'java附件', '附件', 'User', '2017-09-03 14:08:10', '10.10.80.225', 'face0.gif', '2017-09-03 14:08:10', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('100', '1', '普通主题', '新帖子测试', '测试内容', 'UserTest', '2017-09-03 14:33:12', '10.10.80.225', 'face0.gif', '2017-09-03 14:33:12', '0', null, '0', null, null);
+INSERT INTO `tb_bbs` VALUES ('102', '1', '普通主题', '测试文件', '测试', 'UserTest', '2017-09-03 14:34:29', '10.10.80.225', 'face0.gif', '2017-09-03 14:34:29', '0', null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for `tb_bbsanswer`
@@ -116,7 +144,7 @@ CREATE TABLE `tb_bbsanswer` (
   `bbsAnswer_sendTime` datetime DEFAULT NULL,
   `bbsAnswer_face` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`bbsAnswer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_bbsanswer
@@ -124,6 +152,15 @@ CREATE TABLE `tb_bbsanswer` (
 INSERT INTO `tb_bbsanswer` VALUES ('6', '2', 'yrtyyrtyrty', '<font color=blue>ytryrtytrytrytr</font>', '00', '2013-01-01 00:00:00', 'face0.gif');
 INSERT INTO `tb_bbsanswer` VALUES ('7', '15', '测试回复', '测试回复', 'java1234', '2013-08-05 11:11:35', 'face0.gif');
 INSERT INTO `tb_bbsanswer` VALUES ('8', '1', '策略模式', '策略', '翔子', '2017-09-03 10:26:02', 'face11.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('9', '62', '求贴', '求资源！谢楼主！2084642241@qq.com', 'xiangzi', '2017-09-03 10:59:09', 'face17.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('10', '63', '回复', '确实存在不安全的可能。', 'xiangzi', '2017-09-03 12:20:58', 'face11.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('11', '63', '回复', '楼下有更好的看法吗？', 'xiangzi', '2017-09-03 12:23:48', 'face3.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('12', '89', '回复', '应该说是互为补充，共同发展！', 'xiangzi', '2017-09-03 12:38:32', 'face17.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('13', '87', '报名', '举手报名！lz', 'xiangzi', '2017-09-03 12:39:52', 'face0.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('14', '84', '报名', '举手报名！lz', '翔子', '2017-09-03 13:17:41', 'face0.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('16', '22', 's', '<br>ss', 'User', '2017-09-03 14:10:52', 'face0.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('17', '65', '回复1', '回复测试', 'User', '2017-09-03 14:11:29', 'face0.gif');
+INSERT INTO `tb_bbsanswer` VALUES ('19', '22', '支持楼主', '这个帖子挺有用的', 'UserTest', '2017-09-03 14:32:35', 'face0.gif');
 
 -- ----------------------------
 -- Table structure for `tb_board`
@@ -136,7 +173,7 @@ CREATE TABLE `tb_board` (
   `board_master` varchar(20) DEFAULT NULL,
   `board_pcard` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`board_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_board
@@ -159,8 +196,9 @@ INSERT INTO `tb_board` VALUES ('15', '4', '其他', 'tsoft', '欢迎进入 硬�
 INSERT INTO `tb_board` VALUES ('16', '1', '其他', 'tsoft', '欢迎进入 WEB开发/其他 版面！');
 INSERT INTO `tb_board` VALUES ('17', '2', 'MS-SQL Server开发', '莫明', '欢迎进入 数据库开发/MS-SQL Server开发 版面！');
 INSERT INTO `tb_board` VALUES ('18', '2', 'PowerBuilder开发', '莫明', '欢迎进入 数据库开发/PowerBuilder开发 版面！');
-INSERT INTO `tb_board` VALUES ('19', '5', '问候', '00', '请不要乱写内容');
-INSERT INTO `tb_board` VALUES ('20', '5', '44444', '00', '4444');
+INSERT INTO `tb_board` VALUES ('19', '5', '同城交友', 'Divine', '同城交流，欢迎各位！');
+INSERT INTO `tb_board` VALUES ('20', '5', '线下聚会', 'Alston', '线下聚起来！嗨起来！');
+INSERT INTO `tb_board` VALUES ('21', '1', '板面添加', 'Alston', '公告新');
 
 -- ----------------------------
 -- Table structure for `tb_broadcast`
@@ -171,12 +209,13 @@ CREATE TABLE `tb_broadcast` (
   `broadcast_message` varchar(255) NOT NULL,
   `broadcast_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_broadcast
 -- ----------------------------
 INSERT INTO `tb_broadcast` VALUES ('1', '这里是第一条公告，修改了。', '2017-09-01 09:04:18');
+INSERT INTO `tb_broadcast` VALUES ('2', '性能更高', '2017-09-03 14:15:58');
 
 -- ----------------------------
 -- Table structure for `tb_class`
@@ -187,7 +226,7 @@ CREATE TABLE `tb_class` (
   `class_name` varchar(40) DEFAULT NULL,
   `class_intro` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_class
@@ -196,7 +235,8 @@ INSERT INTO `tb_class` VALUES ('1', 'WEB开发', '欢迎进入“WEB开发”世
 INSERT INTO `tb_class` VALUES ('2', '数据库开发', '欢迎进入“数据库开发”世界，互相交流、互相学习！');
 INSERT INTO `tb_class` VALUES ('3', '软件开发', '欢迎进入“软件开发”世界，互相交流、互相学习！');
 INSERT INTO `tb_class` VALUES ('4', '硬件开发', '欢迎进入“硬件开发”世界，互相交流、互相学习！');
-INSERT INTO `tb_class` VALUES ('5', '关爱', '欢迎访问！');
+INSERT INTO `tb_class` VALUES ('5', '程序员交友', '欢迎各位单身程序员来此版块交流！');
+INSERT INTO `tb_class` VALUES ('7', '版块测试', '欢迎访问！！');
 
 -- ----------------------------
 -- Table structure for `tb_collect`
@@ -207,7 +247,7 @@ CREATE TABLE `tb_collect` (
   `collect_collector` varchar(255) NOT NULL,
   `collect_bbs_id` int(11) NOT NULL,
   PRIMARY KEY (`collect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_collect
@@ -227,8 +267,8 @@ CREATE TABLE `tb_forbidden_ip` (
 -- ----------------------------
 -- Records of tb_forbidden_ip
 -- ----------------------------
-INSERT INTO `tb_forbidden_ip` VALUES ('102.3.3.3');
 INSERT INTO `tb_forbidden_ip` VALUES ('103.2.2.21');
+INSERT INTO `tb_forbidden_ip` VALUES ('127.0.0.1');
 
 -- ----------------------------
 -- Table structure for `tb_friend`
@@ -239,7 +279,7 @@ CREATE TABLE `tb_friend` (
   `my_name` varchar(255) DEFAULT NULL,
   `friend_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=gb2312;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=gb2312;
 
 -- ----------------------------
 -- Records of tb_friend
@@ -265,7 +305,7 @@ CREATE TABLE `tb_user` (
   `user_able` varchar(1) NOT NULL DEFAULT '0',
   `user_forbidden` varchar(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
@@ -290,4 +330,8 @@ INSERT INTO `tb_user` VALUES ('31', 'xiangzi', '0e0812de4c9dfab1fb10242043373ab0
 INSERT INTO `tb_user` VALUES ('32', 'bebeyo', 'e10adc3949ba59abbe56e057f20f883e', 'user0.gif', '男', '17317899006', '448759710', '448759710@qq.com', '新加坡', '0', '0');
 INSERT INTO `tb_user` VALUES ('33', '翔子', '0e0812de4c9dfab1fb10242043373ab0', 'user12.gif', '女', '13434565789', '2343453454', '238797382@qq.com', '北京', '0', '0');
 INSERT INTO `tb_user` VALUES ('34', '周淮安', '670b14728ad9902aecba32e22fa4f6bd', 'user0.gif', '男', '18549875660', '448759710', '448759710@qq.com', '龙门', '0', '0');
-INSERT INTO `tb_user` VALUES ('35', 'Divine', '827ccb0eea8a706c4c34a16891f84e7b', 'user4.gif', '男', '13905421342', '1234', '213141122@seu.edu.cn', '安徽', '0', '0');
+INSERT INTO `tb_user` VALUES ('36', 'Alston', '202cb962ac59075b964b07152d234b70', 'user0.gif', '男', '15851831378', '615174833', '615174833@qq.com', '山东', '1', '0');
+INSERT INTO `tb_user` VALUES ('37', 'Xenomorph', '670b14728ad9902aecba32e22fa4f6bd', 'user0.gif', '男', '18819588090', '79798797', '080708@163.com', '1370', '0', '0');
+INSERT INTO `tb_user` VALUES ('38', 'pan', '420403978b541419b5ee1bdae6e0e4f6', 'user0.gif', '男', '12345678911', '105006461', '1212@qq.com', '广西', '2', '0');
+INSERT INTO `tb_user` VALUES ('39', 'User', '670b14728ad9902aecba32e22fa4f6bd', 'user0.gif', '男', '11111111111', '123456', '123456@qq.com', '东大', '0', '0');
+INSERT INTO `tb_user` VALUES ('40', 'UserTest', 'cee435f21198dc608510df2e61ee438a', 'user1.gif', '男', '13455241145', '123457', 'we1@seu.edu.cn', '中国', '2', '0');
